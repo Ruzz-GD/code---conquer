@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjanl4oapcpdu"]
+
+[ext_resource type="Script" uid="uid://dmgrysp03y2qr" path="res://scenes/maps/4_th_floor_main_door.gd" id="1_vkug2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pafh4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vkug2"]
+
+[node name="Under-ground-2Nd-floor" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="TileMapLayer-Ground" type="TileMapLayer" parent="TileMap"]
+
+[node name="TileMapLayer-Wall" type="TileMapLayer" parent="TileMap"]
+
+[node name="TileMapLayer-Decorations" type="TileMapLayer" parent="TileMap"]
+
+[node name="ug-4th-floor-spawn-point" type="Marker2D" parent="."]
+visible = false
+
+[node name="4th-floor-main-door" type="Area2D" parent="."]
+visible = false
+script = ExtResource("1_vkug2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="4th-floor-main-door"]
+shape = SubResource("CapsuleShape2D_pafh4")
+
+[node name="Sprite2D" type="Sprite2D" parent="4th-floor-main-door"]
+
+[node name="room1" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="room1"]
+shape = SubResource("CapsuleShape2D_vkug2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="room1"]
