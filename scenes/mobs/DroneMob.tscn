@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhs5c4nhdc1l7"]
+
+[ext_resource type="Script" uid="uid://delh4bwl8nsiw" path="res://scenes/mobs/drone_body.gd" id="1_ollsl"]
+[ext_resource type="Texture2D" uid="uid://c5yjs82rxser3" path="res://assets/sprites/Idle/idle_down.png" id="2_nlewb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2i34"]
+atlas = ExtResource("2_nlewb")
+region = Rect2(3.5, 0, 43, 64)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlewb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nlewb"]
+radius = 250.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2i34"]
+radius = 125.0
+
+[node name="DroneMob" type="Node2D"]
+
+[node name="DroneBody" type="CharacterBody2D" parent="."]
+position = Vector2(-1, 0)
+script = ExtResource("1_ollsl")
+
+[node name="Sprite2D" type="Sprite2D" parent="DroneBody"]
+scale = Vector2(1.94186, 1.65625)
+texture = SubResource("AtlasTexture_h2i34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody"]
+shape = SubResource("CapsuleShape2D_nlewb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DroneBody"]
+
+[node name="ChaseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+shape = SubResource("CircleShape2D_nlewb")
+one_way_collision_margin = 128.0
+
+[node name="PatrolArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea"]
+shape = SubResource("CircleShape2D_h2i34")

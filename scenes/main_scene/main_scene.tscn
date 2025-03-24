@@ -8,4 +8,3 @@ script = ExtResource("1_6iw8k")
 [node name="player_container" type="Node2D" parent="."]
 
 [node name="current_map" type="Node2D" parent="."]
-position = Vector2(-7, -4)
