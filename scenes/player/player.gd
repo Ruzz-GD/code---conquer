@@ -3,25 +3,32 @@ extends CharacterBody2D
 const SPEED = 100  # Normal speed
 const DASH_SPEED = 150  # Dash speed
 const DASH_TIME = 0.8  # Dash duration in seconds
-const MOVE_THRESHOLD = 20  # Minimum pixels before changing z_index
 
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer  # Reference to the timer node
 
 var last_idle = "idle_down"  # Last idle animation
-var prev_position = Vector2.ZERO  # Store previous position
 var is_dashing = false  # Dash state
 var dash_velocity = Vector2.ZERO  # Dash movement direction
+var can_move = true  # ✅ New flag to control movement
 
 func _ready():
-	prev_position = global_position
 	dash_timer.wait_time = DASH_TIME
 	dash_timer.one_shot = true  # Ensure it doesn't loop
 
+	# ✅ Connect to GameManager signals to enable/disable movement
+	GameManager.disable_player_action.connect(_on_typing_started)
+	GameManager.enable_player_action.connect(_on_typing_finished)
+
 func _physics_process(_delta):
+	if not can_move:
+		velocity = Vector2.ZERO  # ✅ Stop movement if typing
+		move_and_slide()
+		return
+
 	if is_dashing:
 		velocity = dash_velocity  # Keep applying dash velocity
-		move_and_slide()  # Move with collisions
+		move_and_slide()
 
 		# If dash timer expires, stop the dash
 		if dash_timer.time_left <= 0:
@@ -31,54 +38,48 @@ func _physics_process(_delta):
 	var direction = _get_movement_direction()  # Get movement direction
 
 	# Dash logic (Only W, A, S, D are allowed)
-	if Input.is_action_just_pressed("dash_move"):
-		print("🟢 Dash Key Pressed!")  # Debug print
+	if Input.is_action_just_pressed("dash_move") and can_move:  # ✅ Only allow dash if movement is enabled
+		print("🟢 Dash Key Pressed!")
 		if direction != Vector2.ZERO and _is_valid_dash_direction(direction):
 			print("🔹 Dash Attempted! Move Direction:", direction)
 			_dash(direction)
 			return  # Stop normal movement when dashing
 		else:
-			print("🔴 Dash Pressed, but No Valid Direction!")  # Debug print
+			print("🔴 Dash Pressed, but No Valid Direction!")
 
 	# Handle movement
 	_handle_movement(direction)
 
 # Get movement direction
 func _get_movement_direction() -> Vector2:
+	if not can_move:  # ✅ Prevent movement when typing
+		return Vector2.ZERO
+
 	var direction = Vector2.ZERO
-	var new_anim = ""
 
 	if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_right"):
 		direction = Vector2(1, -1)
-		new_anim = "walk_right_up"
 		last_idle = "idle_right_up"
 	elif Input.is_action_pressed("move_up") and Input.is_action_pressed("move_left"):
 		direction = Vector2(-1, -1)
-		new_anim = "walk_left_up"
 		last_idle = "idle_left_up"
 	elif Input.is_action_pressed("move_down") and Input.is_action_pressed("move_right"):
 		direction = Vector2(1, 1)
-		new_anim = "walk_right_down"
 		last_idle = "idle_right_down"
 	elif Input.is_action_pressed("move_down") and Input.is_action_pressed("move_left"):
 		direction = Vector2(-1, 1)
-		new_anim = "walk_left_down"
 		last_idle = "idle_left_down"
 	elif Input.is_action_pressed("move_up"):
 		direction.y -= 1
-		new_anim = "walk_up"
 		last_idle = "idle_up"
 	elif Input.is_action_pressed("move_down"):
 		direction.y += 1
-		new_anim = "walk_down"
 		last_idle = "idle_down"
 	elif Input.is_action_pressed("move_left"):
 		direction.x -= 1
-		new_anim = "walk_left"
 		last_idle = "idle_left"
 	elif Input.is_action_pressed("move_right"):
 		direction.x += 1
-		new_anim = "walk_right"
 		last_idle = "idle_right"
 
 	return direction.normalized() if direction != Vector2.ZERO else Vector2.ZERO
@@ -93,12 +94,6 @@ func _handle_movement(direction: Vector2):
 		anim_sprite.play(last_idle)
 	
 	move_and_slide()
-
-	# Adjust z_index for depth sorting
-	var distance_moved = global_position - prev_position
-	if abs(distance_moved.y) >= MOVE_THRESHOLD:
-		z_index = 1 if distance_moved.y > 0 else 3
-		prev_position = global_position
 
 # Dash function
 func _dash(dash_direction):
@@ -141,11 +136,12 @@ func _get_dash_animation(direction: Vector2) -> String:
 	
 	return last_idle
 
-# Get fallback dash direction (only W, A, S, D)
-func _get_fallback_dash_direction() -> Vector2:
-	match last_idle:
-		"idle_up": return Vector2(0, -1)
-		"idle_down": return Vector2(0, 1)
-		"idle_left": return Vector2(-1, 0)
-		"idle_right": return Vector2(1, 0)
-	return Vector2.ZERO  # If all fails, return zero vector
+# ✅ Stop movement when player starts debugging
+func _on_typing_started():
+	print("🛑 Typing started! Disabling movement.")
+	can_move = false
+
+# ✅ Resume movement when debugging is finished
+func _on_typing_finished():
+	print("✅ Typing finished! Enabling movement.")
+	can_move = true

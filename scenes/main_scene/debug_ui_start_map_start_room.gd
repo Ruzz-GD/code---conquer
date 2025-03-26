@@ -8,7 +8,7 @@ signal challenge_solved  # Signal to notify the door
 @onready var challenge_label = $Panel/Label
 @onready var closed_button = $Panel/ClosedButton  # The "X" button to close the panel
 
-var correct_answer = "5"  # Example correct answer
+var correct_answer = "Hello World"  # Example correct answer
 
 func _ready():
 	submit_button.pressed.connect(_on_submit_pressed)

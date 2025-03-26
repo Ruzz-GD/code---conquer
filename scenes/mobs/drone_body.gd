@@ -58,7 +58,7 @@ func patrol(delta):
 		patrol_timer = randf_range(0.5, 1.5)  
 		pick_new_target()
 
-func chase_player(delta):
+func chase_player(_delta):
 	if player:
 		var distance_to_player = global_position.distance_to(player.global_position)
 		if distance_to_player > stop_distance:

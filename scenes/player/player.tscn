@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://kd0dbfq8pka6" path="res://assets/sprites/Shadow.png" id="14_ugbui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
-size = Vector2(18, 10)
+size = Vector2(16, 6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48o5h"]
 atlas = ExtResource("2_8ydkj")
@@ -1251,10 +1251,11 @@ atlas = ExtResource("14_ugbui")
 [node name="Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
+z_index = 9
 script = ExtResource("1_8afob")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -1262,12 +1263,15 @@ position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-scale = Vector2(1.4, 1.4)
+position = Vector2(0, 3)
+scale = Vector2(1.11458, 1.07031)
 sprite_frames = SubResource("SpriteFrames_gmlin")
 animation = &"idle_down"
-frame_progress = 0.850113
+frame_progress = 0.382851
 
 [node name="PlayerShadow" type="Sprite2D" parent="CharacterBody2D"]
+z_index = 2
+z_as_relative = false
 position = Vector2(-3.5, 3)
 scale = Vector2(1.27083, 1.125)
 texture = SubResource("AtlasTexture_kthys")
