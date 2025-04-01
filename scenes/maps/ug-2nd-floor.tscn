@@ -1,8 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu67wjahiwtrg"]
-
-[ext_resource type="Script" uid="uid://dlr66ty0jwtel" path="res://scenes/maps/2_nd_floor_main_door.gd" id="1_dv5vt"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axh0n"]
+[gd_scene load_steps=2 format=3 uid="uid://cu67wjahiwtrg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dv5vt"]
 
@@ -19,15 +15,6 @@ format = 2
 
 [node name="ug-2nd-floor-spawn-point" type="Marker2D" parent="."]
 visible = false
-
-[node name="2nd-floor-main-door" type="Area2D" parent="."]
-visible = false
-script = ExtResource("1_dv5vt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="2nd-floor-main-door"]
-shape = SubResource("CapsuleShape2D_axh0n")
-
-[node name="Sprite2D" type="Sprite2D" parent="2nd-floor-main-door"]
 
 [node name="room1" type="Area2D" parent="."]
 visible = false

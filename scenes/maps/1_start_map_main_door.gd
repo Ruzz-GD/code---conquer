@@ -30,6 +30,8 @@ func _ready():
 		print("❌ Debug UI not found in GameManager!")
 
 func _on_area_clicked(_viewport, event, _shape_idx):
+	if can_open:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		print("📌 Area2D clicked! Showing Debug UI")
 		if debug_ui_main_door:

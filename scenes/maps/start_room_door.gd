@@ -33,9 +33,11 @@ func solve_challenge():
 		GameManager.enable_player_action.emit()
 
 func _on_startroombutton_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if can_open:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if debug_ui_start_room:
-			GameManager.disable_player_action
+			GameManager.disable_player_action.emit()
 			debug_ui_start_room.show()
 		else:
 			print("error")
