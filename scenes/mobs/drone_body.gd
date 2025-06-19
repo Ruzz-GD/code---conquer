@@ -82,7 +82,7 @@ func pick_new_target():
 		patrol_radius = patrol_area.get_node("CollisionShape2D").shape.radius  
 
 	target_position = start_position + Vector2(cos(angle), sin(angle)) * patrol_radius
-	print("🎯 New Patrol Target:", target_position)
+	#print("🎯 New Patrol Target:", target_position)
 
 # 🟢 Player enters PatrolArea → Start chasing
 func _on_patrol_area_entered(body):
