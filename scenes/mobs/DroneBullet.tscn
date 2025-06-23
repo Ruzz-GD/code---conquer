@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy3fpv7e73sou"]
+
+[ext_resource type="Script" uid="uid://busyfoa2cco4e" path="res://scenes/mobs/dronebullet.gd" id="1_7nujd"]
+[ext_resource type="Texture2D" uid="uid://dofx4ms060o1e" path="res://assets/img/bullet.png" id="2_7nujd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sttck"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7nujd"]
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 524288
+script = ExtResource("1_7nujd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sttck")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.0520031, 0.225)
+scale = Vector2(0.24675, 0.252273)
+texture = ExtResource("2_7nujd")
+
+[node name="HitDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector"]
+shape = SubResource("CircleShape2D_7nujd")

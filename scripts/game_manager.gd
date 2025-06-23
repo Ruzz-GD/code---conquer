@@ -1,5 +1,6 @@
 extends Node2D
 
+
 signal disable_player_action
 signal enable_player_action
 signal map_updated(new_map_path, new_spawn_marker)  # 🔄 New signal
@@ -15,6 +16,7 @@ var difficulty: String = "Medium"
 func _ready():
 	var cursor_texture = preload("res://assets/img/my_cursor.png")
 	Input.set_custom_mouse_cursor(cursor_texture ,Input.CURSOR_ARROW ,Vector2(0,0))
+
 	# Get the current active main scene
 	start_map_main_door_debug_ui = get_tree().current_scene.find_child("DebugUI-main-door-start-map", true)
 	start_map_start_room = get_tree().current_scene.find_child("DebugUI-start-map-start-room")
@@ -38,10 +40,8 @@ func reset_position() -> Vector2:
 func reset_game():
 	print("🔄 Game reset triggered")
 	is_game_started = false
-	difficulty = "Medium"
 	current_map_path = "res://scenes/maps/start-map.tscn"
 	spawn_marker_name = "start-map-spawn-point"
-
-	# Defer signal emission to ensure listeners are ready
+	
 	call_deferred("emit_signal", "map_updated", current_map_path, spawn_marker_name)
 	call_deferred("emit_signal", "game_reset")

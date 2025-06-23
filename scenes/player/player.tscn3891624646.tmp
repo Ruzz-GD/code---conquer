@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=3 uid="uid://blgp6vp8k1l70"]
+[gd_scene load_steps=182 format=3 uid="uid://blgp6vp8k1l70"]
 
 [ext_resource type="Script" uid="uid://bf2368a7y57er" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://cuas7djejk8t5" path="res://assets/sprites/Dash - NEW/Dash_Down.png" id="2_8ydkj"]
@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cj5bw5ktcrixj" path="res://assets/sprites/Walk/walk_up.png" id="13_ioxgp"]
 [ext_resource type="Texture2D" uid="uid://kd0dbfq8pka6" path="res://assets/sprites/Shadow.png" id="14_ugbui"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uf5tr"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf5tr"]
+size = Vector2(16, 6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48o5h"]
 atlas = ExtResource("2_8ydkj")
@@ -1248,14 +1248,8 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_kthys"]
 atlas = ExtResource("14_ugbui")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uf5tr"]
-radius = 7.0
-height = 26.0
-
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 z_index = 9
-collision_mask = 3
-slide_on_ceiling = false
 script = ExtResource("1_8afob")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -1263,8 +1257,8 @@ zoom = Vector2(3.5, 3.5)
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 12)
-shape = SubResource("CircleShape2D_uf5tr")
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_uf5tr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 3)
@@ -1281,13 +1275,3 @@ texture = SubResource("AtlasTexture_kthys")
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="ShootTimer" type="Timer" parent="."]
-
-[node name="hit_box" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
-position = Vector2(1, 2)
-shape = SubResource("CapsuleShape2D_uf5tr")

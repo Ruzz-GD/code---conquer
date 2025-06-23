@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bo7eesj5hn1sq"]
+[gd_scene load_steps=18 format=3 uid="uid://bo7eesj5hn1sq"]
 
 [ext_resource type="Script" uid="uid://dhpew8klfs2r5" path="res://scenes/main_scene/main_scene.gd" id="1_6iw8k"]
 [ext_resource type="Script" uid="uid://cxmmupnm7gjgg" path="res://scenes/maps/debug_ui_main_door.gd" id="2_o5t4i"]
@@ -13,12 +13,7 @@
 [ext_resource type="Theme" uid="uid://ba6ts21pbuppy" path="res://assets/theme/my_btn_style.tres" id="9_s5p1y"]
 [ext_resource type="Theme" uid="uid://bbylrddysow5i" path="res://assets/theme/setting_modal.tres" id="9_ugojt"]
 [ext_resource type="Script" uid="uid://b5yue1ceel8hl" path="res://scenes/main_scene/player_stat.gd" id="11_nim2u"]
-[ext_resource type="Texture2D" uid="uid://1b5kvmfm0inp" path="res://assets/img/extra-lives.png" id="12_3naof"]
-[ext_resource type="Texture2D" uid="uid://dkjdriadmmqrl" path="res://assets/img/profile.png" id="12_17klg"]
-[ext_resource type="Texture2D" uid="uid://c3tff2ljfkogp" path="res://assets/img/hint.png" id="13_3naof"]
-[ext_resource type="Script" uid="uid://01rs0h4amp1w" path="res://scenes/main_scene/info_route.gd" id="15_qgjuk"]
-[ext_resource type="Texture2D" uid="uid://bqr001dm4q8d5" path="res://assets/img/back-arrow.png" id="16_qgjuk"]
-[ext_resource type="Texture2D" uid="uid://dyypt2jsp7wio" path="res://assets/img/code-conquer-start-screen.png" id="17_17klg"]
+[ext_resource type="FontFile" uid="uid://dwvt3mhlo0c6t" path="res://assets/ttf/Inter-Black.ttf" id="13_f6yoc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbdpr"]
 atlas = ExtResource("3_34m6u")
@@ -28,20 +23,7 @@ region = Rect2(516.97, 98.0045, 9.03668, 12.0245)
 atlas = ExtResource("3_34m6u")
 region = Rect2(485.028, 98.0107, 9.02661, 12.0043)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17klg"]
-bg_color = Color(0.14, 0.14, 0.14, 0.517647)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sro07"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_datfd"]
-bg_color = Color(0, 0.611765, 0.678431, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgjuk"]
-bg_color = Color(0, 0.611765, 0.678431, 1)
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_6iw8k")
@@ -218,32 +200,26 @@ vertical_alignment = 1
 [node name="ErrorTimer" type="Timer" parent="UIManager/DebugUI-start-map-start-room/Panel"]
 
 [node name="ingame_ui" type="Control" parent="UIManager"]
-z_index = 5
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 theme = ExtResource("5_6ycpv")
 script = ExtResource("5_umvci")
 
 [node name="ingame_setting" type="TextureButton" parent="UIManager/ingame_ui"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_left = 528.0
-offset_top = -316.0
-offset_right = 568.0
-offset_bottom = -276.0
+offset_left = 1096.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 56.0
 texture_normal = ExtResource("7_s5p1y")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ingame-setting-modal" type="Panel" parent="UIManager/ingame_ui"]
 visible = false
-z_index = 1
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
 anchors_preset = 8
@@ -276,7 +252,7 @@ grow_vertical = 2
 theme = ExtResource("9_s5p1y")
 text = "Resume"
 
-[node name="info-btn" type="Button" parent="UIManager/ingame_ui/ingame-setting-modal"]
+[node name="sound-modal" type="Button" parent="UIManager/ingame_ui/ingame-setting-modal"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 1
 anchors_preset = 8
@@ -291,7 +267,7 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
-text = "Info"
+text = "Sound"
 
 [node name="quit-btn" type="Button" parent="UIManager/ingame_ui/ingame-setting-modal"]
 custom_minimum_size = Vector2(250, 50)
@@ -334,11 +310,8 @@ uppercase = true
 [node name="player-stat" type="PanelContainer" parent="UIManager/ingame_ui"]
 custom_minimum_size = Vector2(300, 70)
 layout_mode = 0
-offset_left = -567.0
-offset_top = -315.0
-offset_right = -213.0
-offset_bottom = -241.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_17klg")
+offset_right = 287.0
+offset_bottom = 66.0
 script = ExtResource("11_nim2u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat"]
@@ -347,7 +320,6 @@ layout_mode = 2
 [node name="profile" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
-texture = ExtResource("12_17klg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer"]
 custom_minimum_size = Vector2(290, 70)
@@ -361,44 +333,11 @@ layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_sro07")
 value = 100.0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 26)
+[node name="extra-life" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="extra-lives-container" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(142.5, 0)
-layout_mode = 2
-
-[node name="heart-1" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
-layout_mode = 2
-texture = ExtResource("12_3naof")
-
-[node name="heart-2" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
-layout_mode = 2
-texture = ExtResource("12_3naof")
-
-[node name="heart-3" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
-layout_mode = 2
-texture = ExtResource("12_3naof")
-
-[node name="hints-container" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(142.5, 0)
-layout_mode = 2
-
-[node name="hint-1" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/hints-container"]
-layout_mode = 2
-texture = ExtResource("13_3naof")
-
-[node name="hint-2" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/hints-container"]
-layout_mode = 2
-texture = ExtResource("13_3naof")
-
-[node name="hint-3" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/hints-container"]
-layout_mode = 2
-texture = ExtResource("13_3naof")
 
 [node name="start_screen" type="Control" parent="UIManager"]
-z_index = 900
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -428,7 +367,7 @@ grow_vertical = 2
 theme = ExtResource("9_s5p1y")
 alignment = 1
 
-[node name="new-game-btn" type="Button" parent="UIManager/start_screen"]
+[node name="play-btn" type="Button" parent="UIManager/start_screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -442,8 +381,7 @@ offset_bottom = -51.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
-text = "New Game
-"
+text = "Play"
 
 [node name="exit-btn" type="Button" parent="UIManager/start_screen"]
 layout_mode = 1
@@ -490,225 +428,34 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="UIManager/start_screen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -271.0
-offset_top = -264.0
-offset_right = 271.0
-offset_bottom = -108.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("17_17klg")
-expand_mode = 1
-
-[node name="setting-modal" type="Panel" parent="UIManager/start_screen"]
+[node name="setting-modal" type="Control" parent="UIManager/start_screen"]
 visible = false
-z_index = 1
-custom_minimum_size = Vector2(600, 500)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -250.0
-offset_right = 300.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_ugojt")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="add-username" type="Button" parent="UIManager/start_screen/setting-modal"]
-custom_minimum_size = Vector2(250, 50)
+[node name="Label" type="Label" parent="UIManager/start_screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -91.0
-offset_right = 125.0
-offset_bottom = -41.0
+offset_left = -145.0
+offset_top = -214.0
+offset_right = 145.0
+offset_bottom = -170.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("9_s5p1y")
-text = "Add Username"
-
-[node name="info-btn" type="Button" parent="UIManager/start_screen/setting-modal"]
-custom_minimum_size = Vector2(250, 50)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = 7.0
-offset_right = 125.0
-offset_bottom = 57.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_s5p1y")
-text = "Info"
-
-[node name="Label" type="Label" parent="UIManager/start_screen/setting-modal"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.5
-offset_top = -179.5
-offset_right = 70.5
-offset_bottom = -146.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
-theme_override_colors/font_shadow_color = Color(0.16, 0.16, 0.16, 1)
-theme_override_font_sizes/font_size = 26
-text = "Setting"
+theme_override_fonts/font = ExtResource("13_f6yoc")
+theme_override_font_sizes/font_size = 46
+text = "Code & Conquer"
 horizontal_alignment = 1
 vertical_alignment = 1
-uppercase = true
-
-[node name="back" type="TextureButton" parent="UIManager/start_screen/setting-modal"]
-layout_mode = 0
-offset_left = 537.0
-offset_top = 18.0
-offset_right = 578.0
-offset_bottom = 55.0
-texture_normal = ExtResource("16_qgjuk")
-stretch_mode = 0
-
-[node name="info-route" type="ColorRect" parent="UIManager"]
-visible = false
-z_index = 999
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.5
-offset_top = -324.0
-offset_right = 576.5
-offset_bottom = 324.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0235294, 0.168627, 0.341176, 1)
-script = ExtResource("15_qgjuk")
-
-[node name="Label" type="Label" parent="UIManager/info-route"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -47.5
-offset_top = -279.5
-offset_right = 47.5
-offset_bottom = -220.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 48
-text = "Info"
-
-[node name="info-page" type="ScrollContainer" parent="UIManager/info-route"]
-layout_mode = 0
-offset_top = 205.0
-offset_right = 1152.0
-offset_bottom = 648.0
-horizontal_scroll_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="UIManager/info-route/info-page"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="control-info" type="VBoxContainer" parent="UIManager/info-route/info-page/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="UIManager/info-route/info-page/MarginContainer/control-info"]
-layout_mode = 2
-text = "W – Walk Up
-
-A – Walk Left
-
-S – Walk Down
-
-D – Walk Right
-
-WE – Diagonal Up-Right
-
-WQ – Diagonal Up-Left
-
-SA – Diagonal Down-Left
-
-SD – Diagonal Down-Right
-
-Hold W / A / S / D + Spacebar – Dash in that direction
-
-Left Click – Target objects or enemies"
-
-[node name="lab-info" type="VBoxContainer" parent="UIManager/info-route/info-page/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIManager/info-route/info-page/MarginContainer/lab-info"]
-layout_mode = 2
-
-[node name="control-info-btn" type="Button" parent="UIManager/info-route"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 122.0
-offset_right = 227.0
-offset_bottom = 167.0
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_datfd")
-text = "Control Info"
-
-[node name="lab-info-btn" type="Button" parent="UIManager/info-route"]
-layout_mode = 0
-offset_left = 254.0
-offset_top = 122.0
-offset_right = 464.0
-offset_bottom = 167.0
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_qgjuk")
-text = "Lab Info"
-
-[node name="back" type="TextureButton" parent="UIManager/info-route"]
-layout_mode = 0
-offset_left = 1089.0
-offset_top = 17.0
-offset_right = 1136.0
-offset_bottom = 50.0
-texture_normal = ExtResource("16_qgjuk")
-ignore_texture_size = true
-stretch_mode = 0
 
 [connection signal="pressed" from="UIManager/ingame_ui/ingame_setting" to="UIManager/ingame_ui" method="_on_ingame_setting_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/resume-btn" to="UIManager/ingame_ui" method="_on_resumebtn_pressed"]
-[connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/info-btn" to="UIManager/ingame_ui" method="_on_infobtn_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/quit-btn" to="UIManager/ingame_ui" method="_on_quitbtn_pressed"]
-[connection signal="pressed" from="UIManager/start_screen/new-game-btn" to="UIManager/start_screen" method="_on_newgamebtn_pressed"]
+[connection signal="pressed" from="UIManager/start_screen/play-btn" to="UIManager/start_screen" method="_on_playbtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/exit-btn" to="UIManager/start_screen" method="_on_exitbtn_pressed"]
-[connection signal="pressed" from="UIManager/start_screen/setting-btn" to="UIManager/start_screen" method="_on_settingbtn_pressed"]
-[connection signal="pressed" from="UIManager/start_screen/setting-modal/info-btn" to="UIManager/start_screen" method="_on_infobtn_pressed"]
-[connection signal="pressed" from="UIManager/start_screen/setting-modal/back" to="UIManager/start_screen" method="_on_back_pressed"]
-[connection signal="pressed" from="UIManager/info-route/control-info-btn" to="UIManager/info-route" method="_on_controlinfobtn_pressed"]
-[connection signal="pressed" from="UIManager/info-route/lab-info-btn" to="UIManager/info-route" method="_on_labinfobtn_pressed"]
-[connection signal="pressed" from="UIManager/info-route/back" to="UIManager/info-route" method="_on_back_pressed"]

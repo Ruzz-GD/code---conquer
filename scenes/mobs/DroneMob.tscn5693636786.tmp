@@ -26,11 +26,11 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4h84k"]
+radius = 114.215
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlewb"]
 height = 42.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4h84k"]
-radius = 115.213
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nlewb"]
 radius = 250.0
@@ -43,7 +43,6 @@ radius = 183.175
 [node name="DroneBody" type="CharacterBody2D" parent="." groups=["drone"]]
 z_index = 9
 position = Vector2(-1, 0)
-collision_layer = 2
 script = ExtResource("1_ollsl")
 
 [node name="Sprite2D" type="Sprite2D" parent="DroneBody"]
@@ -51,7 +50,7 @@ scale = Vector2(1.94186, 1.65625)
 texture = SubResource("AtlasTexture_h2i34")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody"]
-position = Vector2(-1, 13)
+position = Vector2(-1, 14)
 shape = SubResource("CircleShape2D_fxgcf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DroneBody"]
@@ -68,17 +67,17 @@ show_percentage = false
 [node name="attack_timer" type="Timer" parent="DroneBody"]
 wait_time = 3.0
 
+[node name="AreaToDetect" type="Area2D" parent="DroneBody"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody/AreaToDetect"]
+shape = SubResource("CircleShape2D_4h84k")
+
 [node name="hit_box" type="Area2D" parent="DroneBody"]
 collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody/hit_box"]
 shape = SubResource("CapsuleShape2D_nlewb")
-
-[node name="AreaToDetect" type="Area2D" parent="DroneBody"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody/AreaToDetect"]
-shape = SubResource("CircleShape2D_4h84k")
 
 [node name="ChaseArea" type="Area2D" parent="."]
 

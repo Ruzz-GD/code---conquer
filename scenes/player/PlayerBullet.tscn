@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2knwicpa28u0"]
+
+[ext_resource type="Script" uid="uid://b3igq52epxxls" path="res://scenes/player/playerbullet.gd" id="1_ixud6"]
+[ext_resource type="Texture2D" uid="uid://dofx4ms060o1e" path="res://assets/img/bullet.png" id="2_ixud6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gcv7"]
+size = Vector2(7.5, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jedbt"]
+size = Vector2(7.5, 2)
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 524288
+script = ExtResource("1_ixud6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_3gcv7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.0520031, 0.225)
+scale = Vector2(0.24675, 0.252273)
+texture = ExtResource("2_ixud6")
+
+[node name="HitDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector"]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_jedbt")

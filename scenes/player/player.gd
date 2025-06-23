@@ -6,21 +6,45 @@ const DASH_TIME = 0.8
 
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
+@onready var bullet_scene = preload("res://scenes/player/PlayerBullet.tscn")
+@onready var shoot_timer = $ShootTimer
 
 var last_idle = "idle_down"
 var is_dashing = false
 var dash_velocity = Vector2.ZERO
+var is_shooting = false
 var can_move_game_started = true
+
+signal player_health_changed(current)
+signal player_lives_changed(current)
+signal player_hints_changed(current)
+
+var max_health := 100
+var current_health := 100
+var max_lives := 3
+var current_lives := 3
+var max_hints := 0
+var current_hints := 0
+
+@export var attack_range := 100
+@export var attack_damage := 10
+@export var attack_speed := 4 
 
 func _ready():
 	dash_timer.wait_time = DASH_TIME
 	dash_timer.one_shot = true
 
+	shoot_timer.wait_time = 1.0 / attack_speed
+	shoot_timer.timeout.connect(_on_ShootTimer_timeout)
+
 	GameManager.disable_player_action.connect(_on_typing_started)
 	GameManager.enable_player_action.connect(_on_typing_finished)
-	GameManager.game_reset.connect(_on_game_reset) # 👈 Listen to game reset
+	GameManager.game_reset.connect(_on_game_reset)
 
-	# Optional: Reset state at first load
+	emit_signal("player_health_changed", current_health)
+	emit_signal("player_lives_changed", current_lives)
+	emit_signal("player_hints_changed", current_hints)
+
 	if not GameManager.is_game_started:
 		reset_state(GameManager.reset_position())
 
@@ -30,26 +54,46 @@ func _physics_process(_delta):
 		move_and_slide()
 		return
 
-	if is_dashing:
-		velocity = dash_velocity
-		move_and_slide()
-		if dash_timer.time_left <= 0:
-			_stop_dash()
+	# Check shooting input
+	if Input.is_action_pressed("to_shoot") and not get_viewport().gui_get_hovered_control():
+		if shoot_timer.is_stopped():
+			shoot_timer.start()
+			is_shooting = true
+	else:
+		if not shoot_timer.is_stopped():
+			shoot_timer.stop()
+		is_shooting = false
+
+	# Stop all movement if dashing or shooting
+	if is_dashing or is_shooting:
+		if is_dashing:
+			velocity = dash_velocity
+			move_and_slide()
+			if dash_timer.time_left <= 0:
+				_stop_dash()
+		else:
+			velocity = Vector2.ZERO
+			move_and_slide()
 		return
-
+	# Normal movement
 	var direction = _get_movement_direction()
+	if Input.is_action_just_pressed("dash_move") and direction != Vector2.ZERO and _is_valid_dash_direction(direction):
+		_dash(direction)
+	else:
+		_handle_movement(direction)
 
-	if Input.is_action_just_pressed("dash_move") and can_move_game_started:
-		if direction != Vector2.ZERO and _is_valid_dash_direction(direction):
-			_dash(direction)
-			return
+func shoot():
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.direction = (get_global_mouse_position() - global_position).normalized()
+	bullet.attack_range = attack_range
+	bullet.attack_damage = attack_damage
+	get_tree().current_scene.add_child(bullet)
 
-	_handle_movement(direction)
+func _on_ShootTimer_timeout():
+	shoot()
 
 func _get_movement_direction() -> Vector2:
-	if not can_move_game_started or not GameManager.is_game_started:
-		return Vector2.ZERO
-
 	var direction = Vector2.ZERO
 
 	if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_right"):
@@ -77,7 +121,7 @@ func _get_movement_direction() -> Vector2:
 		direction.x += 1
 		last_idle = "idle_right"
 
-	return direction.normalized() if direction != Vector2.ZERO else Vector2.ZERO
+	return direction.normalized()
 
 func _handle_movement(direction: Vector2):
 	if direction != Vector2.ZERO:
@@ -86,17 +130,15 @@ func _handle_movement(direction: Vector2):
 	else:
 		velocity = Vector2.ZERO
 		anim_sprite.play(last_idle)
-
 	move_and_slide()
 
 func _dash(dash_direction):
+	if is_shooting:
+		return # Prevent dashing while shooting
 	is_dashing = true
 	dash_velocity = dash_direction.normalized() * DASH_SPEED
 	anim_sprite.play(_get_dash_animation(dash_direction))
 	dash_timer.start()
-
-func _on_DashTimer_timeout():
-	_stop_dash()
 
 func _stop_dash():
 	is_dashing = false
@@ -106,15 +148,12 @@ func _is_valid_dash_direction(direction: Vector2) -> bool:
 	return direction == Vector2.UP or direction == Vector2.DOWN or direction == Vector2.LEFT or direction == Vector2.RIGHT
 
 func _get_dash_animation(direction: Vector2) -> String:
-	if direction == Vector2.LEFT:
-		return "dash_left"
-	elif direction == Vector2.RIGHT:
-		return "dash_right"
-	elif direction == Vector2.UP:
-		return "dash_up"
-	elif direction == Vector2.DOWN:
-		return "dash_down"
-	return last_idle
+	match direction:
+		Vector2.LEFT: return "dash_left"
+		Vector2.RIGHT: return "dash_right"
+		Vector2.UP: return "dash_up"
+		Vector2.DOWN: return "dash_down"
+		_: return last_idle
 
 func _on_typing_started():
 	can_move_game_started = false
@@ -122,25 +161,43 @@ func _on_typing_started():
 func _on_typing_finished():
 	can_move_game_started = true
 
-# ✅ Called when GameManager triggers a reset
+func take_damage(amount: int) -> void:
+	current_health = clamp(current_health - amount, 0, max_health)
+	emit_signal("player_health_changed", current_health)
+	if current_health == 0:
+		lose_life()
+
+func lose_life() -> void:
+	if current_lives > 0:
+		current_lives -= 1
+		current_health = max_health
+		emit_signal("player_lives_changed", current_lives)
+		emit_signal("player_health_changed", current_health)
+	else:
+		GameManager.reset_game()
+
+func use_hint():
+	if current_hints > 0:
+		current_hints -= 1
+		emit_signal("player_hints_changed", current_hints)
+
 func _on_game_reset():
-	print("🔁 Reset received in Player")
+	current_health = max_health
+	current_lives = max_lives
+	current_hints = max_hints
+	emit_signal("player_health_changed", current_health)
+	emit_signal("player_lives_changed", current_lives)
+	emit_signal("player_hints_changed", current_hints)
 	reset_state(GameManager.reset_position())
 
-# ✅ Reset state and teleport
 func reset_state(pos: Vector2):
-	print("🚀 Teleporting player to:", pos)
 	global_position = pos
 	velocity = Vector2.ZERO
 	dash_velocity = Vector2.ZERO
 	is_dashing = false
-
-	# Reset facing if game hasn't started
+	is_shooting = false
 	if not GameManager.is_game_started:
 		last_idle = "idle_down"
-		print("↩️ Reset facing direction to:", last_idle)
-
 	anim_sprite.play(last_idle)
-
 	if not dash_timer.is_stopped():
 		dash_timer.stop()

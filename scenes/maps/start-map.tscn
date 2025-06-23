@@ -794,7 +794,7 @@ texture = ExtResource("4_um0h7")
 36:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ti2w4"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 524289
 sources/0 = SubResource("TileSetAtlasSource_a6um0")
 sources/1 = SubResource("TileSetAtlasSource_um0h7")
 sources/2 = SubResource("TileSetAtlasSource_jgbkp")
@@ -1182,7 +1182,7 @@ texture = ExtResource("2_a6um0")
 10:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_xw5er"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 524289
 sources/0 = SubResource("TileSetAtlasSource_3yol8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xw5er"]
@@ -1619,7 +1619,7 @@ texture = ExtResource("4_um0h7")
 36:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_j7r27"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 524289
 sources/0 = SubResource("TileSetAtlasSource_xw5er")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j7r27"]
@@ -2073,7 +2073,7 @@ texture = ExtResource("4_um0h7")
 36:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_kun3q"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 524289
 sources/0 = SubResource("TileSetAtlasSource_j7r27")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kun3q"]
@@ -2596,10 +2596,19 @@ size = Vector2(144, 47)
 [node name="Start-map" type="Node2D"]
 script = SubResource("GDScript_jgbkp")
 
-[node name="MobsContainer" type="Node2D" parent="."]
+[node name="drone_container" type="Node2D" parent="."]
 
-[node name="DroneMob" parent="MobsContainer" instance=ExtResource("1_7marc")]
-position = Vector2(-557, -548)
+[node name="drone-1" parent="drone_container" instance=ExtResource("1_7marc")]
+position = Vector2(654, -631)
+
+[node name="drone-2" parent="drone_container" instance=ExtResource("1_7marc")]
+position = Vector2(664, -352)
+
+[node name="drone-3" parent="drone_container" instance=ExtResource("1_7marc")]
+position = Vector2(991, -348)
+
+[node name="drone-4" parent="drone_container" instance=ExtResource("1_7marc")]
+position = Vector2(998, -621)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 1)
@@ -2653,6 +2662,7 @@ tile_set = SubResource("TileSet_sn51k")
 modulate = Color(0.8, 0.8, 0.8, 1)
 z_index = 7
 position = Vector2(-1056, -679)
+collision_layer = 524289
 script = ExtResource("8_3yol8")
 closed_texture = SubResource("AtlasTexture_xw5er")
 open_texture = SubResource("AtlasTexture_80v0b")
@@ -2697,6 +2707,7 @@ shape = SubResource("RectangleShape2D_qnrc8")
 [node name="start-room-door" type="StaticBody2D" parent="."]
 z_index = 7
 position = Vector2(495, -544)
+collision_layer = 524289
 script = ExtResource("7_3yol8")
 closed_texture = SubResource("AtlasTexture_j7r27")
 open_texture = SubResource("AtlasTexture_kun3q")
