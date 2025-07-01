@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var bullet_speed := 300
+var bullet_speed := 100
 var attack_range := 0.0
 var attack_damage := 0
 

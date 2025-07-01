@@ -30,3 +30,15 @@ func load_map(map_path: String, spawn_marker: String):
 	var new_map = load(map_path).instantiate()
 	current_map.add_child(new_map)
 	print("✅ Map loaded successfully:", map_path)
+
+	await get_tree().process_frame  # Wait for nodes to be fully added
+
+	# Attempt to find spawn marker inside the newly loaded map
+	var marker = new_map.get_node_or_null(spawn_marker)
+	if marker:
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player.global_position = marker.global_position
+			print("📍 Player spawned at:", marker.name)
+	else:
+		print("❌ Spawn marker not found:", spawn_marker)

@@ -1,24 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy3fpv7e73sou"]
+[gd_scene load_steps=5 format=3 uid="uid://c4q3orahwuyld"]
 
 [ext_resource type="Script" uid="uid://busyfoa2cco4e" path="res://scenes/mobs/dronebullet.gd" id="1_7nujd"]
-[ext_resource type="Texture2D" uid="uid://dofx4ms060o1e" path="res://assets/img/bullet.png" id="2_7nujd"]
+[ext_resource type="Texture2D" uid="uid://fubdvkins3o0" path="res://assets/img/drone_bullet.png" id="2_7nujd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sttck"]
-radius = 4.12311
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xh56"]
+radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7nujd"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ymjk"]
+radius = 5.0
 
 [node name="Bullet" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 0
-collision_mask = 524288
 script = ExtResource("1_7nujd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_sttck")
+shape = SubResource("CircleShape2D_4xh56")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.0520031, 0.225)
-scale = Vector2(0.24675, 0.252273)
+scale = Vector2(0.0753685, 0.074826)
 texture = ExtResource("2_7nujd")
 
 [node name="HitDetector" type="Area2D" parent="."]
@@ -26,4 +26,4 @@ collision_layer = 0
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector"]
-shape = SubResource("CircleShape2D_7nujd")
+shape = SubResource("CircleShape2D_4ymjk")

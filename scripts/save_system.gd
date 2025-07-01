@@ -1,0 +1,145 @@
+extends Node
+
+signal save_loaded
+var loaded := false
+
+var player_state := {}
+var opened_chests := {}
+var opened_doors := {}
+var killed_drones := {}
+
+const SAVE_DIR := "user://code_conquer_saves_gameplay"
+
+var save_data := {
+	"chests_opened": {},
+	"doors_opened": {},
+	"killed_drones": {},
+	"player_state": {},
+	"current_map_path": "",
+	"player_spawn_marker_path": "",
+	"player_username": "",
+	"difficulty": "",
+	"save_station_map": ""  # ✅ Added field
+}
+
+func reset_save():
+	opened_chests = {}
+	opened_doors = {}
+	killed_drones = {}
+	player_state = {}
+
+	save_data = {
+		"chests_opened": {},
+		"doors_opened": {},
+		"killed_drones": {},
+		"player_state": {},
+		"current_map_path": "",
+		"player_spawn_marker_path": "",
+		"player_username": "",
+		"difficulty": "",
+		"save_station_map": ""
+	}
+
+func save_game(file_name := "", save_station_map := ""):
+	if file_name == "":
+		file_name = GameManager.get_save_file()
+
+	if file_name == "":
+		print("❌ No valid filename provided or tracked. Save aborted.")
+		return
+
+	GameManager.set_save_file(file_name)
+	GameManager.update_current_save_station_marker()
+
+	var dir = DirAccess.open(SAVE_DIR)
+	if not dir:
+		var err = DirAccess.make_dir_absolute(SAVE_DIR)
+		if err != OK:
+			print("❌ Failed to create save directory!")
+			return
+		else:
+			print("📁 Save directory created:", SAVE_DIR)
+
+	var final_path = "%s/%s" % [SAVE_DIR, file_name]
+
+	save_data["player_username"] = GameManager.player_username
+	save_data["chests_opened"] = opened_chests
+	save_data["doors_opened"] = opened_doors
+	save_data["killed_drones"] = killed_drones
+	save_data["current_map_path"] = GameManager.current_map_path
+	save_data["player_spawn_marker_path"] = GameManager.current_save_station_marker
+	save_data["difficulty"] = GameManager.difficulty
+	save_data["save_station_map"] = save_station_map  # ✅ Store floor label
+
+	var player_node = get_tree().get_first_node_in_group("player")
+	if player_node:
+		player_state = player_node.get_save_state()
+		save_data["player_state"] = player_state
+
+	var file = FileAccess.open(final_path, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(save_data))
+		file.close()
+		print("✅ Game saved to:", final_path)
+
+func load_game(file_name := "save_data.json"):
+	var final_path = "%s/%s" % [SAVE_DIR, file_name]
+
+	if not FileAccess.file_exists(final_path):
+		loaded = false
+		print("🟨 Save file not found:", final_path)
+		return
+
+	var file = FileAccess.open(final_path, FileAccess.READ)
+	if not file:
+		print("❌ Failed to open save file.")
+		return
+
+	var content = file.get_as_text()
+	file.close()
+
+	save_data = JSON.parse_string(content) if content else {}
+	if typeof(save_data) != TYPE_DICTIONARY:
+		print("❌ Save data is invalid!")
+		return
+
+	if not save_data.has("current_map_path") or not save_data.has("player_spawn_marker_path"):
+		print("❌ Save file is missing critical data. Aborting load.")
+		return
+
+	GameManager.player_username = save_data.get("player_username", "")
+	opened_chests = save_data.get("chests_opened", {})
+	opened_doors = save_data.get("doors_opened", {})
+	killed_drones = save_data.get("killed_drones", {})
+	player_state = save_data.get("player_state", {})
+
+	GameManager.current_map_path = save_data["current_map_path"]
+	GameManager.spawn_marker_name = save_data["player_spawn_marker_path"]
+	GameManager.difficulty = save_data.get("difficulty", "Medium")
+
+	GameManager.set_save_file(file_name)
+
+	GameManager.is_game_started = true
+	GameManager.update_map(GameManager.current_map_path, GameManager.spawn_marker_name)
+
+	call_deferred("_apply_player_state")
+	emit_signal("save_loaded")
+	print("✅ Loaded:", final_path)
+	print("🧭 Triggered map load with:", GameManager.current_map_path, GameManager.spawn_marker_name)
+
+func _apply_player_state():
+	var player_node = get_tree().get_first_node_in_group("player")
+	if player_node:
+		player_node.load_save_state(player_state)
+		print("✅ Player state loaded.")
+	else:
+		print("⚠️ Player node not found when applying saved state.")
+
+func is_chest_opened(chest_id: String) -> bool:
+	return opened_chests.has(chest_id) and opened_chests[chest_id]
+
+func is_door_open(door_id: String) -> bool:
+	return opened_doors.has(door_id) and opened_doors[door_id]
+
+func is_drone_killed(drone_id: String) -> bool:
+	return killed_drones.has(drone_id) and killed_drones[drone_id]

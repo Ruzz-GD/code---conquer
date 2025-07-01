@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cu67wjahiwtrg"]
+
+[node name="second_floor_underground_map" type="Node2D"]
+
+[node name="second_floor_spawn_marker" type="Marker2D" parent="."]
+position = Vector2(359, 207)
