@@ -7,6 +7,7 @@ var player_state := {}
 var opened_chests := {}
 var opened_doors := {}
 var killed_drones := {}
+var killed_robots := {}  # ✅ New
 
 const SAVE_DIR := "user://code_conquer_saves_gameplay"
 
@@ -14,30 +15,35 @@ var save_data := {
 	"chests_opened": {},
 	"doors_opened": {},
 	"killed_drones": {},
+	"killed_robots": {},  # ✅ New
 	"player_state": {},
 	"current_map_path": "",
 	"player_spawn_marker_path": "",
 	"player_username": "",
 	"difficulty": "",
-	"save_station_map": ""  # ✅ Added field
+	"save_station_map": "",
+	"gameplay_time": 0.0  # ✅ Track elapsed gameplay time
 }
 
 func reset_save():
 	opened_chests = {}
 	opened_doors = {}
 	killed_drones = {}
+	killed_robots = {}  # ✅ New
 	player_state = {}
 
 	save_data = {
 		"chests_opened": {},
 		"doors_opened": {},
 		"killed_drones": {},
+		"killed_robots": {},  # ✅ New
 		"player_state": {},
 		"current_map_path": "",
 		"player_spawn_marker_path": "",
 		"player_username": "",
 		"difficulty": "",
-		"save_station_map": ""
+		"save_station_map": "",
+		"gameplay_time": 0.0
 	}
 
 func save_game(file_name := "", save_station_map := ""):
@@ -66,10 +72,12 @@ func save_game(file_name := "", save_station_map := ""):
 	save_data["chests_opened"] = opened_chests
 	save_data["doors_opened"] = opened_doors
 	save_data["killed_drones"] = killed_drones
+	save_data["killed_robots"] = killed_robots  # ✅ Save robot data
 	save_data["current_map_path"] = GameManager.current_map_path
 	save_data["player_spawn_marker_path"] = GameManager.current_save_station_marker
 	save_data["difficulty"] = GameManager.difficulty
-	save_data["save_station_map"] = save_station_map  # ✅ Store floor label
+	save_data["save_station_map"] = save_station_map
+	save_data["gameplay_time"] = GameManager.get_elapsed_time()
 
 	var player_node = get_tree().get_first_node_in_group("player")
 	if player_node:
@@ -111,27 +119,27 @@ func load_game(file_name := "save_data.json"):
 	opened_chests = save_data.get("chests_opened", {})
 	opened_doors = save_data.get("doors_opened", {})
 	killed_drones = save_data.get("killed_drones", {})
+	killed_robots = save_data.get("killed_robots", {})  # ✅ Load robot data
 	player_state = save_data.get("player_state", {})
 
 	GameManager.current_map_path = save_data["current_map_path"]
 	GameManager.spawn_marker_name = save_data["player_spawn_marker_path"]
 	GameManager.difficulty = save_data.get("difficulty", "Medium")
-
 	GameManager.set_save_file(file_name)
+
+	var loaded_time = save_data.get("gameplay_time", 0.0)
+	GameManager.game_timer = loaded_time
 
 	GameManager.is_game_started = true
 	GameManager.update_map(GameManager.current_map_path, GameManager.spawn_marker_name)
 
 	call_deferred("_apply_player_state")
 	emit_signal("save_loaded")
-	print("✅ Loaded:", final_path)
-	print("🧭 Triggered map load with:", GameManager.current_map_path, GameManager.spawn_marker_name)
 
 func _apply_player_state():
 	var player_node = get_tree().get_first_node_in_group("player")
 	if player_node:
 		player_node.load_save_state(player_state)
-		print("✅ Player state loaded.")
 	else:
 		print("⚠️ Player node not found when applying saved state.")
 
@@ -143,3 +151,6 @@ func is_door_open(door_id: String) -> bool:
 
 func is_drone_killed(drone_id: String) -> bool:
 	return killed_drones.has(drone_id) and killed_drones[drone_id]
+
+func is_robot_killed(robot_id: String) -> bool:  # ✅ New function
+	return killed_robots.has(robot_id) and killed_robots[robot_id]

@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var door_id: String = "first_floor_last_door"
+var door_id: String = "first_floor_forth_door"
 
 @export var closed_texture: Texture
 @export var open_texture: Texture
@@ -59,13 +59,15 @@ func _on_door_button_input(viewport: Node, event: InputEvent, shape_idx: int) ->
 				print("⚠️ Debug UI already open.")
 				return
 
+			# 🟢 Assign random challenge only once
 			if not has_set_challenge:
 				debug_ui.set_random_challenge(GameManager.difficulty)
-				selected_challenge = debug_ui.selected_challenge  # 🟡 Copy the generated challenge
+				selected_challenge = debug_ui.selected_challenge
 				has_set_challenge = true
 				challenge_difficulty = GameManager.difficulty
 
-			debug_ui.show_debug_ui(self, selected_challenge)  # ✅ 2 arguments!
+			# ✅ Pass self and selected_challenge to shared debug UI
+			debug_ui.show_debug_ui(self, selected_challenge)
 			_disable_player_input(true)
 		else:
 			print("❌ Could not show debug UI")

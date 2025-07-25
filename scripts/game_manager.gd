@@ -14,6 +14,10 @@ var player_username: String:
 	get:
 		return player_username
 
+# TIMER
+var game_timer := 0.0
+var is_timer_running := false
+
 # MAPS
 var first_floor_map: String = "res://scenes/maps/first-floor-map.tscn"
 var first_floor_spawn_marker_name: String = "first_floor_spawn_marker"
@@ -39,6 +43,11 @@ var is_game_started: bool:
 		_is_game_started = value
 		is_game_start.emit(value)
 
+		if value:
+			start_timer()
+		else:
+			stop_timer()
+
 var _difficulty := "Medium"
 var difficulty: String:
 	get: return _difficulty
@@ -50,6 +59,26 @@ var difficulty: String:
 func _ready():
 	var cursor_texture = preload("res://assets/img/my_cursor.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(0, 0))
+
+# Runs every frame to update the timer
+func _process(delta):
+	if is_timer_running:
+		game_timer += delta
+
+# Starts the timer
+func start_timer():
+	game_timer = 0.0
+	is_timer_running = true
+	print("⏱️ Timer started")
+
+# Stops the timer
+func stop_timer():
+	is_timer_running = false
+	print("🛑 Timer stopped at ", game_timer, " seconds")
+
+# Get the elapsed time
+func get_elapsed_time() -> float:
+	return game_timer
 
 # --- Map Logic ---
 func update_map(new_map_path: String, new_spawn_marker: String):

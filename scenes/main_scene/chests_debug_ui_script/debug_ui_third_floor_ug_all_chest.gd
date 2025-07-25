@@ -13,6 +13,8 @@ var player: Node = null
 var showing_expected_output := false
 var selected_challenge := {}
 var current_chest: Node = null  # ✅ Track the chest using this UI
+var used_medium := []
+var used_hard := []
 
 
 var medium_challenges = [
@@ -196,11 +198,22 @@ func _on_difficulty_changed(new_difficulty: String):
 
 func set_random_challenge(difficulty: String):
 	var pool = medium_challenges if difficulty == "Medium" else hard_challenges
-	selected_challenge = pool[randi() % pool.size()]
+	var used = used_medium if difficulty == "Medium" else used_hard
+
+	# Remove already-used challenges
+	var available := pool.filter(func(ch): return not used.has(ch))
+
+	# If all have been used, reset
+	if available.is_empty():
+		used.clear()
+		available = pool.duplicate()
+
+	selected_challenge = available[randi() % available.size()]
+	used.append(selected_challenge)
+
 	buggy_code = selected_challenge["buggy_code"]
 	correct_fix = selected_challenge["correct_fix"]
 	expected_output = selected_challenge["expected_output"]
-
 func show_debug_ui(caller_node: Node, challenge: Dictionary):
 	current_chest = caller_node
 	selected_challenge = challenge
