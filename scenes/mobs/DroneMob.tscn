@@ -364,7 +364,7 @@ radius = 170.065
 [node name="DroneMob" type="Node2D"]
 script = ExtResource("1_4h84k")
 
-[node name="DroneBody" type="CharacterBody2D" parent="."]
+[node name="DroneBody" type="CharacterBody2D" parent="." groups=["drone", "persistent_object"]]
 z_index = 9
 z_as_relative = false
 position = Vector2(-1, 0)

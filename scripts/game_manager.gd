@@ -21,14 +21,15 @@ var is_timer_running := false
 # MAPS
 var first_floor_map: String = "res://scenes/maps/first-floor-map.tscn"
 var first_floor_spawn_marker_name: String = "first_floor_spawn_marker"
+var first_floor_stair_spawner: String = "first_floor_spawn_marker_stair"
 var first_floor_save_station_marker: String = "first_floor_save_station_pos"
 
 var second_floor_underground_map: String = "res://scenes/maps/second-floor-underground-map.tscn"
-var second_floor_underground_spawn_marker_name: String = "second_floor_spawn_marker"
+var second_floor_undergroun_stair_spawner: String = "second_floor_spawn_marker_stair"
 var second_floor_underground_save_station_marker: String = "second_floor_underground_save_station_pos"
 
 var third_floor_underground_map: String = "res://scenes/maps/third-floor-underground-map.tscn"
-var third_floor_underground_spawn_marker_name: String = "third_floor_spawn_marker"
+var third_floor_underground_stair_spawner: String = "third_floor_spawn_marker_stair"
 var third_floor_underground_save_station_marker: String = "third_floor_underground_save_station_pos"
 
 var current_map_path := first_floor_map
@@ -105,7 +106,6 @@ func update_current_save_station_marker():
 # --- Game Reset Logic ---
 func reset_game():
 	print("🔄 Game reset triggered")
-
 	player_username = ""
 	SaveSystem.reset_save()
 

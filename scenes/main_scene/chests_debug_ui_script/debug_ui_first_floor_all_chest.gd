@@ -289,7 +289,7 @@ func _disable_player_input(state: bool):
 		player = get_tree().current_scene.find_child("Player", true, false)
 
 	if player:
-		player.typing_cant_move = state
+		player.typing = state
 		print("🔧 typing_cant_move set to:", state)
 	else:
 		print("❌ Player not found when trying to set typing_cant_move.")

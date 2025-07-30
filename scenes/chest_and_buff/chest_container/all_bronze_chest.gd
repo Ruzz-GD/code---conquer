@@ -137,3 +137,8 @@ func open_chest():
 
 func _on_LifetimeTimer_timeout():
 	queue_free()
+
+func apply_saved_state():
+	if SaveSystem.is_chest_opened(chest_id):
+		chest_already_opened = true
+		$chest_sprite.frame = $chest_sprite.sprite_frames.get_frame_count("bronze_chest_anim") - 1

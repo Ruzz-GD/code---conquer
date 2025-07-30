@@ -43,6 +43,9 @@ func _ready():
 
 	door_button.input_event.connect(_on_door_button_input)
 	
+func apply_saved_state():
+	_check_if_door_should_be_open()
+	
 func _check_if_door_should_be_open():
 	if SaveSystem.is_door_open(door_id):
 		door_already_open = true
@@ -122,7 +125,7 @@ func update_door_texture():
 
 func _disable_player_input(state: bool):
 	if player:
-		player.typing_cant_move = state
+		player.typing = state
 		print("🎮 typing_cant_move =", state)
 
 func setup_unlocked_door():

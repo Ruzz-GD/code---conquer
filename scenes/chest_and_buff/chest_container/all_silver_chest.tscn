@@ -290,7 +290,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n377p"]
 size = Vector2(30, 13)
 
-[node name="all_silver_chest" type="Area2D"]
+[node name="all_silver_chest" type="Area2D" groups=["persistent_object"]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_bjyex")

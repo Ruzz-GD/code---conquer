@@ -42,8 +42,8 @@ var current_bullet := 60
 var max_magazine := 5
 var current_magazine := 3
 
-var typing_cant_move := false
-var has_gun := false  # ✅ New: player starts without gun
+var typing := false
+var has_gun := false 
 
 var is_player_have_double_damage_buff := false
 var is_player_have_triple_damage_buff := false
@@ -77,7 +77,7 @@ func _ready():
 		reset_state()
 
 func _physics_process(_delta):
-	if not GameManager.is_game_started or is_dead or typing_cant_move:
+	if not GameManager.is_game_started or is_dead or typing:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -518,7 +518,7 @@ func _on_game_reset():
 	current_bullet = max_bullet
 	has_gun = false  # ✅ Reset gun on game reset
 	is_dead = false
-	typing_cant_move = false
+	typing = false
 	emit_signal("player_health_changed", current_health)
 	emit_signal("player_lives_changed", current_lives)
 	emit_signal("player_hints_changed", current_hints)

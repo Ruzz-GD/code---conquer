@@ -7,7 +7,7 @@ var player_state := {}
 var opened_chests := {}
 var opened_doors := {}
 var killed_drones := {}
-var killed_robots := {}  # ✅ New
+var killed_robots := {}  
 
 const SAVE_DIR := "user://code_conquer_saves_gameplay"
 
@@ -154,3 +154,17 @@ func is_drone_killed(drone_id: String) -> bool:
 
 func is_robot_killed(robot_id: String) -> bool:  # ✅ New function
 	return killed_robots.has(robot_id) and killed_robots[robot_id]
+	
+func _ready():
+	print("✅ SaveSystem ready")
+	GameManager.map_updated.connect(_on_map_changed)
+
+func _on_map_changed(new_map_path: String, spawn_marker: String) -> void:
+	await get_tree().process_frame  
+	reapply_map_state()
+	
+func reapply_map_state():
+	print("✅ SaveSystem ready")
+	for node in get_tree().get_nodes_in_group("persistent_object"):
+		if node.has_method("apply_saved_state"):
+			node.apply_saved_state()

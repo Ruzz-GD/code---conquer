@@ -408,3 +408,7 @@ func is_player_in_hearing_range() -> bool:
 	if not player:
 		return false
 	return chase_area.overlaps_body(player)
+
+func apply_saved_state():
+	if SaveSystem.is_drone_killed(drone_id):
+		queue_free()

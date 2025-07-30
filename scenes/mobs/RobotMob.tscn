@@ -364,11 +364,11 @@ radius = 170.065
 [node name="RobotMob" type="Node2D"]
 script = ExtResource("1_vag56")
 
-[node name="RobotBody" type="CharacterBody2D" parent="."]
+[node name="RobotBody" type="CharacterBody2D" parent="." groups=["persistent_object", "robot"]]
 z_index = 9
 z_as_relative = false
 position = Vector2(-1, 0)
-collision_layer = 4
+collision_layer = 8
 script = ExtResource("1_w5woh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RobotBody"]

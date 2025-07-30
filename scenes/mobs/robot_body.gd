@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var speed := 100  
 @export var chase_speed := 100
-var robot_max_hp := 80
-var robot_current_hp := 80  
+var robot_max_hp := 150
+var robot_current_hp := 150  
 @export var robot_range := 100  
 @export var robot_damage := 10
 @export var attack_speed := 2
@@ -407,3 +407,9 @@ func is_player_in_hearing_range() -> bool:
 	if not player:
 		return false
 	return chase_area.overlaps_body(player)
+
+func apply_saved_state():
+	if SaveSystem.is_robot_killed(robot_id):
+		queue_free()
+	else:
+		print("🤖 Robot alive:", robot_id)

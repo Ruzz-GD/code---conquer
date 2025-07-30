@@ -32,6 +32,11 @@ func _ready():
 	if chest_already_opened:
 		$chest_sprite.frame = $chest_sprite.sprite_frames.get_frame_count("chest_anim") - 1
 
+func apply_saved_state():
+	if SaveSystem.is_chest_opened(chest_id):
+		chest_already_opened = true
+		$chest_sprite.frame = $chest_sprite.sprite_frames.get_frame_count("chest_anim") - 1
+		
 func _check_if_chest_should_be_open():
 	if SaveSystem.is_chest_opened(chest_id):
 		chest_already_opened = true
