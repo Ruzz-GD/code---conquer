@@ -4638,7 +4638,7 @@ scale = Vector2(1.58333, 1.54167)
 texture = SubResource("AtlasTexture_ds708")
 
 [node name="first_floor_spawn_marker" type="Marker2D" parent="."]
-position = Vector2(-663, 226)
+position = Vector2(766, -364)
 
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)

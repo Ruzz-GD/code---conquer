@@ -4363,7 +4363,31 @@ shape = SubResource("CircleShape2D_uf5tr")
 position = Vector2(0, 3)
 scale = Vector2(1.11458, 1.07031)
 sprite_frames = SubResource("SpriteFrames_lgqa7")
-animation = &"dash_down"
+animation = &"shooting_up_right"
+
+[node name="MuzzleUp" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(4.486, -14.0146)
+
+[node name="MuzzleDown" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-3.58879, 11.2117)
+
+[node name="MuzzleLeft" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-14.3552, -1.86861)
+
+[node name="MuzzleRight" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(16.1496, -1.86861)
+
+[node name="MuzzleUpRight" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(16.1496, -6.54016)
+
+[node name="MuzzleUpLeft" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-10.7664, -7.47447)
+
+[node name="MuzzleDownRight" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(12.5608, 8.40878)
+
+[node name="MuzzleDownLeft" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-13.458, 6.54016)
 
 [node name="PlayerShadow" type="Sprite2D" parent="."]
 z_index = 2

@@ -8,7 +8,7 @@ func _ready() -> void:
 	color_rect.modulate.a = 0.0
 
 # Fades in, calls a function, waits, then fades out
-func fade_to_black_then(func_to_call: Callable, wait_time: float = 2.5) -> void:
+func fade_to_black_then(func_to_call: Callable, wait_time: float = 5.0) -> void:
 	color_rect.modulate.a = 0
 	show()
 

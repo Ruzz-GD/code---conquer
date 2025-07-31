@@ -34,7 +34,7 @@ func _delayed_change_floor():
 		GameManager.second_floor_undergroun_stair_spawner
 	)
 
-	await get_tree().process_frame  # Let the new scene load
+	await get_tree().process_frame 
 	player = get_tree().current_scene.find_child("Player", true, false)
 	if not player:
 		print("⚠️ Could not find player after scene change")

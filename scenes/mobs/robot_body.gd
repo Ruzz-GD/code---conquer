@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var speed := 100  
-@export var chase_speed := 100
+@export var speed := 80
+@export var chase_speed := 80
 var robot_max_hp := 150
 var robot_current_hp := 150  
 @export var robot_range := 100  

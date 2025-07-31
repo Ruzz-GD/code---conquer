@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 90
-const DASH_SPEED = 120
+const DASH_SPEED = 100
 const DASH_TIME = 0.8
 
 @onready var anim_sprite = $AnimatedSprite2D
@@ -10,6 +10,15 @@ const DASH_TIME = 0.8
 @onready var shoot_timer = $ShootTimer
 @onready var foot_step_sound = $FootstepSound
 @onready var shooting_sound = $ShootingSound
+
+@onready var muzzle_up = $AnimatedSprite2D/MuzzleUp
+@onready var muzzle_down = $AnimatedSprite2D/MuzzleDown
+@onready var muzzle_left = $AnimatedSprite2D/MuzzleLeft
+@onready var muzzle_right = $AnimatedSprite2D/MuzzleRight
+@onready var muzzle_up_right = $AnimatedSprite2D/MuzzleUpRight
+@onready var muzzle_up_left = $AnimatedSprite2D/MuzzleUpLeft
+@onready var muzzle_down_right = $AnimatedSprite2D/MuzzleDownRight
+@onready var muzzle_down_left = $AnimatedSprite2D/MuzzleDownLeft
 
 signal player_health_changed(current)
 signal player_lives_changed(current)
@@ -36,8 +45,8 @@ var current_lives := 3
 var max_hints := 3
 var current_hints := 1
 
-var max_bullet := 60
-var current_bullet := 60
+var max_bullet := 70
+var current_bullet := 70
 
 var max_magazine := 5
 var current_magazine := 3
@@ -57,6 +66,7 @@ var is_player_have_attack_range_buff := false
 
 @onready var reload_sound = $ReloadSound
 var is_reloading := false
+var is_map_transitioning := false
 
 func _ready():
 	dash_timer.wait_time = DASH_TIME
@@ -64,7 +74,7 @@ func _ready():
 
 	shoot_timer.wait_time = 1.0 / get_attack_speed()
 	shoot_timer.timeout.connect(_on_ShootTimer_timeout)
-
+	GameManager.connect("map_transitioning_changed", Callable(self, "_on_map_transitioning_changed"))
 	GameManager.game_reset.connect(_on_game_reset)
 
 	emit_signal("player_health_changed", current_health)
@@ -77,7 +87,7 @@ func _ready():
 		reset_state()
 
 func _physics_process(_delta):
-	if not GameManager.is_game_started or is_dead or typing:
+	if not GameManager.is_game_started or is_dead or typing or is_map_transitioning:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -140,6 +150,30 @@ func _physics_process(_delta):
 		else:
 			velocity = Vector2.ZERO
 			move_and_slide()
+			
+func _on_map_transitioning_changed(value: bool) -> void:
+	is_map_transitioning = value
+
+	if is_map_transitioning:
+		# Force face-down idle pose
+		var suffix = "_with_gun" if has_gun else ""
+		last_idle = "idle_down" + suffix
+		anim_sprite.play(last_idle)
+
+		velocity = Vector2.ZERO
+		move_and_slide()
+
+func get_muzzle_position() -> Vector2:
+	match last_aim_direction:
+		"up": return muzzle_up.global_position
+		"down": return muzzle_down.global_position
+		"left": return muzzle_left.global_position
+		"right": return muzzle_right.global_position
+		"up_right": return muzzle_up_right.global_position
+		"up_left": return muzzle_up_left.global_position
+		"down_right": return muzzle_down_right.global_position
+		"down_left": return muzzle_down_left.global_position
+		_: return global_position  # fallback if missing
 
 func reload():
 	var bullets_needed = max_bullet - current_bullet
@@ -178,7 +212,7 @@ func shoot():
 	emit_signal("player_bullet_changed", current_bullet)
 
 	var bullet = bullet_scene.instantiate()
-	bullet.global_position = global_position
+	bullet.global_position = get_muzzle_position()
 	bullet.direction = (get_global_mouse_position() - global_position).normalized()
 	bullet.attack_range = get_attack_range()
 	bullet.attack_damage = get_attack_damage()

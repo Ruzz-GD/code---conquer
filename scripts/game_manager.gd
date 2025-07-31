@@ -5,7 +5,8 @@ signal difficulty_changed(new_difficulty: String)
 signal username_changed(new_username)
 signal game_reset
 signal is_game_start
-signal save_file_loaded(file_name: String) # ✅ new signal
+signal save_file_loaded(file_name: String)
+signal map_transitioning_changed(is_transitioning: bool) # ✅ New signal
 
 var player_username: String:
 	set(value):
@@ -17,6 +18,10 @@ var player_username: String:
 # TIMER
 var game_timer := 0.0
 var is_timer_running := false
+
+# MAP TRANSITION
+var map_transitioning: bool = false
+@onready var map_transition_timer := Timer.new()
 
 # MAPS
 var first_floor_map: String = "res://scenes/maps/first-floor-map.tscn"
@@ -61,6 +66,12 @@ func _ready():
 	var cursor_texture = preload("res://assets/img/my_cursor.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(0, 0))
 
+	# Setup map transition timer
+	map_transition_timer.one_shot = true
+	map_transition_timer.wait_time = 5.0
+	map_transition_timer.timeout.connect(_on_map_transition_timer_timeout)
+	add_child(map_transition_timer)
+
 # Runs every frame to update the timer
 func _process(delta):
 	if is_timer_running:
@@ -83,12 +94,27 @@ func get_elapsed_time() -> float:
 
 # --- Map Logic ---
 func update_map(new_map_path: String, new_spawn_marker: String):
+	trigger_map_transition() # 🚨 Trigger transition before updating the map
+
 	current_map_path = new_map_path
 	spawn_marker_name = new_spawn_marker
 	update_current_save_station_marker()
 
 	print("🔄 Map state updated: ", current_map_path, " Spawn marker: ", spawn_marker_name)
 	map_updated.emit(current_map_path, spawn_marker_name)
+
+# --- Trigger Map Transition ---
+func trigger_map_transition():
+	if not map_transitioning:
+		map_transitioning = true
+		emit_signal("map_transitioning_changed", true)
+		map_transition_timer.start()
+		print("🚪 Map transitioning started.")
+
+func _on_map_transition_timer_timeout():
+	map_transitioning = false
+	emit_signal("map_transitioning_changed", false)
+	print("✅ Map transitioning ended.")
 
 func update_current_save_station_marker():
 	match current_map_path:
@@ -122,7 +148,7 @@ func reset_game():
 # --- Save File Tracking ---
 func set_save_file(file_name: String):
 	set_meta("current_save_file", file_name)
-	emit_signal("save_file_loaded", file_name) # ✅ emit signal
+	emit_signal("save_file_loaded", file_name)
 
 func get_save_file() -> String:
 	if has_meta("current_save_file"):

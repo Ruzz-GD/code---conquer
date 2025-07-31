@@ -5,8 +5,8 @@ extends CharacterBody2D
 var drone_max_hp := 80
 var drone_current_hp := 80  
 @export var drone_range := 100  
-@export var drone_damage := 10
-@export var attack_speed := 2
+@export var drone_damage := 5
+@export var attack_speed := 3
 @export var min_safe_distance := 30
 
 @onready var attack_timer = $attack_timer

@@ -2,6 +2,7 @@ extends Area2D
 
 @export var chest_id: String = ""
 var is_from_drone := false
+var is_from_robot := false  
 var player_near = false
 var debug_ui_first_floor_all_chest: Node = null
 var chest_already_opened = false

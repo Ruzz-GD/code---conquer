@@ -350,10 +350,10 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlewb"]
-height = 20.0
+height = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4h84k"]
-radius = 138.004
+radius = 145.417
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2i34"]
 radius = 88.6002
@@ -362,6 +362,7 @@ radius = 88.6002
 radius = 170.065
 
 [node name="DroneMob" type="Node2D"]
+z_as_relative = false
 script = ExtResource("1_4h84k")
 
 [node name="DroneBody" type="CharacterBody2D" parent="." groups=["drone", "persistent_object"]]
@@ -372,7 +373,7 @@ collision_layer = 4
 script = ExtResource("1_ollsl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody"]
-position = Vector2(1, 15)
+position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_fxgcf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DroneBody"]
@@ -399,11 +400,10 @@ collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DroneBody/hit_box"]
-position = Vector2(1, -6)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_nlewb")
 
 [node name="AreaToDetect" type="Area2D" parent="DroneBody"]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -425,6 +425,7 @@ stream = ExtResource("5_smnf4")
 stream = ExtResource("6_d40sm")
 
 [node name="PatrolArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
