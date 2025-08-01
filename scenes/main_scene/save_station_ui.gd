@@ -26,7 +26,7 @@ func _disable_player_input(state: bool):
 	if player == null:
 		player = get_tree().current_scene.find_child("Player", true, false)
 	if player:
-		player.typing_cant_move = state
+		player.typing = state
 	else:
 		print("❌ Player not found.")
 		

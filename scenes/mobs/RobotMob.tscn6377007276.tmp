@@ -370,6 +370,12 @@ z_as_relative = false
 position = Vector2(-1, 0)
 collision_layer = 8
 script = ExtResource("1_w5woh")
+speed = null
+chase_speed = null
+robot_range = null
+robot_damage = null
+attack_speed = null
+min_safe_distance = null
 
 [node name="Muzzle" type="Marker2D" parent="RobotBody"]
 position = Vector2(7, 0)

@@ -381,7 +381,9 @@ position = Vector2(0.500001, 3.57628e-07)
 scale = Vector2(0.671875, 0.59375)
 sprite_frames = SubResource("SpriteFrames_p71ja")
 animation = &"shoot_right"
-frame_progress = 0.449312
+
+[node name="Muzzle" type="Marker2D" parent="DroneBody"]
+position = Vector2(5, 3)
 
 [node name="drone-hp" type="ProgressBar" parent="DroneBody"]
 offset_left = -10.0

@@ -108,6 +108,9 @@ func _on_newgamebtn_pressed() -> void:
 	if player:
 		player.emit_signal("player_hints_changed", player.current_hints)
 
+	# ✅ Stop menu music before starting game
+	$"../../MenuMusic".stop()
+
 	hide()
 	print("🟢 Game Started on Difficulty:", GameManager.difficulty)
 
@@ -173,6 +176,10 @@ func _add_save_row(file_name: String, username: String) -> void:
 	if load_btn:
 		load_btn.pressed.connect(func():
 			print("📂 Loading save:", file_name)
+
+			# ✅ Stop menu music before loading save
+			$"../../MenuMusic".stop()
+
 			SaveSystem.load_game(file_name)
 			hide()
 		)

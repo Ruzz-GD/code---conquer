@@ -5,18 +5,19 @@ extends CharacterBody2D
 var robot_max_hp := 150
 var robot_current_hp := 150  
 @export var robot_range := 100  
-@export var robot_damage := 10
-@export var attack_speed := 2
+@export var robot_damage := 20
+@export var attack_speed := 1
 @export var min_safe_distance := 30
 
 @onready var attack_timer = $attack_timer
-@onready var bullet_scene = preload("res://scenes/mobs/DroneBullet.tscn")
+@onready var bullet_scene = preload("res://scenes/mobs/RobotBullet.tscn")
 @onready var chase_area = $"../ChaseArea"
 @onready var patrol_area = $"../PatrolArea"
 @onready var area_to_detect = $AreaToDetect
 @onready var robot_hp = $"robot-hp"
 @onready var ray = $LineOfSightRay
 @onready var anim = $AnimatedSprite2D
+@onready var muzzle = $Muzzle
 
 @onready var shooting = $ShootingSound
 @onready var death_sound = $DeathSound
@@ -301,7 +302,7 @@ func robot_shooting():
 		if not can_see_player():
 			return
 		var bullet = bullet_scene.instantiate()
-		bullet.global_position = global_position
+		bullet.global_position = get_muzzle_position()
 		bullet.direction = (player.global_position - global_position).normalized()
 		bullet.attack_range = robot_range
 		bullet.attack_damage = robot_damage
@@ -413,3 +414,9 @@ func apply_saved_state():
 		queue_free()
 	else:
 		print("🤖 Robot alive:", robot_id)
+
+func get_muzzle_position() -> Vector2:
+	var offset = muzzle.position
+	if anim.flip_h:
+		offset.x = -offset.x
+	return global_position + offset

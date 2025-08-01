@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=4 uid="uid://mcy7a0d8n6vb"]
+[gd_scene load_steps=168 format=4 uid="uid://mcy7a0d8n6vb"]
 
 [ext_resource type="PackedScene" uid="uid://bdedmb0mmimx5" path="res://scenes/chest_and_buff/chest_gun.tscn" id="1_iy3h5"]
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff/chest_container/all_bronze_chest.tscn" id="1_lxc3w"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhs5c4nhdc1l7" path="res://scenes/mobs/DroneMob.tscn" id="6_gq2yr"]
 [ext_resource type="Texture2D" uid="uid://by3lupafqsqrq" path="res://assets/tilesets/tilesFloor.png" id="7_b3jxc"]
 [ext_resource type="Texture2D" uid="uid://bccsj1fq1od5v" path="res://assets/tilesets/tilesWalls.png" id="8_2f857"]
-[ext_resource type="Script" uid="uid://6emc6ahjdvnl" path="res://scenes/maps/decoration_object_below.gd" id="8_4w16r"]
+[ext_resource type="Script" uid="uid://6emc6ahjdvnl" path="res://scenes/maps/first_floor_assets/decoration_object_below.gd" id="8_4w16r"]
 [ext_resource type="Texture2D" uid="uid://bf8x5i1kvsust" path="res://assets/tilesets/tilesStuff.png" id="9_fbkv4"]
 [ext_resource type="Script" uid="uid://ciyk3axso5flh" path="res://scenes/maps/first_floor_assets/doors_script/vertical_first_floor_last_door.gd" id="10_745yb"]
 [ext_resource type="Script" uid="uid://bb6mrahg2ah5t" path="res://scenes/maps/first_floor_assets/doors_script/horizontal_first_floor_first_door.gd" id="11_io2rw"]
@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://r6bkcbjciec2" path="res://scenes/maps/first_floor_assets/behind_detector.gd" id="13_hrb17"]
 [ext_resource type="Texture2D" uid="uid://dj2jxbl6j58gx" path="res://assets/sprites/item_props/Props and Items/props and items x2.png" id="13_iy3h5"]
 [ext_resource type="Script" uid="uid://b62dwegan37ec" path="res://scenes/maps/first_floor_assets/first_floor_save_station.gd" id="13_jv0kb"]
-[ext_resource type="Script" uid="uid://djiagh1u82j75" path="res://scenes/maps/first_floor_stair_door.gd" id="15_ndug6"]
+[ext_resource type="Script" uid="uid://djiagh1u82j75" path="res://scenes/maps/first_floor_assets/first_floor_stair_door.gd" id="15_ndug6"]
 [ext_resource type="Script" uid="uid://dvnb4tv0myia0" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_1_detector.gd" id="15_rcktb"]
 [ext_resource type="Script" uid="uid://du3jhsjwboxeo" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_2_detector.gd" id="16_x3q8q"]
 [ext_resource type="Script" uid="uid://bhmp3b5xafuh2" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_3_detector.gd" id="17_3j7dc"]
@@ -27,8 +27,8 @@
 [ext_resource type="Script" uid="uid://casbdqrun0yf7" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_9_detector.gd" id="22_745yb"]
 [ext_resource type="Script" uid="uid://di2cu7nucfkkg" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_10_detector.gd" id="23_io2rw"]
 [ext_resource type="Script" uid="uid://bbghdm3v8txnh" path="res://scenes/maps/first_floor_assets/doors_script/hirozontal_first_floor_second_door.gd" id="25_hrb17"]
-[ext_resource type="Script" uid="uid://cxmbko1u6au7h" path="res://scenes/maps/vertical_first_floor_third_door.gd" id="26_ppj1h"]
-[ext_resource type="Script" uid="uid://d21bgka2pwj8l" path="res://scenes/maps/vertical_first_floor_forth_door.gd" id="27_a4gcg"]
+[ext_resource type="Script" uid="uid://cxmbko1u6au7h" path="res://scenes/maps/first_floor_assets/doors_script/vertical_first_floor_third_door.gd" id="26_ppj1h"]
+[ext_resource type="Script" uid="uid://d21bgka2pwj8l" path="res://scenes/maps/first_floor_assets/doors_script/vertical_first_floor_forth_door.gd" id="27_a4gcg"]
 [ext_resource type="Script" uid="uid://bvufmexw5ofs2" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_11_detector.gd" id="29_l3exu"]
 [ext_resource type="Script" uid="uid://dygwxlbu3oshe" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_12_detector.gd" id="30_ovv82"]
 [ext_resource type="Script" uid="uid://h420w6yc8uky" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_13_detector.gd" id="31_yubg6"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://c461gixd1su86" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_16_detector.gd" id="34_dkp0k"]
 [ext_resource type="Script" uid="uid://c5gnmeaflymtg" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_17_detector.gd" id="35_r3vn6"]
 [ext_resource type="Script" uid="uid://dc45waq2pk5he" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_18_detector.gd" id="36_1gvyd"]
+[ext_resource type="PackedScene" uid="uid://bi5mojxlxs0kt" path="res://scenes/mobs/RobotMob.tscn" id="38_jdovf"]
 
 [sub_resource type="GDScript" id="GDScript_jgbkp"]
 script/source = "extends Node2D
@@ -4642,6 +4643,9 @@ position = Vector2(766, -364)
 
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)
+
+[node name="RobotMob" parent="." instance=ExtResource("38_jdovf")]
+position = Vector2(872, -581)
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_exited"]

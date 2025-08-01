@@ -2,12 +2,20 @@ extends Node2D
 
 @onready var current_map = $current_map
 @onready var player_container = $player_container
+@onready var menu_music = $MenuMusic
 
 func _ready():
 	GameManager.map_updated.connect(load_map)
-
+	GameManager.game_reset.connect(_on_game_reset)  # 👈 Listen to reset signal
+	menu_music.stream.loop = true
 	load_player()
 	load_map(GameManager.current_map_path, GameManager.spawn_marker_name)
+
+	start_menu_music_delayed()
+
+func _on_game_reset():
+	# 👇 Trigger music again when game is reset (player quits/dies)
+	start_menu_music_delayed()
 
 func load_player():
 	if player_container.get_child_count() == 0:
@@ -15,7 +23,6 @@ func load_player():
 		var player = player_scene.instantiate()
 		player.name = "Player"
 		player_container.add_child(player)
-
 		print("✅ Player successfully loaded into player_container!")
 	else:
 		print("⚠️ Player already exists in player_container!")
@@ -23,7 +30,6 @@ func load_player():
 func load_map(map_path: String, spawn_marker: String):
 	print("🔄 Changing map to:", map_path)
 
-	# Clear old map
 	for child in current_map.get_children():
 		child.queue_free()
 
@@ -31,9 +37,8 @@ func load_map(map_path: String, spawn_marker: String):
 	current_map.add_child(new_map)
 	print("✅ Map loaded successfully:", map_path)
 
-	await get_tree().process_frame  # Wait for nodes to be fully added
+	await get_tree().process_frame
 
-	# Attempt to find spawn marker inside the newly loaded map
 	var marker = new_map.get_node_or_null(spawn_marker)
 	if marker:
 		var player = get_tree().get_first_node_in_group("player")
@@ -42,3 +47,9 @@ func load_map(map_path: String, spawn_marker: String):
 			print("📍 Player spawned at:", marker.name)
 	else:
 		print("❌ Spawn marker not found:", spawn_marker)
+
+func start_menu_music_delayed():
+	await get_tree().create_timer(5).timeout
+
+	if not GameManager.is_game_started and not menu_music.playing:
+		menu_music.play()

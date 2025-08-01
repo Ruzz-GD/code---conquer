@@ -5,8 +5,8 @@ extends CharacterBody2D
 var drone_max_hp := 80
 var drone_current_hp := 80  
 @export var drone_range := 100  
-@export var drone_damage := 5
-@export var attack_speed := 3
+@export var drone_damage := 4
+@export var attack_speed := 2
 @export var min_safe_distance := 30
 
 @onready var attack_timer = $attack_timer
@@ -17,6 +17,7 @@ var drone_current_hp := 80
 @onready var drone_hp = $"drone-hp"
 @onready var ray = $LineOfSightRay
 @onready var anim = $AnimatedSprite2D
+@onready var muzzle = $Muzzle
 
 @onready var shooting = $ShootingSound
 @onready var death_sound = $DeathSound
@@ -293,6 +294,7 @@ func _on_chase_area_exited(body):
 		else:
 			pick_new_target()
 
+# 🔫 Muzzle-based shooting
 func drone_shooting():
 	if is_dying:
 		return
@@ -301,11 +303,17 @@ func drone_shooting():
 		if not can_see_player():
 			return
 		var bullet = bullet_scene.instantiate()
-		bullet.global_position = global_position
+		bullet.global_position = get_muzzle_position()
 		bullet.direction = (player.global_position - global_position).normalized()
 		bullet.attack_range = drone_range
 		bullet.attack_damage = drone_damage
 		get_tree().current_scene.add_child(bullet)
+
+func get_muzzle_position() -> Vector2:
+	var offset = muzzle.position
+	if anim.flip_h:
+		offset.x = -offset.x
+	return global_position + offset
 
 func take_damage(amount: int) -> void:
 	if is_dying:
@@ -366,7 +374,6 @@ func can_see_player() -> bool:
 
 	if ray.is_colliding():
 		var collider = ray.get_collider()
-		var hit_pos = ray.get_collision_point()
 		if collider != player:
 			return false
 	return true

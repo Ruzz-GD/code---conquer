@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bo7eesj5hn1sq"]
+[gd_scene load_steps=67 format=3 uid="uid://bo7eesj5hn1sq"]
 
 [ext_resource type="Script" uid="uid://dhpew8klfs2r5" path="res://scenes/main_scene/main_scene.gd" id="1_6iw8k"]
 [ext_resource type="Theme" uid="uid://b2ia87ml1evux" path="res://assets/theme/doors_modal.tres" id="3_3t4qf"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://dksvweln4q736" path="res://scenes/main_scene/save_station_ui.gd" id="30_r37pl"]
 [ext_resource type="Texture2D" uid="uid://b86wobeyaqw70" path="res://assets/img/save-icon.png" id="31_sjfcr"]
 [ext_resource type="Script" uid="uid://rrj87tk0kjjj" path="res://scenes/main_scene/fade_transitions.gd" id="32_sjfcr"]
+[ext_resource type="AudioStream" uid="uid://bm21k17h8a3ai" path="res://assets/sounds/menu_bg_music.ogg" id="33_bj71x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbdpr"]
 atlas = ExtResource("3_34m6u")
@@ -1595,6 +1596,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.08, 0.08, 0.08, 1)
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_bj71x")
 
 [connection signal="pressed" from="UIManager/ingame_ui/ingame_setting" to="UIManager/ingame_ui" method="_on_ingame_setting_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/resume-btn" to="UIManager/ingame_ui" method="_on_resumebtn_pressed"]
