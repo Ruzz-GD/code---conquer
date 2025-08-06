@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=4 uid="uid://mcy7a0d8n6vb"]
+[gd_scene load_steps=167 format=4 uid="uid://mcy7a0d8n6vb"]
 
 [ext_resource type="PackedScene" uid="uid://bdedmb0mmimx5" path="res://scenes/chest_and_buff/chest_gun.tscn" id="1_iy3h5"]
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff/chest_container/all_bronze_chest.tscn" id="1_lxc3w"]
@@ -37,7 +37,6 @@
 [ext_resource type="Script" uid="uid://c461gixd1su86" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_16_detector.gd" id="34_dkp0k"]
 [ext_resource type="Script" uid="uid://c5gnmeaflymtg" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_17_detector.gd" id="35_r3vn6"]
 [ext_resource type="Script" uid="uid://dc45waq2pk5he" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_18_detector.gd" id="36_1gvyd"]
-[ext_resource type="PackedScene" uid="uid://bi5mojxlxs0kt" path="res://scenes/mobs/RobotMob.tscn" id="38_jdovf"]
 
 [sub_resource type="GDScript" id="GDScript_jgbkp"]
 script/source = "extends Node2D
@@ -3557,174 +3556,6 @@ region = Rect2(502, 98, 9, 12)
 [node name="first_floor_map" type="Node2D"]
 script = SubResource("GDScript_jgbkp")
 
-[node name="first-floor-map-all-chest" type="Node2D" parent="."]
-z_index = 6
-
-[node name="all_bronze_chest" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
-position = Vector2(698, -796)
-chest_id = "bronze_chest_1"
-
-[node name="all_silver_chest" parent="first-floor-map-all-chest" instance=ExtResource("2_iy3h5")]
-position = Vector2(659, -796)
-chest_id = "silver_chest_1"
-
-[node name="all_gold_chest" parent="first-floor-map-all-chest" instance=ExtResource("3_jv0kb")]
-position = Vector2(619, -796)
-chest_id = "gold_chest_1"
-
-[node name="all_silver_chest2" parent="first-floor-map-all-chest" instance=ExtResource("2_iy3h5")]
-position = Vector2(400, -832)
-chest_id = "silver_chest_2"
-
-[node name="all_bronze_chest2" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
-position = Vector2(1075, -158)
-chest_id = "bronze_chest_2"
-
-[node name="all_bronze_chest3" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
-position = Vector2(1077, 196)
-chest_id = "bronze_chest_3"
-
-[node name="all_gold_chest2" parent="first-floor-map-all-chest" instance=ExtResource("3_jv0kb")]
-position = Vector2(1076, 0)
-chest_id = "gold_chest_2"
-
-[node name="drone_container" type="Node2D" parent="."]
-
-[node name="DroneMob" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(325, -800)
-drone_id = "drone1"
-
-[node name="DroneMob2" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(471, -800)
-drone_id = "drone2"
-
-[node name="DroneMob3" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(326, -606)
-drone_id = "drone3"
-
-[node name="DroneMob4" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(475, -606)
-drone_id = "drone4"
-
-[node name="DroneMob5" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(400, -498)
-drone_id = "drone5"
-
-[node name="DroneMob6" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(326, -372)
-drone_id = "drone6"
-
-[node name="DroneMob7" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(476, -371)
-drone_id = "drone7"
-
-[node name="DroneMob8" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(400, -232)
-is_patroling = false
-drone_id = "drone8"
-
-[node name="DroneMob9" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(650, -122)
-drone_id = "drone9"
-
-[node name="DroneMob10" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(400, -91)
-drone_id = "drone10"
-
-[node name="DroneMob11" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(400, 106)
-drone_id = "drone11"
-
-[node name="DroneMob12" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(657, 105)
-drone_id = "drone12"
-
-[node name="DroneMob13" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(937, -156)
-is_patroling = false
-drone_id = "drone13"
-
-[node name="DroneMob14" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(1001, -44)
-is_patroling = false
-drone_id = "drone14"
-
-[node name="DroneMob15" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(1001, 12)
-is_patroling = false
-drone_id = "drone15"
-
-[node name="DroneMob16" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(1001, 190)
-is_patroling = false
-drone_id = "drone16"
-
-[node name="DroneMob17" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(888, 190)
-is_patroling = false
-drone_id = "drone17"
-
-[node name="DroneMob18" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(136, 225)
-drone_id = "drone18"
-
-[node name="DroneMob19" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-31, 224)
-drone_id = "drone19"
-
-[node name="DroneMob20" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-399, 109)
-is_patroling = false
-drone_id = "drone20"
-
-[node name="DroneMob21" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(164, -178)
-drone_id = "drone21"
-
-[node name="DroneMob22" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(164, -66)
-drone_id = "drone22"
-
-[node name="DroneMob23" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-25, -117)
-drone_id = "drone23"
-
-[node name="DroneMob24" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-311, -192)
-is_patroling = false
-drone_id = "drone24"
-
-[node name="DroneMob25" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-182, -192)
-is_patroling = false
-drone_id = "drone25"
-
-[node name="DroneMob26" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-500, -114)
-drone_id = "drone26"
-
-[node name="DroneMob27" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-647, -114)
-drone_id = "drone27"
-
-[node name="DroneMob28" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-659, 62)
-drone_id = "drone28"
-
-[node name="DroneMob29" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-1051, 187)
-is_patroling = false
-drone_id = "drone29"
-
-[node name="DroneMob30" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-897, 187)
-is_patroling = false
-drone_id = "drone30"
-
-[node name="DroneMob31" parent="drone_container" instance=ExtResource("6_gq2yr")]
-position = Vector2(-972, 232)
-drone_id = "drone31"
-
 [node name="TileMapLayer-Ground" type="TileMapLayer" parent="."]
 self_modulate = Color(0.73, 0.73, 0.73, 1)
 position = Vector2(0, 1)
@@ -3848,6 +3679,158 @@ animation = &"computer"
 z_index = 7
 tile_map_data = PackedByteArray("AAAwAMv/AAAaAAsAAAAwAMz/AAAaAAwAAAAxAMv/AAAbAAsAAAAxAMz/AAAbAAwAAAAyAMv/AAAcAAsAAAAyAMz/AAAcAAwAAAA2AMv/AAAhAAwAAAA2AMz/AAAhAA0AAAA3AMv/AAAiAAwAAAA3AMz/AAAiAA0AAAA4AMv/AAAjAAwAAAA4AMz/AAAjAA0AAAAzAMv/AAAhAAwAAAAzAMz/AAAhAA0AAAA0AMv/AAAiAAwAAAA0AMz/AAAiAA0AAAA1AMv/AAAjAAwAAAA1AMz/AAAjAA0AAABAAOL/AAAeAAIAAABBAOL/AAAfAAIAAABCAOL/AAAgAAIAAABAAN7/AAAeAAIAAABBAN7/AAAfAAIAAABCAN7/AAAgAAIAAABAANr/AAAeAAIAAABBANr/AAAfAAIAAABCANr/AAAgAAIAAAA=")
 tile_set = SubResource("TileSet_sn51k")
+
+[node name="first-floor-map-all-chest" type="Node2D" parent="."]
+z_index = 6
+
+[node name="all_bronze_chest" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
+position = Vector2(698, -796)
+chest_id = "ff-bronze-chest-1"
+
+[node name="all_silver_chest" parent="first-floor-map-all-chest" instance=ExtResource("2_iy3h5")]
+position = Vector2(659, -796)
+chest_id = "ff-silver-chest-1"
+
+[node name="all_gold_chest" parent="first-floor-map-all-chest" instance=ExtResource("3_jv0kb")]
+position = Vector2(619, -796)
+chest_id = "ff-gold-chest-1"
+
+[node name="all_silver_chest2" parent="first-floor-map-all-chest" instance=ExtResource("2_iy3h5")]
+position = Vector2(400, -832)
+chest_id = "ff-silver-chest-2"
+
+[node name="all_bronze_chest2" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
+position = Vector2(1075, -158)
+chest_id = "ff-bronze-chest-2"
+
+[node name="all_bronze_chest3" parent="first-floor-map-all-chest" instance=ExtResource("1_lxc3w")]
+position = Vector2(1077, 196)
+chest_id = "ff-bronze-chest-3"
+
+[node name="all_gold_chest2" parent="first-floor-map-all-chest" instance=ExtResource("3_jv0kb")]
+position = Vector2(1076, 0)
+chest_id = "ff-gold-chest-2"
+
+[node name="drone_container" type="Node2D" parent="."]
+
+[node name="DroneMob" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(325, -800)
+drone_id = "ff-drone1"
+
+[node name="DroneMob2" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(471, -800)
+drone_id = "ff-drone-2"
+
+[node name="DroneMob3" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(400, -581)
+drone_id = "ff-drone-3"
+
+[node name="DroneMob4" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(400, -232)
+is_patroling = false
+drone_id = "ff-drone-4"
+
+[node name="DroneMob5" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(650, -122)
+drone_id = "ff-drone-5"
+
+[node name="DroneMob6" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(400, -91)
+drone_id = "ff-drone-6"
+
+[node name="DroneMob7" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(400, 106)
+drone_id = "ff-drone-7"
+
+[node name="DroneMob8" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(657, 105)
+drone_id = "ff-drone-8"
+
+[node name="DroneMob9" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(937, -156)
+is_patroling = false
+drone_id = "ff-drone-9"
+
+[node name="DroneMob10" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(1001, -44)
+is_patroling = false
+drone_id = "ff-drone-10"
+
+[node name="DroneMob11" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(1001, 12)
+is_patroling = false
+drone_id = "ff-drone-11"
+
+[node name="DroneMob12" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(1001, 190)
+is_patroling = false
+drone_id = "ff-drone-12"
+
+[node name="DroneMob13" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(888, 190)
+is_patroling = false
+drone_id = "ff-drone-13"
+
+[node name="DroneMob14" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(136, 225)
+drone_id = "ff-drone-14"
+
+[node name="DroneMob15" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-31, 224)
+drone_id = "ff-drone-15"
+
+[node name="DroneMob16" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-399, 109)
+is_patroling = false
+drone_id = "ff-drone-16"
+
+[node name="DroneMob17" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(164, -178)
+drone_id = "ff-drone-17"
+
+[node name="DroneMob18" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(164, -66)
+drone_id = "ff-drone-18"
+
+[node name="DroneMob19" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-25, -117)
+drone_id = "ff-drone-19"
+
+[node name="DroneMob20" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-311, -192)
+is_patroling = false
+drone_id = "ff-drone-20"
+
+[node name="DroneMob21" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-182, -192)
+is_patroling = false
+drone_id = "ff-drone-21"
+
+[node name="DroneMob22" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-500, -114)
+drone_id = "ff-drone-22"
+
+[node name="DroneMob23" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-647, -114)
+drone_id = "ff-drone-23"
+
+[node name="DroneMob24" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-659, 62)
+drone_id = "ff-drone-24"
+
+[node name="DroneMob25" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-1051, 205)
+is_patroling = false
+drone_id = "ff-drone-25"
+
+[node name="DroneMob26" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-897, 205)
+is_patroling = false
+drone_id = "ff-drone-26"
+
+[node name="DroneMob27" parent="drone_container" instance=ExtResource("6_gq2yr")]
+position = Vector2(-972, 232)
+drone_id = "ff-drone-27"
 
 [node name="vertical-first-floor-last-door" type="StaticBody2D" parent="." groups=["persistent_object"]]
 modulate = Color(0.8, 0.8, 0.8, 1)
@@ -4220,7 +4203,7 @@ position = Vector2(-526, 99)
 
 [node name="BehindDetector" type="Area2D" parent="."]
 z_index = 10
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("13_hrb17")
 
 [node name="Detector1" type="CollisionShape2D" parent="BehindDetector"]
@@ -4643,9 +4626,6 @@ position = Vector2(766, -364)
 
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)
-
-[node name="RobotMob" parent="." instance=ExtResource("38_jdovf")]
-position = Vector2(872, -581)
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_exited"]

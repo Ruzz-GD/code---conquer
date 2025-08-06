@@ -15,7 +15,7 @@ func _on_resumebtn_pressed() -> void:
 	ingame_setting_modal.visible = false
 	
 func _on_quitbtn_pressed():
-	GameManager.reset_game()
+	GameManager.reset_game(GameManager.ResetReason.QUIT)
 	ingame_setting_modal.visible = false
 	
 func _on_infobtn_pressed() -> void:

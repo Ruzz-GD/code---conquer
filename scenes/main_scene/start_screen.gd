@@ -104,6 +104,7 @@ func _on_newgamebtn_pressed() -> void:
 				player.current_hints = 0
 
 	GameManager.is_game_started = true
+	GameManager.update_map(GameManager.current_map_path, GameManager.spawn_marker_name)
 
 	if player:
 		player.emit_signal("player_hints_changed", player.current_hints)

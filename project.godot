@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/game_manager.gd"
 SaveSystem="*res://scripts/save_system.gd"
+SoundSystem="*res://scripts/Sound_system.gd"
 
 [display]
 

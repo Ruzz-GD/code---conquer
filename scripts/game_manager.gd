@@ -7,6 +7,12 @@ signal game_reset
 signal is_game_start
 signal save_file_loaded(file_name: String)
 signal map_transitioning_changed(is_transitioning: bool) # ✅ New signal
+signal game_loaded
+var is_loaded_from_save: bool = false
+
+enum ResetReason { DEATH, QUIT }
+
+var last_reset_reason: ResetReason = ResetReason.QUIT  # Default
 
 var player_username: String:
 	set(value):
@@ -30,7 +36,8 @@ var first_floor_stair_spawner: String = "first_floor_spawn_marker_stair"
 var first_floor_save_station_marker: String = "first_floor_save_station_pos"
 
 var second_floor_underground_map: String = "res://scenes/maps/second-floor-underground-map.tscn"
-var second_floor_undergroun_stair_spawner: String = "second_floor_spawn_marker_stair"
+var second_floor_underground_stair_spawner: String = "second_floor_spawn_marker_stair"
+var second_floor_underground_stair_spawner2: String = "second_floor_spawn_marker_stair_from_third_floor"
 var second_floor_underground_save_station_marker: String = "second_floor_underground_save_station_pos"
 
 var third_floor_underground_map: String = "res://scenes/maps/third-floor-underground-map.tscn"
@@ -72,10 +79,22 @@ func _ready():
 	map_transition_timer.timeout.connect(_on_map_transition_timer_timeout)
 	add_child(map_transition_timer)
 
+	SaveSystem.save_loaded.connect(_on_game_loaded)
+
 # Runs every frame to update the timer
 func _process(delta):
 	if is_timer_running:
 		game_timer += delta
+
+func _on_game_loaded():
+	is_loaded_from_save = true
+	print("📂 Game was loaded from a save.")
+
+	# ✅ Trigger transition
+	trigger_map_transition()
+
+	# ✅ Emit signal for listeners after transition starts
+	emit_signal("game_loaded")
 
 # Starts the timer
 func start_timer():
@@ -130,8 +149,11 @@ func update_current_save_station_marker():
 	print("📍 Updated current_save_station_marker:", current_save_station_marker)
 
 # --- Game Reset Logic ---
-func reset_game():
-	print("🔄 Game reset triggered")
+func reset_game(reason: ResetReason = ResetReason.QUIT):
+	print("🔄 Game reset triggered with reason:", reason)
+	last_reset_reason = reason
+	
+	# Existing reset logic...
 	player_username = ""
 	SaveSystem.reset_save()
 
@@ -144,7 +166,7 @@ func reset_game():
 
 	call_deferred("emit_signal", "map_updated", current_map_path, spawn_marker_name)
 	call_deferred("emit_signal", "game_reset")
-
+	
 # --- Save File Tracking ---
 func set_save_file(file_name: String):
 	set_meta("current_save_file", file_name)

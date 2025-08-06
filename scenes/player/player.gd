@@ -431,7 +431,7 @@ func lose_life():
 		emit_signal("player_health_changed", current_health)
 	else:
 		is_dead = true
-		GameManager.reset_game()
+		GameManager.reset_game(GameManager.ResetReason.DEATH)
 
 func use_hint():
 	if current_hints > 0:

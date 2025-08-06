@@ -27,11 +27,11 @@ func _on_body_entered(body: Node) -> void:
 func _delayed_change_floor():
 	# Change map
 	GameManager.update_map(
-		GameManager.second_floor_underground_map,
-		GameManager.second_floor_underground_stair_spawner
+		GameManager.third_floor_underground_map,
+		GameManager.third_floor_underground_stair_spawner
 	)
 
-	await get_tree().process_frame 
+	await get_tree().process_frame
 	player = get_tree().current_scene.find_child("Player", true, false)
 	if not player:
 		print("⚠️ Could not find player after scene change")

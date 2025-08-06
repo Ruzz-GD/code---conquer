@@ -1,7 +1,6 @@
 extends Area2D
 
 @onready var blocker = $StaticBody2D/CollisionShape2D
-@onready var transition = get_tree().current_scene.find_child("FadeTransitions", true, false)
 @onready var open_door_texture = $open_door  
 @onready var close_door_texture = $close_door
 @onready var shadow = $ColorRect2
@@ -23,10 +22,8 @@ func _on_body_entered(body: Node) -> void:
 		var suffix = "_with_gun" if player.has_gun else ""
 		player.last_idle = "idle_down" + suffix
 		player.anim_sprite.play(player.last_idle)
-
-		# Fade and transition
-		transition.fade_to_black_then(_delayed_change_floor)
-
+		_delayed_change_floor()
+		
 func _delayed_change_floor():
 	# Change map
 	GameManager.update_map(
