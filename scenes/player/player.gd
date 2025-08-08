@@ -69,6 +69,9 @@ var is_reloading := false
 var is_map_transitioning := false
 
 func _ready():
+	SoundSystem.player_volume_changed.connect(_on_volume_changed)
+	_on_volume_changed(SoundSystem.player_volume)
+
 	dash_timer.wait_time = DASH_TIME
 	dash_timer.one_shot = true
 
@@ -150,7 +153,13 @@ func _physics_process(_delta):
 		else:
 			velocity = Vector2.ZERO
 			move_and_slide()
-			
+
+func _on_volume_changed(new_volume: float):
+	var db = linear_to_db(new_volume)
+	reload_sound.volume_db = db
+	foot_step_sound.volume_db = db
+	shooting_sound.volume_db = db
+
 func _on_map_transitioning_changed(value: bool) -> void:
 	is_map_transitioning = value
 

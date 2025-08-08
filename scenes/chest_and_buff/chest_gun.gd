@@ -72,9 +72,9 @@ func open_chest():
 	print("✅ Chest opened!")
 	chest_already_opened = true
 	SaveSystem.opened_chests[chest_id] = true
-
+	SoundSystem.play_open_chest()
 	$chest_sprite.play("chest_anim")
-
+	
 	await $chest_sprite.animation_finished
 	$chest_sprite.stop()
 	$chest_sprite.frame = $chest_sprite.sprite_frames.get_frame_count("chest_anim") - 1

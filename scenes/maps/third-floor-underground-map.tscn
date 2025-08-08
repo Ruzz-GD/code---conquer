@@ -5,17 +5,17 @@
 [ext_resource type="Script" uid="uid://cq1u1afiu6uee" path="res://scenes/maps/third_floor_assets/hirozontal_third_floor_first_door.gd" id="3_2cubh"]
 [ext_resource type="Texture2D" uid="uid://bf8x5i1kvsust" path="res://assets/tilesets/tilesStuff.png" id="4_wf64c"]
 [ext_resource type="Script" uid="uid://bq2btd4dexr4y" path="res://scenes/maps/third_floor_assets/third_floor_stair_door.gd" id="5_wf64c"]
-[ext_resource type="Script" uid="uid://bu1uysfod8moc" path="res://scenes/maps/vertical_third_floor_second_doorv_2.gd" id="6_1l05w"]
-[ext_resource type="Script" uid="uid://bwj6a8b5ygdir" path="res://scenes/maps/horizontal_third_floor_third_doorv_2.gd" id="7_81hl7"]
-[ext_resource type="Script" uid="uid://b6cdnnrlfcic2" path="res://scenes/maps/horizontal_third_floor_forth_doorv_2.gd" id="8_ogw5t"]
-[ext_resource type="Script" uid="uid://d3oqpoxv5qkxa" path="res://scenes/maps/vertical_third_floor_fith_doorv_2.gd" id="9_ga5j6"]
-[ext_resource type="Script" uid="uid://d32prnhmt86a3" path="res://scenes/maps/vertical_third_floor_six_doorv_2.gd" id="10_lwotl"]
-[ext_resource type="Script" uid="uid://bwqqrk2makx7v" path="res://scenes/maps/hirozontal_third_floor_seven_door.gd" id="11_bkb1h"]
-[ext_resource type="Script" uid="uid://c53dunt66uxmd" path="res://scenes/maps/vertical_third_floor_last_door.gd" id="12_v4rph"]
-[ext_resource type="Script" uid="uid://5l34b0t6ph1n" path="res://scenes/maps/third_floor_behind_detector.gd" id="13_fiu8p"]
+[ext_resource type="Script" uid="uid://bu1uysfod8moc" path="res://scenes/maps/third_floor_assets/vertical_third_floor_second_doorv_2.gd" id="6_1l05w"]
+[ext_resource type="Script" uid="uid://bwj6a8b5ygdir" path="res://scenes/maps/third_floor_assets/horizontal_third_floor_third_doorv_2.gd" id="7_81hl7"]
+[ext_resource type="Script" uid="uid://b6cdnnrlfcic2" path="res://scenes/maps/third_floor_assets/horizontal_third_floor_forth_doorv_2.gd" id="8_ogw5t"]
+[ext_resource type="Script" uid="uid://d3oqpoxv5qkxa" path="res://scenes/maps/third_floor_assets/vertical_third_floor_fith_doorv_2.gd" id="9_ga5j6"]
+[ext_resource type="Script" uid="uid://d32prnhmt86a3" path="res://scenes/maps/third_floor_assets/vertical_third_floor_six_doorv_2.gd" id="10_lwotl"]
+[ext_resource type="Script" uid="uid://bwqqrk2makx7v" path="res://scenes/maps/third_floor_assets/hirozontal_third_floor_seven_door.gd" id="11_bkb1h"]
+[ext_resource type="Script" uid="uid://c53dunt66uxmd" path="res://scenes/maps/third_floor_assets/vertical_third_floor_last_door.gd" id="12_v4rph"]
+[ext_resource type="Script" uid="uid://5l34b0t6ph1n" path="res://scenes/maps/third_floor_assets/third_floor_behind_detector.gd" id="13_fiu8p"]
 [ext_resource type="Script" uid="uid://dm3e7r0g885eo" path="res://scenes/maps/second_floor_assets/decoration.gd" id="14_rf7th"]
 [ext_resource type="Texture2D" uid="uid://dj2jxbl6j58gx" path="res://assets/sprites/item_props/Props and Items/props and items x2.png" id="15_yh30l"]
-[ext_resource type="Script" uid="uid://bqhcki4r2ookd" path="res://scenes/maps/third_floor_save_station.gd" id="16_yh30l"]
+[ext_resource type="Script" uid="uid://bqhcki4r2ookd" path="res://scenes/maps/third_floor_assets/third_floor_save_station.gd" id="16_yh30l"]
 [ext_resource type="PackedScene" uid="uid://bhs5c4nhdc1l7" path="res://scenes/mobs/DroneMob.tscn" id="17_dix0o"]
 [ext_resource type="PackedScene" uid="uid://bi5mojxlxs0kt" path="res://scenes/mobs/RobotMob.tscn" id="18_rsmnm"]
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff/chest_container/all_bronze_chest.tscn" id="19_j04no"]
@@ -1455,39 +1455,6 @@ texture = ExtResource("4_wf64c")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rf7th")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wf64c"]
-atlas = ExtResource("4_wf64c")
-region = Rect2(292, 109, 9, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1l05w"]
-atlas = ExtResource("4_wf64c")
-region = Rect2(306, 109, 11, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lwotl"]
-atlas = ExtResource("4_wf64c")
-region = Rect2(426, 243, 6, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bkb1h"]
-atlas = ExtResource("4_wf64c")
-region = Rect2(426, 227, 6, 11)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l05w"]
-size = Vector2(15.25, 134.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_81hl7"]
-atlas = ExtResource("4_wf64c")
-region = Rect2(386.908, 234.946, 13.2456, 10.0811)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogw5t"]
-size = Vector2(13.312, 39.0476)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ga5j6"]
-size = Vector2(55, 114)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwotl"]
-radius = 4.0
-height = 12.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81hl7"]
 size = Vector2(112, 101)
 
@@ -1523,6 +1490,39 @@ region = Rect2(333, 116, 38, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j04no"]
 size = Vector2(39.2916, 4.80643)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf64c"]
+atlas = ExtResource("4_wf64c")
+region = Rect2(292, 109, 9, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l05w"]
+atlas = ExtResource("4_wf64c")
+region = Rect2(306, 109, 11, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwotl"]
+atlas = ExtResource("4_wf64c")
+region = Rect2(426, 243, 6, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkb1h"]
+atlas = ExtResource("4_wf64c")
+region = Rect2(426, 227, 6, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l05w"]
+size = Vector2(15.25, 134.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81hl7"]
+atlas = ExtResource("4_wf64c")
+region = Rect2(386.908, 234.946, 13.2456, 10.0811)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogw5t"]
+size = Vector2(13.312, 39.0476)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ga5j6"]
+size = Vector2(55, 114)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwotl"]
+radius = 4.0
+height = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8p3sv"]
 atlas = ExtResource("4_wf64c")
@@ -1846,62 +1846,6 @@ tile_set = SubResource("TileSet_yh30l")
 [node name="third_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(1144, 84)
 
-[node name="hirozontal-third-floor-first-door" type="StaticBody2D" parent="." groups=["persistent_object"]]
-z_index = 11
-position = Vector2(847, 32)
-collision_mask = 0
-script = ExtResource("3_2cubh")
-closed_texture = SubResource("AtlasTexture_wf64c")
-open_texture = SubResource("AtlasTexture_1l05w")
-lock_button_icon = SubResource("AtlasTexture_lwotl")
-unlock_button_icon = SubResource("AtlasTexture_bkb1h")
-
-[node name="Sprite2D" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
-z_index = 10
-z_as_relative = false
-position = Vector2(72.5, 25)
-scale = Vector2(1.36364, 1.48718)
-
-[node name="close-door-collision" type="CollisionShape2D" parent="hirozontal-third-floor-first-door"]
-position = Vector2(73.375, 34.75)
-shape = SubResource("RectangleShape2D_1l05w")
-
-[node name="door-edge" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
-position = Vector2(73, 62)
-scale = Vector2(1.21148, 1.725)
-texture = SubResource("AtlasTexture_81hl7")
-
-[node name="door-edge2" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
-position = Vector2(73, -12)
-rotation = 3.14159
-scale = Vector2(1.24097, 1.72393)
-texture = SubResource("AtlasTexture_81hl7")
-
-[node name="open-door-collision" type="CollisionShape2D" parent="hirozontal-third-floor-first-door"]
-position = Vector2(73, 9)
-rotation = -3.14159
-scale = Vector2(1.20192, 2.1)
-shape = SubResource("RectangleShape2D_ogw5t")
-
-[node name="door-detector" type="Area2D" parent="hirozontal-third-floor-first-door"]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hirozontal-third-floor-first-door/door-detector"]
-position = Vector2(71.5, 44)
-shape = SubResource("RectangleShape2D_ga5j6")
-
-[node name="door-button" type="Area2D" parent="hirozontal-third-floor-first-door"]
-position = Vector2(-1, 0)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hirozontal-third-floor-first-door/door-button"]
-position = Vector2(86, -13)
-shape = SubResource("CapsuleShape2D_lwotl")
-
-[node name="Sprite2D" type="Sprite2D" parent="hirozontal-third-floor-first-door/door-button"]
-position = Vector2(84, -13)
-rotation = 3.14159
-
 [node name="third_floor_stair_door" type="Area2D" parent="."]
 position = Vector2(1141, -122)
 collision_mask = 2
@@ -1965,6 +1909,62 @@ offset_right = 27.0
 offset_bottom = 156.0
 mouse_filter = 2
 color = Color(0.0901961, 0.0901961, 0.0901961, 0.988235)
+
+[node name="hirozontal-third-floor-first-door" type="StaticBody2D" parent="." groups=["persistent_object"]]
+z_index = 11
+position = Vector2(847, 32)
+collision_mask = 0
+script = ExtResource("3_2cubh")
+closed_texture = SubResource("AtlasTexture_wf64c")
+open_texture = SubResource("AtlasTexture_1l05w")
+lock_button_icon = SubResource("AtlasTexture_lwotl")
+unlock_button_icon = SubResource("AtlasTexture_bkb1h")
+
+[node name="Sprite2D" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
+z_index = 10
+z_as_relative = false
+position = Vector2(72.5, 25)
+scale = Vector2(1.36364, 1.48718)
+
+[node name="close-door-collision" type="CollisionShape2D" parent="hirozontal-third-floor-first-door"]
+position = Vector2(73.375, 34.75)
+shape = SubResource("RectangleShape2D_1l05w")
+
+[node name="door-edge" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
+position = Vector2(73, 62)
+scale = Vector2(1.21148, 1.725)
+texture = SubResource("AtlasTexture_81hl7")
+
+[node name="door-edge2" type="Sprite2D" parent="hirozontal-third-floor-first-door"]
+position = Vector2(73, -12)
+rotation = 3.14159
+scale = Vector2(1.24097, 1.72393)
+texture = SubResource("AtlasTexture_81hl7")
+
+[node name="open-door-collision" type="CollisionShape2D" parent="hirozontal-third-floor-first-door"]
+position = Vector2(73, 9)
+rotation = -3.14159
+scale = Vector2(1.20192, 2.1)
+shape = SubResource("RectangleShape2D_ogw5t")
+
+[node name="door-detector" type="Area2D" parent="hirozontal-third-floor-first-door"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hirozontal-third-floor-first-door/door-detector"]
+position = Vector2(71.5, 44)
+shape = SubResource("RectangleShape2D_ga5j6")
+
+[node name="door-button" type="Area2D" parent="hirozontal-third-floor-first-door"]
+position = Vector2(-1, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hirozontal-third-floor-first-door/door-button"]
+position = Vector2(86, -13)
+shape = SubResource("CapsuleShape2D_lwotl")
+
+[node name="Sprite2D" type="Sprite2D" parent="hirozontal-third-floor-first-door/door-button"]
+position = Vector2(84, -13)
+rotation = 3.14159
 
 [node name="vertical-third-floor-second-doorv2" type="StaticBody2D" parent="." groups=["persistent_object"]]
 position = Vector2(1013, 473)
@@ -2606,12 +2606,12 @@ chest_id = "tf-gold-chest-4"
 position = Vector2(255, 530)
 chest_id = "tf-bronze-chest-5"
 
-[connection signal="body_entered" from="hirozontal-third-floor-first-door/door-detector" to="hirozontal-third-floor-first-door" method="_on_doordetector_body_entered"]
-[connection signal="body_exited" from="hirozontal-third-floor-first-door/door-detector" to="hirozontal-third-floor-first-door" method="_on_doordetector_body_exited"]
-[connection signal="input_event" from="hirozontal-third-floor-first-door/door-button" to="hirozontal-third-floor-first-door" method="_on_door_button_input"]
 [connection signal="body_entered" from="third_floor_stair_door" to="third_floor_stair_door" method="_on_body_entered"]
 [connection signal="child_entered_tree" from="third_floor_stair_door/detector" to="third_floor_stair_door" method="_on_detector_child_entered_tree"]
 [connection signal="pressed" from="third_floor_stair_door/close_door/Button" to="third_floor_stair_door" method="_on_button_pressed"]
+[connection signal="body_entered" from="hirozontal-third-floor-first-door/door-detector" to="hirozontal-third-floor-first-door" method="_on_doordetector_body_entered"]
+[connection signal="body_exited" from="hirozontal-third-floor-first-door/door-detector" to="hirozontal-third-floor-first-door" method="_on_doordetector_body_exited"]
+[connection signal="input_event" from="hirozontal-third-floor-first-door/door-button" to="hirozontal-third-floor-first-door" method="_on_door_button_input"]
 [connection signal="input_event" from="vertical-third-floor-second-doorv2/door-button" to="vertical-third-floor-second-doorv2" method="_on_doorbutton_input_event"]
 [connection signal="body_entered" from="vertical-third-floor-second-doorv2/detector" to="vertical-third-floor-second-doorv2" method="_on_detector_body_entered"]
 [connection signal="body_exited" from="vertical-third-floor-second-doorv2/detector" to="vertical-third-floor-second-doorv2" method="_on_detector_body_exited"]

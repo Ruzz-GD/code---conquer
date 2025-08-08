@@ -1,16 +1,15 @@
 extends StaticBody2D
 
-var door_id: String = "third_floor_forth_door"
+var door_id: String = "third_floor_second_door"
 
-@export var unlock_button_texture: Texture
-@export var lock_button_texture: Texture
-@onready var door_button_texture = $"door-button/door-button-texture"
+@export var door_button_open_texture = Texture
+@export var door_button_close_texture = Texture
 
+@onready var open_door_texture = $"open-door-texture"
 @onready var close_door_texture = $"close-door-texture"
-@onready var open_door_texture1 = $"up-open-texture"
-@onready var open_door_texture2 = $"bottom-open-texture"
+@onready var door_button_texture = $"door-button/button-texture"
+@onready var door_detector = $"detector"
 @onready var close_door_collision = $"close-door-collision"
-@onready var door_detector = $"door-detector"
 
 var is_door_open: bool = false
 var player_near: bool = false 
@@ -37,66 +36,7 @@ func _ready() -> void:
 	else:
 		print("❌ Debug UI not found in scene!")
 
-func solve_challenge():
-	print("✅ Debugging complete! Door can now open.")
-	challenge_solve = true
-	SaveSystem.opened_doors[door_id] = true 
-	update_door_texture()
-	
-	if debug_ui:
-		debug_ui.hide()
 
-	_disable_player_input(false)
-	check_player_in_area()
-
-func apply_saved_state():
-	_check_if_door_should_be_open()
-
-func _check_if_door_should_be_open():
-	if SaveSystem.is_door_open(door_id):
-		challenge_solve = true 
-		update_door_texture()
-		
-func check_player_in_area():
-	for body in door_detector.get_overlapping_bodies():
-		if body.is_in_group("player"):
-			if not is_door_open:
-				print("🚪 Player already inside. Opening door.")
-				open_door()
-			return
-	print("❌ No player inside door detector.")
-
-func update_door_texture():
-	door_button_texture.texture = unlock_button_texture if challenge_solve else lock_button_texture
-	open_door_texture1.visible = is_door_open
-	open_door_texture2.visible = is_door_open
-	close_door_texture.visible = not is_door_open
-	close_door_collision.set_deferred("disabled", is_door_open)
-
-func open_door():
-	is_door_open = true
-	update_door_texture()
-	
-func close_door():
-	is_door_open = false
-	update_door_texture()
-
-func _on_doordetector_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player_near = true
-		print("👣 Player entered door area.")
-
-		# ✅ Auto-open the door if challenge is already solved
-		if challenge_solve and not is_door_open:
-			print("✅ Challenge already solved. Auto-opening door.")
-			open_door()
-
-func _on_doordetector_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player_near = false
-		if is_door_open:
-			close_door()
-			
 func _on_doorbutton_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if not player_near:
 		print("❌ Player too far from door.")
@@ -125,7 +65,68 @@ func _on_doorbutton_input_event(viewport: Node, event: InputEvent, shape_idx: in
 		else:
 			print("❌ Could not show debug UI")
 			
+func solve_challenge():
+	print("✅ Debugging complete! Door can now open.")
+	challenge_solve = true
+	SaveSystem.opened_doors[door_id] = true 
+	update_door_texture()
+	
+	if debug_ui:
+		debug_ui.hide()
+
+	_disable_player_input(false)
+	check_player_in_area()
+
+func check_player_in_area():
+	for body in door_detector.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			if not is_door_open:
+				print("🚪 Player already inside. Opening door.")
+				open_door()
+			return
+	print("❌ No player inside door detector.")
+
+func update_door_texture():
+	door_button_texture.texture = door_button_open_texture if challenge_solve else door_button_close_texture
+	open_door_texture.visible = is_door_open
+	close_door_texture.visible = not is_door_open
+	close_door_collision.set_deferred("disabled", is_door_open)
+
+func open_door():
+	is_door_open = true
+	SoundSystem.play_door_open()
+	update_door_texture()
+	
+func close_door():
+	is_door_open = false
+	SoundSystem.play_door_close()
+	update_door_texture()
+
+func _on_detector_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_near = true
+		print("👣 Player entered door area.")
+
+		# ✅ Auto-open the door if challenge is already solved
+		if challenge_solve and not is_door_open:
+			print("✅ Challenge already solved. Auto-opening door.")
+			open_door()
+
+func _on_detector_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player_near = false
+		if is_door_open:
+			close_door()
+
 func _disable_player_input(state: bool):
 	if player:
 		player.typing = state
 		print("🔧 Player typing_cant_move set to:", state)
+
+func apply_saved_state():
+	_check_if_door_should_be_open()
+
+func _check_if_door_should_be_open():
+	if SaveSystem.is_door_open(door_id):
+		challenge_solve = true 
+		update_door_texture()

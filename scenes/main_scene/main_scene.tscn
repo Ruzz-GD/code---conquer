@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bo7eesj5hn1sq"]
+[gd_scene load_steps=69 format=3 uid="uid://bo7eesj5hn1sq"]
 
 [ext_resource type="Script" uid="uid://dhpew8klfs2r5" path="res://scenes/main_scene/main_scene.gd" id="1_6iw8k"]
 [ext_resource type="Theme" uid="uid://b2ia87ml1evux" path="res://assets/theme/doors_modal.tres" id="3_3t4qf"]
@@ -30,9 +30,10 @@
 [ext_resource type="Texture2D" uid="uid://blhhf84wrqfxu" path="res://assets/buff-icon/extra_atk_speed.png" id="21_scan6"]
 [ext_resource type="Texture2D" uid="uid://cptywfipihkmr" path="res://assets/buff-icon/extra_atk_range.png" id="22_cm64g"]
 [ext_resource type="Script" uid="uid://dksvweln4q736" path="res://scenes/main_scene/save_station_ui.gd" id="30_r37pl"]
+[ext_resource type="Script" uid="uid://d4c4h4ol5anht" path="res://scenes/main_scene/sound_system_panel.gd" id="30_y5h3x"]
 [ext_resource type="Texture2D" uid="uid://b86wobeyaqw70" path="res://assets/img/save-icon.png" id="31_sjfcr"]
 [ext_resource type="Script" uid="uid://rrj87tk0kjjj" path="res://scenes/main_scene/fade_transitions.gd" id="32_sjfcr"]
-[ext_resource type="AudioStream" uid="uid://bm21k17h8a3ai" path="res://assets/sounds/menu_bg_music.ogg" id="33_bj71x"]
+[ext_resource type="AudioStream" uid="uid://bm21k17h8a3ai" path="res://assets/music/menu_bg_music.ogg" id="33_bj71x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbdpr"]
 atlas = ExtResource("3_34m6u")
@@ -169,6 +170,22 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc27i"]
+bg_color = Color(0.091, 0.328417, 0.35, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.850667, 0.88, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_6iw8k")
@@ -725,13 +742,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.0
-offset_top = -91.0
+offset_top = -130.0
 offset_right = 125.0
-offset_bottom = -41.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
 text = "Resume"
+
+[node name="soundsystem" type="Button" parent="UIManager/ingame_ui/ingame-setting-modal"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -50.0
+offset_right = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_s5p1y")
+text = "Audio
+"
 
 [node name="info-btn" type="Button" parent="UIManager/ingame_ui/ingame-setting-modal"]
 custom_minimum_size = Vector2(250, 50)
@@ -742,9 +776,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.0
-offset_top = 7.0
+offset_top = 31.0
 offset_right = 125.0
-offset_bottom = 57.0
+offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
@@ -759,9 +793,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.0
-offset_top = 98.0
+offset_top = 109.0
 offset_right = 125.0
-offset_bottom = 148.0
+offset_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
@@ -775,9 +809,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -70.5
-offset_top = -179.5
+offset_top = -192.5
 offset_right = 70.5
-offset_bottom = -146.5
+offset_bottom = -159.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
@@ -1087,7 +1121,6 @@ texture = ExtResource("17_17klg")
 expand_mode = 1
 
 [node name="setting-modal" type="Panel" parent="UIManager/start_screen"]
-visible = false
 z_index = 1
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
@@ -1121,6 +1154,23 @@ grow_vertical = 2
 theme = ExtResource("9_s5p1y")
 text = "Add Username"
 
+[node name="Audio" type="Button" parent="UIManager/start_screen/setting-modal"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -8.0
+offset_right = 125.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_s5p1y")
+text = "Audio"
+
 [node name="info-btn" type="Button" parent="UIManager/start_screen/setting-modal"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 1
@@ -1130,9 +1180,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.0
-offset_top = 7.0
+offset_top = 72.0
 offset_right = 125.0
-offset_bottom = 57.0
+offset_bottom = 122.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_s5p1y")
@@ -1585,8 +1635,147 @@ vertical_alignment = 1
 
 [node name="reset_timer" type="Timer" parent="UIManager/save-station-ui"]
 
+[node name="SoundSystemPanel" type="Panel" parent="UIManager"]
+visible = false
+z_index = 901
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("30_y5h3x")
+
+[node name="BackgroundVolume" type="Label" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -371.0
+offset_top = -67.0
+offset_right = -139.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "BackGround Music"
+
+[node name="bg_slider" type="HSlider" parent="UIManager/SoundSystemPanel"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -59.0
+offset_right = 225.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_bc27i")
+value = 100.0
+rounded = true
+
+[node name="bg_percent_label" type="Label" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 255.0
+offset_top = -71.0
+offset_right = 301.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSound" type="Label" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.5
+offset_top = -17.0
+offset_right = -217.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Sound Effect"
+
+[node name="sfx_slider" type="HSlider" parent="UIManager/SoundSystemPanel"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -8.0
+offset_right = 225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_bc27i")
+value = 100.0
+rounded = true
+
+[node name="sfx_percent_label" type="Label" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 255.5
+offset_top = -18.0
+offset_right = 300.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundSystemLabel" type="Label" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.5
+offset_top = 181.0
+offset_right = 116.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Sound System"
+
+[node name="backbtn" type="TextureButton" parent="UIManager/SoundSystemPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -65.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture_normal = ExtResource("16_qgjuk")
+stretch_mode = 5
+
 [node name="FadeTransitions" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 script = ExtResource("32_sjfcr")
 
 [node name="ColorRect" type="ColorRect" parent="FadeTransitions"]
@@ -1628,6 +1817,7 @@ stream = ExtResource("33_bj71x")
 
 [connection signal="pressed" from="UIManager/ingame_ui/ingame_setting" to="UIManager/ingame_ui" method="_on_ingame_setting_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/resume-btn" to="UIManager/ingame_ui" method="_on_resumebtn_pressed"]
+[connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/soundsystem" to="UIManager/ingame_ui" method="_on_soundsystem_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/info-btn" to="UIManager/ingame_ui" method="_on_infobtn_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/quit-btn" to="UIManager/ingame_ui" method="_on_quitbtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/new-game-btn" to="UIManager/start_screen" method="_on_newgamebtn_pressed"]
@@ -1635,6 +1825,7 @@ stream = ExtResource("33_bj71x")
 [connection signal="pressed" from="UIManager/start_screen/setting-btn" to="UIManager/start_screen" method="_on_settingbtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/open_saved_game" to="UIManager/start_screen" method="_on_open_saved_game_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-modal/add-username" to="UIManager/start_screen" method="_on_addusername_pressed"]
+[connection signal="pressed" from="UIManager/start_screen/setting-modal/Audio" to="UIManager/start_screen" method="_on_audio_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-modal/info-btn" to="UIManager/start_screen" method="_on_infobtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-modal/back" to="UIManager/start_screen" method="_on_back_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/to-addusername-container/submit-btn" to="UIManager/start_screen" method="_on_submitbtn_addusername_pressed"]
@@ -1645,3 +1836,4 @@ stream = ExtResource("33_bj71x")
 [connection signal="pressed" from="UIManager/info-route/back" to="UIManager/info-route" method="_on_back_pressed"]
 [connection signal="pressed" from="UIManager/save-station-ui/save_container/save_btn" to="UIManager/save-station-ui" method="_on_save_btn_pressed"]
 [connection signal="pressed" from="UIManager/save-station-ui/save_container/close-btn" to="UIManager/save-station-ui" method="_on_closebtn_pressed"]
+[connection signal="pressed" from="UIManager/SoundSystemPanel/backbtn" to="UIManager/SoundSystemPanel" method="_on_backbtn_pressed"]

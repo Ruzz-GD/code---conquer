@@ -111,10 +111,10 @@ func _on_challenge_solved():
 func open_chest():
 	print("✅ Chest opened!")
 	chest_already_opened = true
-
+	
 	if chest_id != "":
 		SaveSystem.opened_chests[chest_id] = true
-
+	SoundSystem.play_open_chest()
 	$chest_sprite.play("bronze_chest_anim")
 
 	await $chest_sprite.animation_finished

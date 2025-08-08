@@ -2,23 +2,12 @@ extends Node2D
 
 @onready var current_map = $current_map
 @onready var player_container = $player_container
-@onready var menu_music = $MenuMusic
 
 func _ready():
 	GameManager.map_updated.connect(load_map)
-	GameManager.game_reset.connect(_on_game_reset)
 
-	SoundSystem.background_volume_changed.connect(_on_background_volume_changed)
-	_on_background_volume_changed(SoundSystem.background_volume)  # Set current value
-
-	menu_music.stream.loop = true
 	load_player()
 	load_map(GameManager.current_map_path, GameManager.spawn_marker_name)
-
-	start_menu_music_delayed()
-
-func _on_game_reset():
-	start_menu_music_delayed()
 
 func load_player():
 	if player_container.get_child_count() == 0:
@@ -50,12 +39,3 @@ func load_map(map_path: String, spawn_marker: String):
 			print("📍 Player spawned at:", marker.name)
 	else:
 		print("❌ Spawn marker not found:", spawn_marker)
-
-func start_menu_music_delayed():
-	await get_tree().create_timer(5).timeout
-
-	if not GameManager.is_game_started and not menu_music.playing:
-		menu_music.play()
-
-func _on_background_volume_changed(value: float):
-	menu_music.volume_db = linear_to_db(value)

@@ -42,6 +42,8 @@ var is_dying := false
 var drone_id: String = ""
 
 func _ready():
+	SoundSystem.mob_volume_changed.connect(_on_mob_volume_changed)
+	_on_mob_volume_changed(SoundSystem.mob_volume)
 	drone_id = get_parent().drone_id
 	if drone_id == "":
 		push_error("❌ Missing drone_id for drone at " + str(global_position))
@@ -121,6 +123,12 @@ func _process(delta):
 			return_to_start(delta)
 		else:
 			stop_movement()
+
+func _on_mob_volume_changed(new_volume: float):
+	var db = linear_to_db(new_volume)
+	shooting.volume_db = db
+	death_sound.volume_db = db
+	walking_sound.volume_db = db
 
 func _check_if_drone_is_dead():
 	if SaveSystem.is_drone_killed(drone_id):

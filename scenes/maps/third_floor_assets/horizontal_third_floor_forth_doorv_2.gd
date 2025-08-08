@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var door_id: String = "third_floor_third_door"
+var door_id: String = "third_floor_forth_door"
 
 @export var unlock_button_texture: Texture
 @export var lock_button_texture: Texture
@@ -75,10 +75,12 @@ func update_door_texture():
 
 func open_door():
 	is_door_open = true
+	SoundSystem.play_door_open()
 	update_door_texture()
 	
 func close_door():
 	is_door_open = false
+	SoundSystem.play_door_close()
 	update_door_texture()
 
 func _on_doordetector_body_entered(body: Node2D) -> void:

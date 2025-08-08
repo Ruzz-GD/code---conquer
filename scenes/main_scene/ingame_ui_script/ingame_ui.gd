@@ -3,7 +3,7 @@ extends Control
 @onready var ingame_setting_modal = $"ingame-setting-modal"
 @onready var resume_btn = $"ingame-setting-modal/resume-btn"
 @onready var info_route = $"../info-route"
-
+@onready var soundpanel = $"../SoundSystemPanel"
 func _ready() -> void:
 	ingame_setting_modal.visible = false
 	info_route.visible = false
@@ -20,3 +20,7 @@ func _on_quitbtn_pressed():
 	
 func _on_infobtn_pressed() -> void:
 	info_route.visible = true
+
+
+func _on_soundsystem_pressed() -> void:
+	soundpanel.show()

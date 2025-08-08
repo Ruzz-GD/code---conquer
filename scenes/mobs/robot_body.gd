@@ -42,6 +42,8 @@ var is_dying := false
 var robot_id: String = ""
 
 func _ready():
+	SoundSystem.mob_volume_changed.connect(_on_mob_volume_changed)
+	_on_mob_volume_changed(SoundSystem.mob_volume) 
 	robot_id = get_parent().robot_id
 	if robot_id == "":
 		push_error("❌ Missing robot_id for robot at " + str(global_position))
@@ -121,6 +123,12 @@ func _process(delta):
 			return_to_start(delta)
 		else:
 			stop_movement()
+
+func _on_mob_volume_changed(new_volume: float):
+	var db = linear_to_db(new_volume)
+	shooting.volume_db = db
+	walking_sound.volume_db = db
+	death_sound.volume_db = db
 
 func _check_if_robot_is_dead():
 	if SaveSystem.is_robot_killed(robot_id):

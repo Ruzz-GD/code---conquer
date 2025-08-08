@@ -75,10 +75,12 @@ func update_door_texture():
 
 func open_door():
 	is_door_open = true
+	SoundSystem.play_door_open()
 	update_door_texture()
 	
 func close_door():
 	is_door_open = false
+	SoundSystem.play_door_close()
 	update_door_texture()
 
 func _on_doordetector_body_entered(body: Node2D) -> void:

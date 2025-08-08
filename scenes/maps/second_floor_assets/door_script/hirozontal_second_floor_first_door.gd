@@ -108,11 +108,13 @@ func _on_doordetector_body_exited(body):
 
 func open_door():
 	is_door_open = true
+	SoundSystem.play_door_open()
 	door_sprite.z_index = 5
 	update_door_texture()
 
 func close_door():
 	is_door_open = false
+	SoundSystem.play_door_close()
 	update_door_texture()
 
 func update_door_texture():

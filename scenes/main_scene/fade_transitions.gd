@@ -54,6 +54,9 @@ func _create_wave_labels(text: String) -> void:
 		letter_labels.append(label)
 
 func fade_to_black_then(func_to_call: Callable, wait_time: float = 5.0) -> void:
+	if SoundSystem:
+		SoundSystem.set_loading(true) # 🚫 Stop any music & block new music
+
 	color_rect.modulate.a = 1.0
 	show()
 
@@ -73,6 +76,9 @@ func _hide_label_container() -> void:
 	stop_wave_animation()
 
 func _on_fade_out_complete() -> void:
+	if SoundSystem:
+		SoundSystem.set_loading(false) # 🚫 Stop any music & block new music
+
 	label_container.visible = false
 	transition_label.visible = false
 	stop_wave_animation()

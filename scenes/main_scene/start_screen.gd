@@ -10,7 +10,7 @@ extends Control
 @onready var welcome_message = $welcome_player
 @onready var saved_game_container = $view_saved_game_container
 @onready var saved_game_list = $view_saved_game_container/saved_game_list
-
+@onready var SoundSystemPanel = $"../SoundSystemPanel"
 var player
 
 func _ready():
@@ -109,8 +109,6 @@ func _on_newgamebtn_pressed() -> void:
 	if player:
 		player.emit_signal("player_hints_changed", player.current_hints)
 
-	# ✅ Stop menu music before starting game
-	$"../../MenuMusic".stop()
 
 	hide()
 	print("🟢 Game Started on Difficulty:", GameManager.difficulty)
@@ -178,11 +176,12 @@ func _add_save_row(file_name: String, username: String) -> void:
 		load_btn.pressed.connect(func():
 			print("📂 Loading save:", file_name)
 
-			# ✅ Stop menu music before loading save
-			$"../../MenuMusic".stop()
-
 			SaveSystem.load_game(file_name)
 			hide()
 		)
 
 	saved_game_list.add_child(new_row)
+
+
+func _on_audio_pressed() -> void:
+	SoundSystemPanel.show()
