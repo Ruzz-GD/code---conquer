@@ -71,9 +71,12 @@ func _process(delta):
 	if is_dying:
 		return
 
-	if not GameManager.is_game_started:
+	# 🚫 Block AI actions while game is not started or loading screen is active
+	if not GameManager.is_game_started or (SoundSystem and SoundSystem.is_loading):
 		velocity = Vector2.ZERO
 		move_and_slide()
+		attack_timer.stop()
+		shooting.stop()
 		return
 
 	check_if_stuck(delta)

@@ -59,8 +59,6 @@ func _ready():
 	# Start menu music if game not started and not loading
 	if not GameManager.is_game_started and not is_loading:
 		_play_bgm(MENU_BGM)
-
-
 # ----------------------------
 # 🚪 Loading / Transition Handling
 # ----------------------------
@@ -121,6 +119,7 @@ func set_mob_volume(value: float):
 	save_sound_settings()
 	emit_signal("mob_volume_changed", mob_volume)
 
+
 # ----------------------------
 # 💾 Save / Load
 # ----------------------------
@@ -145,6 +144,8 @@ func load_sound_settings():
 			if data.has("sfx_volume"):
 				player_volume = data["sfx_volume"]
 				mob_volume = data["sfx_volume"]
+
+
 # ----------------------------
 # 🔊 Play SFX
 # ----------------------------
@@ -161,6 +162,8 @@ func _play_sfx(stream: AudioStream):
 	sfx_player.stream = stream
 	sfx_player.volume_db = linear_to_db(player_volume)
 	sfx_player.play()
+
+
 # ----------------------------
 # ⚔ Dynamic Music Control
 # ----------------------------
