@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bo7eesj5hn1sq"]
+[gd_scene load_steps=81 format=3 uid="uid://bo7eesj5hn1sq"]
 
 [ext_resource type="Script" uid="uid://dhpew8klfs2r5" path="res://scenes/main_scene/main_scene.gd" id="1_6iw8k"]
 [ext_resource type="Theme" uid="uid://b2ia87ml1evux" path="res://assets/theme/doors_modal.tres" id="3_3t4qf"]
@@ -16,6 +16,7 @@
 [ext_resource type="Theme" uid="uid://bbylrddysow5i" path="res://assets/theme/setting_modal.tres" id="9_ugojt"]
 [ext_resource type="Script" uid="uid://cl8s1dmytqfby" path="res://scenes/main_scene/chests_debug_ui_script/debug_ui_second_floor_ug_all_chest.gd" id="9_wuij3"]
 [ext_resource type="Script" uid="uid://ub01xe4nulnr" path="res://scenes/main_scene/chests_debug_ui_script/debug_ui_third_floor_ug_all_chest.gd" id="10_scan6"]
+[ext_resource type="Script" uid="uid://cw4lwirt8ub3n" path="res://scenes/main_scene/escape_door_modal.gd" id="11_fr7fn"]
 [ext_resource type="Script" uid="uid://b5yue1ceel8hl" path="res://scenes/main_scene/ingame_ui_script/player_stat.gd" id="11_nim2u"]
 [ext_resource type="Texture2D" uid="uid://1b5kvmfm0inp" path="res://assets/img/extra-lives.png" id="12_3naof"]
 [ext_resource type="Texture2D" uid="uid://dkjdriadmmqrl" path="res://assets/img/profile.png" id="12_17klg"]
@@ -29,11 +30,17 @@
 [ext_resource type="Texture2D" uid="uid://05ly8a7tvs4k" path="res://assets/buff-icon/triple_damage.png" id="20_wuij3"]
 [ext_resource type="Texture2D" uid="uid://blhhf84wrqfxu" path="res://assets/buff-icon/extra_atk_speed.png" id="21_scan6"]
 [ext_resource type="Texture2D" uid="uid://cptywfipihkmr" path="res://assets/buff-icon/extra_atk_range.png" id="22_cm64g"]
+[ext_resource type="Script" uid="uid://dswosu680xmxm" path="res://scenes/main_scene/core_container.gd" id="25_bo5y2"]
+[ext_resource type="Texture2D" uid="uid://c31fahk6yeulo" path="res://assets/img/green-core.png" id="26_w0eu7"]
+[ext_resource type="Texture2D" uid="uid://buvyeuwlk5vuq" path="res://assets/img/blue-core.png" id="27_bc27i"]
+[ext_resource type="Texture2D" uid="uid://87vea4egynhu" path="res://assets/img/red-core.png" id="28_fr7fn"]
 [ext_resource type="Script" uid="uid://dksvweln4q736" path="res://scenes/main_scene/save_station_ui.gd" id="30_r37pl"]
 [ext_resource type="Script" uid="uid://d4c4h4ol5anht" path="res://scenes/main_scene/sound_system_panel.gd" id="30_y5h3x"]
 [ext_resource type="Texture2D" uid="uid://b86wobeyaqw70" path="res://assets/img/save-icon.png" id="31_sjfcr"]
 [ext_resource type="Script" uid="uid://rrj87tk0kjjj" path="res://scenes/main_scene/fade_transitions.gd" id="32_sjfcr"]
 [ext_resource type="AudioStream" uid="uid://bm21k17h8a3ai" path="res://assets/music/menu_bg_music.ogg" id="33_bj71x"]
+[ext_resource type="Script" uid="uid://cx1wa65lmp51b" path="res://scenes/main_scene/view_history.gd" id="34_bc27i"]
+[ext_resource type="Script" uid="uid://dmnok1i55hfwf" path="res://scenes/main_scene/finaly_ui.gd" id="39_c3uee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbdpr"]
 atlas = ExtResource("3_34m6u")
@@ -42,6 +49,32 @@ region = Rect2(516.97, 98.0045, 9.03668, 12.0245)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6loks"]
 atlas = ExtResource("3_34m6u")
 region = Rect2(485.028, 98.0107, 9.02661, 12.0043)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3uee"]
+bg_color = Color(0.1736, 0.44408, 0.56, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rv7a5"]
+bg_color = Color(0.13, 0.13, 0.13, 0.823529)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ci57a"]
+bg_color = Color(0, 0, 0, 0.823529)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17klg"]
 bg_color = Color(0.14, 0.14, 0.14, 0.517647)
@@ -85,6 +118,13 @@ bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjfcr"]
 bg_color = Color(0, 0, 0, 0.756863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fr7fn"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 0.517647)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5h3x"]
 bg_color = Color(0, 0, 0, 0.560784)
@@ -186,6 +226,9 @@ expand_margin_left = 10.0
 expand_margin_top = 10.0
 expand_margin_right = 10.0
 expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jujby"]
+bg_color = Color(0.14, 0.14, 0.14, 1)
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_6iw8k")
@@ -688,6 +731,140 @@ offset_right = 416.0
 offset_bottom = 484.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 
+[node name="Escape-Door-Modal" type="Control" parent="DoorsChestDebugModal"]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_fr7fn")
+
+[node name="Panel" type="Panel" parent="DoorsChestDebugModal/Escape-Door-Modal"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -159.0
+offset_right = 248.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c3uee")
+
+[node name="Label" type="Label" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_top = 15.0
+offset_right = 87.5
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 22
+text = "Need 3 Core To Unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 56.0
+offset_right = 20.0
+offset_bottom = 79.0
+grow_horizontal = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="green_core" type="TextureRect" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -50.0
+offset_right = -86.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_w0eu7")
+expand_mode = 1
+
+[node name="blue_core" type="TextureRect" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_bc27i")
+expand_mode = 1
+
+[node name="red_core" type="TextureRect" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 82.0
+offset_top = -50.0
+offset_right = 182.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_fr7fn")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -78.0
+offset_right = 71.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/hover = SubResource("StyleBoxFlat_rv7a5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ci57a")
+text = "Activate"
+
+[node name="back_button" type="TextureButton" parent="DoorsChestDebugModal/Escape-Door-Modal/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 29.0
+grow_horizontal = 0
+texture_normal = ExtResource("16_qgjuk")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="UIManager" type="CanvasLayer" parent="."]
 layer = 5
 
@@ -1003,6 +1180,43 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_sjfcr")
 max_value = 1.0
 show_percentage = false
 
+[node name="core_container" type="PanelContainer" parent="UIManager/ingame_ui"]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 1
+offset_left = 315.0
+offset_top = -315.0
+offset_right = 518.0
+offset_bottom = -238.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fr7fn")
+script = ExtResource("25_bo5y2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIManager/ingame_ui/core_container"]
+layout_mode = 2
+
+[node name="green-core" type="TextureRect" parent="UIManager/ingame_ui/core_container/HBoxContainer"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("26_w0eu7")
+expand_mode = 1
+
+[node name="blue-core" type="TextureRect" parent="UIManager/ingame_ui/core_container/HBoxContainer"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("27_bc27i")
+expand_mode = 1
+
+[node name="red-core" type="TextureRect" parent="UIManager/ingame_ui/core_container/HBoxContainer"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("28_fr7fn")
+expand_mode = 1
+
 [node name="start_screen" type="Control" parent="UIManager"]
 z_index = 900
 layout_mode = 3
@@ -1014,7 +1228,7 @@ script = ExtResource("6_umvci")
 
 [node name="ColorRect" type="ColorRect" parent="UIManager/start_screen"]
 layout_mode = 0
-offset_right = 1152.0
+offset_right = 1153.0
 offset_bottom = 648.0
 color = Color(0.0229994, 0.168132, 0.341941, 1)
 
@@ -1096,13 +1310,6 @@ offset_top = 16.0
 offset_right = 103.0
 offset_bottom = 48.0
 texture_normal = ExtResource("31_sjfcr")
-
-[node name="history-modal" type="Control" parent="UIManager/start_screen"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UIManager/start_screen"]
 layout_mode = 1
@@ -1311,12 +1518,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nthpl")
 
+[node name="Label" type="Label" parent="UIManager/start_screen/view_saved_game_container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.5
+offset_top = 27.0
+offset_right = 81.5
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 26
+text = "Saved Game
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="saved_game_list" type="VBoxContainer" parent="UIManager/start_screen/view_saved_game_container"]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 67.0
+offset_top = 91.0
 offset_right = 921.0
-offset_bottom = 515.0
+offset_bottom = 516.0
 
 [node name="Panel" type="Panel" parent="UIManager/start_screen/view_saved_game_container/saved_game_list"]
 custom_minimum_size = Vector2(882, 60)
@@ -1385,6 +1608,60 @@ grow_horizontal = 0
 texture_normal = ExtResource("16_qgjuk")
 ignore_texture_size = true
 stretch_mode = 3
+
+[node name="view_history" type="Panel" parent="UIManager/start_screen"]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -469.5
+offset_top = -265.5
+offset_right = 469.5
+offset_bottom = 265.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nthpl")
+script = ExtResource("34_bc27i")
+
+[node name="history_list" type="VBoxContainer" parent="UIManager/start_screen/view_history"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 85.0
+offset_right = 921.0
+offset_bottom = 516.0
+
+[node name="close-history-modal" type="TextureButton" parent="UIManager/start_screen/view_history"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 14.0
+offset_right = -13.0
+offset_bottom = 42.0
+grow_horizontal = 0
+texture_normal = ExtResource("16_qgjuk")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UIManager/start_screen/view_history"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = 19.0
+offset_right = 30.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 26
+text = "History"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="info-route" type="ColorRect" parent="UIManager"]
 visible = false
@@ -1773,6 +2050,144 @@ grow_horizontal = 0
 texture_normal = ExtResource("16_qgjuk")
 stretch_mode = 5
 
+[node name="finaly_ui" type="Control" parent="UIManager"]
+z_index = 999
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("39_c3uee")
+
+[node name="Panel" type="Panel" parent="UIManager/finaly_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jujby")
+
+[node name="Label" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.0
+offset_top = 37.0
+offset_right = 137.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.2625, 0.60375, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0.44, 0.44, 0.44, 1)
+theme_override_font_sizes/font_size = 26
+text = "Somehow you survive"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gametime" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.5
+offset_top = -192.0
+offset_right = -2.5
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Game Time :  "
+vertical_alignment = 1
+
+[node name="deathcount" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = -154.0
+offset_right = 10.5
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Death Count :  "
+vertical_alignment = 1
+
+[node name="openeddoor" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -118.0
+offset_right = 82.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Opened Door Count :  "
+vertical_alignment = 1
+
+[node name="openedchest" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -81.0
+offset_right = 82.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Opened chest Count :"
+vertical_alignment = 1
+
+[node name="killeddrone" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -40.0
+offset_right = 84.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Killed Drone Count :"
+vertical_alignment = 1
+
+[node name="killedrobot" type="Label" parent="UIManager/finaly_ui/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = 3.0
+offset_right = 85.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Killed Robot Count :"
+vertical_alignment = 1
+
 [node name="FadeTransitions" type="CanvasLayer" parent="."]
 layer = 10
 visible = false
@@ -1815,6 +2230,9 @@ vertical_alignment = 1
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_bj71x")
 
+[connection signal="visibility_changed" from="DoorsChestDebugModal/Escape-Door-Modal" to="DoorsChestDebugModal/Escape-Door-Modal" method="_on_visibility_changed"]
+[connection signal="pressed" from="DoorsChestDebugModal/Escape-Door-Modal/Panel/Button" to="DoorsChestDebugModal/Escape-Door-Modal" method="_on_button_pressed"]
+[connection signal="pressed" from="DoorsChestDebugModal/Escape-Door-Modal/Panel/back_button" to="DoorsChestDebugModal/Escape-Door-Modal" method="_on_back_button_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame_setting" to="UIManager/ingame_ui" method="_on_ingame_setting_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/resume-btn" to="UIManager/ingame_ui" method="_on_resumebtn_pressed"]
 [connection signal="pressed" from="UIManager/ingame_ui/ingame-setting-modal/soundsystem" to="UIManager/ingame_ui" method="_on_soundsystem_pressed"]
@@ -1823,6 +2241,7 @@ stream = ExtResource("33_bj71x")
 [connection signal="pressed" from="UIManager/start_screen/new-game-btn" to="UIManager/start_screen" method="_on_newgamebtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/exit-btn" to="UIManager/start_screen" method="_on_exitbtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-btn" to="UIManager/start_screen" method="_on_settingbtn_pressed"]
+[connection signal="pressed" from="UIManager/start_screen/history-btn" to="UIManager/start_screen" method="_on_historybtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/open_saved_game" to="UIManager/start_screen" method="_on_open_saved_game_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-modal/add-username" to="UIManager/start_screen" method="_on_addusername_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/setting-modal/Audio" to="UIManager/start_screen" method="_on_audio_pressed"]
@@ -1831,6 +2250,7 @@ stream = ExtResource("33_bj71x")
 [connection signal="pressed" from="UIManager/start_screen/to-addusername-container/submit-btn" to="UIManager/start_screen" method="_on_submitbtn_addusername_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/to-addusername-container/close-btn" to="UIManager/start_screen" method="_on_closebtn_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/view_saved_game_container/close-save-con" to="UIManager/start_screen" method="_on_closesavecon_pressed"]
+[connection signal="pressed" from="UIManager/start_screen/view_history/close-history-modal" to="UIManager/start_screen" method="_on_closehistorymodal_pressed"]
 [connection signal="pressed" from="UIManager/info-route/control-info-btn" to="UIManager/info-route" method="_on_controlinfobtn_pressed"]
 [connection signal="pressed" from="UIManager/info-route/lab-info-btn" to="UIManager/info-route" method="_on_labinfobtn_pressed"]
 [connection signal="pressed" from="UIManager/info-route/back" to="UIManager/info-route" method="_on_back_pressed"]

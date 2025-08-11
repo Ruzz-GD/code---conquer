@@ -78,6 +78,7 @@ func _on_door_button_input(viewport: Node, event: InputEvent, shape_idx: int) ->
 func solve_challenge():
 	print("✅ Debugging complete! Door can now open.")
 	SaveSystem.opened_doors[door_id] = true 
+	GameManager.opened_doors_count += 1
 	can_open = true
 	button_icon.texture = unlock_button_icon
 	door_button.input_pickable = false

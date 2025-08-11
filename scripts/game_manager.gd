@@ -5,9 +5,12 @@ signal difficulty_changed(new_difficulty: String)
 signal username_changed(new_username)
 signal game_reset
 signal is_game_start
+signal game_finish_changed(is_finished: bool)
 signal save_file_loaded(file_name: String)
-signal map_transitioning_changed(is_transitioning: bool) # ✅ New signal
+signal map_transitioning_changed(is_transitioning: bool)
 signal game_loaded
+signal core_collected(core_type)
+
 var is_loaded_from_save: bool = false
 
 enum ResetReason { DEATH, QUIT }
@@ -23,7 +26,18 @@ var player_username: String:
 
 # TIMER
 var game_timer := 0.0
+var death_count : int = 0
+var opened_doors_count: int = 0
+var opened_chests_count: int = 0
+var killed_drones_count: int = 0
+var killed_robots_count: int = 0
+
 var is_timer_running := false
+var cores_collected = {
+	"green": false,
+	"blue": false,
+	"red": false
+}
 
 # MAP TRANSITION
 var map_transitioning: bool = false
@@ -61,6 +75,14 @@ var is_game_started: bool:
 		else:
 			stop_timer()
 
+var _is_game_finish: bool = false
+var is_game_finish: bool:
+	get: return _is_game_finish
+	set(value):
+		if _is_game_finish != value:
+			_is_game_finish = value
+			emit_signal("game_finish_changed", value)
+			
 var _difficulty := "Medium"
 var difficulty: String:
 	get: return _difficulty
@@ -86,19 +108,37 @@ func _process(delta):
 	if is_timer_running:
 		game_timer += delta
 
+func collect_core(core_type: String):
+	if core_type in cores_collected:
+		cores_collected[core_type] = true
+		print("Collected core:", core_type)
+		emit_signal("core_collected", core_type)
+	else:
+		print("Unknown core type:", core_type)
+
+func has_core(core_type: String) -> bool:
+	return cores_collected.get(core_type, false)
+	
 func _on_game_loaded():
 	is_loaded_from_save = true
 	print("📂 Game was loaded from a save.")
 
-	# ✅ Trigger transition
+	# Trigger transition
 	trigger_map_transition()
 
-	# ✅ Emit signal for listeners after transition starts
+	# Emit signal for listeners after transition starts
 	emit_signal("game_loaded")
+
+	# Start timer WITHOUT resetting time, since loading from save
+	start_timer()
+
+	# Reset flag so future starts reset time normally
+	is_loaded_from_save = false
 
 # Starts the timer
 func start_timer():
-	game_timer = 0.0
+	if not is_loaded_from_save:
+		game_timer = 0.0
 	is_timer_running = true
 	print("⏱️ Timer started")
 
@@ -113,7 +153,7 @@ func get_elapsed_time() -> float:
 
 # --- Map Logic ---
 func update_map(new_map_path: String, new_spawn_marker: String):
-	trigger_map_transition() # 🚨 Trigger transition before updating the map
+	trigger_map_transition() # Trigger transition before updating the map
 
 	current_map_path = new_map_path
 	spawn_marker_name = new_spawn_marker
@@ -152,8 +192,9 @@ func update_current_save_station_marker():
 func reset_game(reason: ResetReason = ResetReason.QUIT):
 	print("🔄 Game reset triggered with reason:", reason)
 	last_reset_reason = reason
-	
-	# Existing reset logic...
+	for core in cores_collected.keys():
+		cores_collected[core] = false
+
 	player_username = ""
 	SaveSystem.reset_save()
 

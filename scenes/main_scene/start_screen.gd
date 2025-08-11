@@ -9,6 +9,7 @@ extends Control
 @onready var player_username = $"to-addusername-container/TextEdit"
 @onready var welcome_message = $welcome_player
 @onready var saved_game_container = $view_saved_game_container
+@onready var history_modal = $view_history
 @onready var saved_game_list = $view_saved_game_container/saved_game_list
 @onready var SoundSystemPanel = $"../SoundSystemPanel"
 var player
@@ -31,7 +32,7 @@ func _ready():
 
 	info_router.visible = false
 	setting_modal.visible = false
-
+	history_modal.hide()
 	difficulty_btn.clear()
 	difficulty_btn.add_item("Difficulty: Medium")
 	difficulty_btn.add_item("Difficulty: Hard")
@@ -185,3 +186,11 @@ func _add_save_row(file_name: String, username: String) -> void:
 
 func _on_audio_pressed() -> void:
 	SoundSystemPanel.show()
+
+
+func _on_historybtn_pressed() -> void:
+	history_modal.show()
+
+
+func _on_closehistorymodal_pressed() -> void:
+	history_modal.hide()

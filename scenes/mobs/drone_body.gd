@@ -23,9 +23,9 @@ var drone_current_hp := 80
 @onready var death_sound = $DeathSound
 @onready var walking_sound = $WalkingSound
 
-@onready var bronze_chest_scene = preload("res://scenes/chest_and_buff/chest_container/all_bronze_chest.tscn")
-@onready var silver_chest_scene = preload("res://scenes/chest_and_buff/chest_container/all_silver_chest.tscn")
-@onready var gold_chest_scene = preload("res://scenes/chest_and_buff/chest_container/all_gold_chest.tscn")
+@onready var bronze_chest_scene = preload("res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn")
+@onready var silver_chest_scene = preload("res://scenes/chest_and_buff_and_core/chest_container/all_silver_chest.tscn")
+@onready var gold_chest_scene = preload("res://scenes/chest_and_buff_and_core/chest_container/all_gold_chest.tscn")
 
 var start_position: Vector2  
 var target_position: Vector2  

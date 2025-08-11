@@ -1,4 +1,4 @@
-[gd_scene load_steps=197 format=4 uid="uid://mcy7a0d8n6vb"]
+[gd_scene load_steps=168 format=4 uid="uid://mcy7a0d8n6vb"]
 
 [ext_resource type="PackedScene" uid="uid://bdedmb0mmimx5" path="res://scenes/chest_and_buff_and_core/chest_gun.tscn" id="1_iy3h5"]
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn" id="1_lxc3w"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://6emc6ahjdvnl" path="res://scenes/maps/first_floor_assets/decoration_object_below.gd" id="8_4w16r"]
 [ext_resource type="Texture2D" uid="uid://bf8x5i1kvsust" path="res://assets/tilesets/tilesStuff.png" id="9_fbkv4"]
 [ext_resource type="Script" uid="uid://ciyk3axso5flh" path="res://scenes/maps/first_floor_assets/doors_script/vertical_first_floor_last_door.gd" id="10_745yb"]
-[ext_resource type="Script" uid="uid://takp3aifrbg8" path="res://scenes/maps/scape_door_end_game.gd" id="11_h5dxs"]
 [ext_resource type="Script" uid="uid://bb6mrahg2ah5t" path="res://scenes/maps/first_floor_assets/doors_script/horizontal_first_floor_first_door.gd" id="11_io2rw"]
 [ext_resource type="Script" uid="uid://doqtqog7qc4rx" path="res://scenes/maps/first_floor_assets/room_cover_script/last_cover_detector.gd" id="12_3j7dc"]
 [ext_resource type="Script" uid="uid://r6bkcbjciec2" path="res://scenes/maps/first_floor_assets/behind_detector.gd" id="13_hrb17"]
@@ -39,9 +38,6 @@
 [ext_resource type="Script" uid="uid://c5gnmeaflymtg" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_17_detector.gd" id="35_r3vn6"]
 [ext_resource type="Script" uid="uid://dc45waq2pk5he" path="res://scenes/maps/first_floor_assets/room_cover_script/cover_18_detector.gd" id="36_1gvyd"]
 [ext_resource type="PackedScene" uid="uid://kpfebl6dy0b0" path="res://scenes/chest_and_buff_and_core/core/green-core.tscn" id="38_jdovf"]
-[ext_resource type="PackedScene" uid="uid://3f3lexqs6coc" path="res://scenes/chest_and_buff_and_core/core/blue-core.tscn" id="39_1ktru"]
-[ext_resource type="PackedScene" uid="uid://dqulcbmdywib3" path="res://scenes/chest_and_buff_and_core/core/red-core.tscn" id="40_h5dxs"]
-[ext_resource type="Script" uid="uid://cxfdlng6dk1am" path="res://scenes/maps/finaly.gd" id="42_dmt08"]
 
 [sub_resource type="GDScript" id="GDScript_jgbkp"]
 script/source = "extends Node2D
@@ -3330,139 +3326,6 @@ region = Rect2(426, 243, 6, 11)
 atlas = ExtResource("9_fbkv4")
 region = Rect2(426, 227, 6, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gfqs"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(0, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pi63j"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(128, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_byh12"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(256, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_11jrj"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(384, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_urb11"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(512, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_76c00"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(640, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bnh3k"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(768, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nb18g"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(896, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xc4n1"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(1024, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xoiah"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(1152, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8upht"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(1280, 1024, 128, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_faeo2"]
-atlas = ExtResource("13_iy3h5")
-region = Rect2(1408, 1024, 128, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ccgbp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5gfqs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pi63j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_byh12")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_11jrj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_urb11")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_76c00")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bnh3k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nb18g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xc4n1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xoiah")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8upht")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_faeo2")
-}],
-"loop": false,
-"name": &"open",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_byh12"]
-size = Vector2(112, 9)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1paln"]
-size = Vector2(20, 12)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_faeo2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ds708"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_urb11"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76c00"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bnh3k"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nb18g"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmt08"]
-bg_color = Color(0.8, 0.8, 0.8, 0.568627)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xc4n1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoiah"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8upht"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pa1n"]
-bg_color = Color(0.18, 0.18, 0.18, 0.603922)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmt08"]
-size = Vector2(121, 54)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7marc"]
 size = Vector2(99.6563, 89.625)
 
@@ -3680,8 +3543,16 @@ size = Vector2(448, 440)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8rj4"]
 size = Vector2(143.5, 177)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_11jrj"]
-size = Vector2(977, 87)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byh12"]
+size = Vector2(112, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11jrj"]
+atlas = ExtResource("9_fbkv4")
+region = Rect2(45, 67, 86, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds708"]
+atlas = ExtResource("9_fbkv4")
+region = Rect2(502, 98, 9, 12)
 
 [node name="first_floor_map" type="Node2D"]
 script = SubResource("GDScript_jgbkp")
@@ -4067,55 +3938,6 @@ shape = SubResource("CapsuleShape2D_3yol8")
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-first-floor-second-door/start-room-button"]
 position = Vector2(83, -13)
 rotation = 3.14159
-
-[node name="scape-door-end-game" type="StaticBody2D" parent="." groups=["persistent_object"]]
-z_index = 5
-position = Vector2(-237, -308)
-collision_mask = 0
-script = ExtResource("11_h5dxs")
-
-[node name="door-sprite" type="AnimatedSprite2D" parent="scape-door-end-game"]
-position = Vector2(-4, 77)
-scale = Vector2(0.765625, 0.75)
-sprite_frames = SubResource("SpriteFrames_ccgbp")
-animation = &"open"
-
-[node name="close-door-blocker" type="CollisionShape2D" parent="scape-door-end-game"]
-position = Vector2(-4, 96.5)
-shape = SubResource("RectangleShape2D_byh12")
-
-[node name="open-door-blocker" type="CollisionShape2D" parent="scape-door-end-game"]
-position = Vector2(-42, 95)
-shape = SubResource("RectangleShape2D_1paln")
-
-[node name="open-door-blocker2" type="CollisionShape2D" parent="scape-door-end-game"]
-position = Vector2(36, 95)
-shape = SubResource("RectangleShape2D_1paln")
-
-[node name="Button" type="Button" parent="scape-door-end-game"]
-offset_left = -16.0
-offset_top = 72.0
-offset_right = 9.0
-offset_bottom = 85.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_faeo2")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ds708")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_urb11")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_76c00")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bnh3k")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nb18g")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dmt08")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xc4n1")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_xoiah")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_8upht")
-theme_override_styles/normal = SubResource("StyleBoxFlat_8pa1n")
-
-[node name="detector" type="Area2D" parent="scape-door-end-game"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="scape-door-end-game/detector"]
-position = Vector2(-4.5, 101)
-shape = SubResource("RectangleShape2D_dmt08")
 
 [node name="first-floor-stair-door" type="Area2D" parent="."]
 position = Vector2(-1163, -937)
@@ -4629,8 +4451,27 @@ script = ExtResource("36_1gvyd")
 position = Vector2(-125.75, 1.5)
 shape = SubResource("RectangleShape2D_a8rj4")
 
+[node name="scape-door-end-game" type="StaticBody2D" parent="."]
+z_index = 5
+position = Vector2(-237, -308)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scape-door-end-game"]
+position = Vector2(-4, 96.5)
+shape = SubResource("RectangleShape2D_byh12")
+
+[node name="scape-door-texture" type="Sprite2D" parent="scape-door-end-game"]
+position = Vector2(-3, 77)
+scale = Vector2(1.11628, 1.11628)
+texture = SubResource("AtlasTexture_11jrj")
+
+[node name="Sprite2D" type="Sprite2D" parent="scape-door-end-game"]
+position = Vector2(60.875, 82.75)
+scale = Vector2(1.58333, 1.54167)
+texture = SubResource("AtlasTexture_ds708")
+
 [node name="first_floor_spawn_marker" type="Marker2D" parent="."]
-position = Vector2(-229, -145)
+position = Vector2(766, -364)
 
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)
@@ -4788,23 +4629,7 @@ position = Vector2(1076, 0)
 chest_id = "ff-gold-chest-2"
 
 [node name="Green-core" parent="." instance=ExtResource("38_jdovf")]
-position = Vector2(15, -134)
-
-[node name="Blue-core" parent="." instance=ExtResource("39_1ktru")]
-position = Vector2(-101, -131)
-
-[node name="Red-core" parent="." instance=ExtResource("40_h5dxs")]
-position = Vector2(-147, -53)
-
-[node name="finaly" type="Area2D" parent="."]
-position = Vector2(-229, -368)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("42_dmt08")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="finaly"]
-position = Vector2(-18.5, 53.5)
-shape = SubResource("RectangleShape2D_11jrj")
+position = Vector2(827, -518)
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_exited"]
@@ -4821,9 +4646,6 @@ shape = SubResource("RectangleShape2D_11jrj")
 [connection signal="body_entered" from="hirozontal-first-floor-second-door/door-detector" to="hirozontal-first-floor-second-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="hirozontal-first-floor-second-door/door-detector" to="hirozontal-first-floor-second-door" method="_on_doordetector_body_exited"]
 [connection signal="input_event" from="hirozontal-first-floor-second-door/start-room-button" to="hirozontal-first-floor-second-door" method="_on_door_button_input"]
-[connection signal="pressed" from="scape-door-end-game/Button" to="scape-door-end-game" method="_on_button_pressed"]
-[connection signal="body_entered" from="scape-door-end-game/detector" to="scape-door-end-game" method="_on_detector_body_entered"]
-[connection signal="body_exited" from="scape-door-end-game/detector" to="scape-door-end-game" method="_on_detector_body_exited"]
 [connection signal="body_entered" from="first-floor-stair-door" to="first-floor-stair-door" method="_on_body_entered"]
 [connection signal="child_entered_tree" from="first-floor-stair-door/detector" to="first-floor-stair-door" method="_on_detector_child_entered_tree"]
 [connection signal="pressed" from="first-floor-stair-door/close_door/Button" to="first-floor-stair-door" method="_on_button_pressed"]
@@ -4869,4 +4691,3 @@ shape = SubResource("RectangleShape2D_11jrj")
 [connection signal="body_exited" from="Room-Cover/cover-17-detector" to="Room-Cover/cover-17-detector" method="_on_body_exited"]
 [connection signal="body_entered" from="Room-Cover/cover-18-detector" to="Room-Cover/cover-18-detector" method="_on_body_entered"]
 [connection signal="body_exited" from="Room-Cover/cover-18-detector" to="Room-Cover/cover-18-detector" method="_on_body_exited"]
-[connection signal="body_entered" from="finaly" to="finaly" method="_on_body_entered"]

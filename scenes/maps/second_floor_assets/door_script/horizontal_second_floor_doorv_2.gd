@@ -41,6 +41,7 @@ func solve_challenge():
 	print("✅ Debugging complete! Door can now open.")
 	challenge_solve = true
 	SaveSystem.opened_doors[door_id] = true 
+	GameManager.opened_doors_count += 1
 	update_door_texture()
 	
 	if debug_ui:

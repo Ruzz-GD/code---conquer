@@ -18,9 +18,9 @@
 [ext_resource type="Script" uid="uid://bqhcki4r2ookd" path="res://scenes/maps/third_floor_assets/third_floor_save_station.gd" id="16_yh30l"]
 [ext_resource type="PackedScene" uid="uid://bhs5c4nhdc1l7" path="res://scenes/mobs/DroneMob.tscn" id="17_dix0o"]
 [ext_resource type="PackedScene" uid="uid://bi5mojxlxs0kt" path="res://scenes/mobs/RobotMob.tscn" id="18_rsmnm"]
-[ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff/chest_container/all_bronze_chest.tscn" id="19_j04no"]
-[ext_resource type="PackedScene" uid="uid://gu4007qprrps" path="res://scenes/chest_and_buff/chest_container/all_gold_chest.tscn" id="20_xqp04"]
-[ext_resource type="PackedScene" uid="uid://c7ok3atjqsdyw" path="res://scenes/chest_and_buff/chest_container/all_silver_chest.tscn" id="21_42xc3"]
+[ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn" id="19_j04no"]
+[ext_resource type="PackedScene" uid="uid://gu4007qprrps" path="res://scenes/chest_and_buff_and_core/chest_container/all_gold_chest.tscn" id="20_xqp04"]
+[ext_resource type="PackedScene" uid="uid://c7ok3atjqsdyw" path="res://scenes/chest_and_buff_and_core/chest_container/all_silver_chest.tscn" id="21_42xc3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cubh"]
 texture = ExtResource("1_dcd1y")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdxoua6n0q8ea"]
 
-[ext_resource type="Script" uid="uid://b5xa6pqm65aqo" path="res://scenes/chest_and_buff/buff_container/bullet_magazine.gd" id="1_136ce"]
+[ext_resource type="Script" uid="uid://b5xa6pqm65aqo" path="res://scenes/chest_and_buff_and_core/buff_container/bullet_magazine.gd" id="1_136ce"]
 [ext_resource type="Texture2D" uid="uid://de8lgymlnhc2j" path="res://assets/img/bullet-icon.png" id="1_gnee1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_136ce"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=197 format=4 uid="uid://mcy7a0d8n6vb"]
+[gd_scene load_steps=194 format=4 uid="uid://mcy7a0d8n6vb"]
 
 [ext_resource type="PackedScene" uid="uid://bdedmb0mmimx5" path="res://scenes/chest_and_buff_and_core/chest_gun.tscn" id="1_iy3h5"]
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn" id="1_lxc3w"]
@@ -41,7 +41,6 @@
 [ext_resource type="PackedScene" uid="uid://kpfebl6dy0b0" path="res://scenes/chest_and_buff_and_core/core/green-core.tscn" id="38_jdovf"]
 [ext_resource type="PackedScene" uid="uid://3f3lexqs6coc" path="res://scenes/chest_and_buff_and_core/core/blue-core.tscn" id="39_1ktru"]
 [ext_resource type="PackedScene" uid="uid://dqulcbmdywib3" path="res://scenes/chest_and_buff_and_core/core/red-core.tscn" id="40_h5dxs"]
-[ext_resource type="Script" uid="uid://cxfdlng6dk1am" path="res://scenes/maps/finaly.gd" id="42_dmt08"]
 
 [sub_resource type="GDScript" id="GDScript_jgbkp"]
 script/source = "extends Node2D
@@ -3418,7 +3417,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_faeo2")
 }],
 "loop": false,
-"name": &"open",
+"name": &"default",
 "speed": 5.0
 }]
 
@@ -3428,7 +3427,12 @@ size = Vector2(112, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1paln"]
 size = Vector2(20, 12)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_faeo2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5dxs"]
+bg_color = Color(0.8, 0.8, 0.8, 0.733333)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ds708"]
 
@@ -3441,7 +3445,7 @@ size = Vector2(20, 12)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nb18g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmt08"]
-bg_color = Color(0.8, 0.8, 0.8, 0.568627)
+bg_color = Color(0.8, 0.8, 0.8, 0.733333)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -3459,9 +3463,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmt08"]
-size = Vector2(121, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7marc"]
 size = Vector2(99.6563, 89.625)
@@ -3679,9 +3680,6 @@ size = Vector2(448, 440)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8rj4"]
 size = Vector2(143.5, 177)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_11jrj"]
-size = Vector2(977, 87)
 
 [node name="first_floor_map" type="Node2D"]
 script = SubResource("GDScript_jgbkp")
@@ -4068,7 +4066,7 @@ shape = SubResource("CapsuleShape2D_3yol8")
 position = Vector2(83, -13)
 rotation = 3.14159
 
-[node name="scape-door-end-game" type="StaticBody2D" parent="." groups=["persistent_object"]]
+[node name="scape-door-end-game" type="StaticBody2D" parent="."]
 z_index = 5
 position = Vector2(-237, -308)
 collision_mask = 0
@@ -4078,7 +4076,6 @@ script = ExtResource("11_h5dxs")
 position = Vector2(-4, 77)
 scale = Vector2(0.765625, 0.75)
 sprite_frames = SubResource("SpriteFrames_ccgbp")
-animation = &"open"
 
 [node name="close-door-blocker" type="CollisionShape2D" parent="scape-door-end-game"]
 position = Vector2(-4, 96.5)
@@ -4097,7 +4094,7 @@ offset_left = -16.0
 offset_top = 72.0
 offset_right = 9.0
 offset_bottom = 85.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_faeo2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_h5dxs")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ds708")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_urb11")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_76c00")
@@ -4108,14 +4105,6 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xc4n1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xoiah")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_8upht")
 theme_override_styles/normal = SubResource("StyleBoxFlat_8pa1n")
-
-[node name="detector" type="Area2D" parent="scape-door-end-game"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="scape-door-end-game/detector"]
-position = Vector2(-4.5, 101)
-shape = SubResource("RectangleShape2D_dmt08")
 
 [node name="first-floor-stair-door" type="Area2D" parent="."]
 position = Vector2(-1163, -937)
@@ -4229,6 +4218,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_3j7dc")
 position = Vector2(-526, 99)
 
 [node name="BehindDetector" type="Area2D" parent="."]
+visible = false
 z_index = 10
 collision_mask = 14
 script = ExtResource("13_hrb17")
@@ -4636,6 +4626,7 @@ position = Vector2(-229, -145)
 position = Vector2(-1157, -745)
 
 [node name="drone_container" type="Node2D" parent="."]
+visible = false
 
 [node name="DroneMob" parent="drone_container" instance=ExtResource("6_gq2yr")]
 position = Vector2(325, -800)
@@ -4788,23 +4779,13 @@ position = Vector2(1076, 0)
 chest_id = "ff-gold-chest-2"
 
 [node name="Green-core" parent="." instance=ExtResource("38_jdovf")]
-position = Vector2(15, -134)
+position = Vector2(827, -518)
 
 [node name="Blue-core" parent="." instance=ExtResource("39_1ktru")]
-position = Vector2(-101, -131)
+position = Vector2(713, -486)
 
 [node name="Red-core" parent="." instance=ExtResource("40_h5dxs")]
-position = Vector2(-147, -53)
-
-[node name="finaly" type="Area2D" parent="."]
-position = Vector2(-229, -368)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("42_dmt08")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="finaly"]
-position = Vector2(-18.5, 53.5)
-shape = SubResource("RectangleShape2D_11jrj")
+position = Vector2(935, -478)
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_exited"]
@@ -4821,9 +4802,6 @@ shape = SubResource("RectangleShape2D_11jrj")
 [connection signal="body_entered" from="hirozontal-first-floor-second-door/door-detector" to="hirozontal-first-floor-second-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="hirozontal-first-floor-second-door/door-detector" to="hirozontal-first-floor-second-door" method="_on_doordetector_body_exited"]
 [connection signal="input_event" from="hirozontal-first-floor-second-door/start-room-button" to="hirozontal-first-floor-second-door" method="_on_door_button_input"]
-[connection signal="pressed" from="scape-door-end-game/Button" to="scape-door-end-game" method="_on_button_pressed"]
-[connection signal="body_entered" from="scape-door-end-game/detector" to="scape-door-end-game" method="_on_detector_body_entered"]
-[connection signal="body_exited" from="scape-door-end-game/detector" to="scape-door-end-game" method="_on_detector_body_exited"]
 [connection signal="body_entered" from="first-floor-stair-door" to="first-floor-stair-door" method="_on_body_entered"]
 [connection signal="child_entered_tree" from="first-floor-stair-door/detector" to="first-floor-stair-door" method="_on_detector_child_entered_tree"]
 [connection signal="pressed" from="first-floor-stair-door/close_door/Button" to="first-floor-stair-door" method="_on_button_pressed"]
@@ -4869,4 +4847,3 @@ shape = SubResource("RectangleShape2D_11jrj")
 [connection signal="body_exited" from="Room-Cover/cover-17-detector" to="Room-Cover/cover-17-detector" method="_on_body_exited"]
 [connection signal="body_entered" from="Room-Cover/cover-18-detector" to="Room-Cover/cover-18-detector" method="_on_body_entered"]
 [connection signal="body_exited" from="Room-Cover/cover-18-detector" to="Room-Cover/cover-18-detector" method="_on_body_exited"]
-[connection signal="body_entered" from="finaly" to="finaly" method="_on_body_entered"]

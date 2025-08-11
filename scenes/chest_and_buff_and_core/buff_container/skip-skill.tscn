@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cl2a0hdraxspc"]
 
-[ext_resource type="Script" uid="uid://c67gb0te171qw" path="res://scenes/chest_and_buff/buff_container/skip_skill.gd" id="1_bf5w2"]
+[ext_resource type="Script" uid="uid://c67gb0te171qw" path="res://scenes/chest_and_buff_and_core/buff_container/skip_skill.gd" id="1_bf5w2"]
 [ext_resource type="Texture2D" uid="uid://c3tff2ljfkogp" path="res://assets/img/hint.png" id="1_fa6bf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bf5w2"]

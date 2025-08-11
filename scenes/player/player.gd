@@ -434,6 +434,7 @@ func get_bullet_magazine(magazine):
 func lose_life():
 	if current_lives > 0:
 		current_lives -= 1
+		GameManager.death_count += 1
 		current_health = max_health
 		is_dead = false
 		emit_signal("player_lives_changed", current_lives)

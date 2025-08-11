@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6c8kehw6wh8k"]
 
-[ext_resource type="Script" uid="uid://dosapiicgjo45" path="res://scenes/chest_and_buff/buff_container/double_damage_buff.gd" id="1_eux2e"]
+[ext_resource type="Script" uid="uid://dosapiicgjo45" path="res://scenes/chest_and_buff_and_core/buff_container/double_damage_buff.gd" id="1_eux2e"]
 [ext_resource type="Texture2D" uid="uid://d33jcnoc3p1w6" path="res://assets/buff-icon/double_damage.png" id="2_jf17x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jf17x"]

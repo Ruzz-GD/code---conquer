@@ -1,14 +1,14 @@
 [gd_scene load_steps=54 format=3 uid="uid://gu4007qprrps"]
 
-[ext_resource type="Script" uid="uid://dgurd3lqduwf4" path="res://scenes/chest_and_buff/chest_container/all_gold_chest.gd" id="1_a5j0g"]
+[ext_resource type="Script" uid="uid://dgurd3lqduwf4" path="res://scenes/chest_and_buff_and_core/chest_container/all_gold_chest.gd" id="1_a5j0g"]
 [ext_resource type="Texture2D" uid="uid://cjfkhgjljdr31" path="res://assets/sprites/chest/Chest 5-Gold.png" id="2_a5j0g"]
-[ext_resource type="PackedScene" uid="uid://b1yakvyqkf3rh" path="res://scenes/chest_and_buff/buff_container/attack_range_buff.tscn" id="3_en5ls"]
-[ext_resource type="PackedScene" uid="uid://bec8nbrh0hvbk" path="res://scenes/chest_and_buff/buff_container/attack_speed_buff.tscn" id="4_bq820"]
-[ext_resource type="PackedScene" uid="uid://bdxoua6n0q8ea" path="res://scenes/chest_and_buff/buff_container/bullet-magazine.tscn" id="5_fr3tl"]
-[ext_resource type="PackedScene" uid="uid://b6c8kehw6wh8k" path="res://scenes/chest_and_buff/buff_container/double_damage_buff.tscn" id="6_fyam4"]
-[ext_resource type="PackedScene" uid="uid://cq3wtuxeyf1fg" path="res://scenes/chest_and_buff/buff_container/extra-live.tscn" id="7_guevl"]
-[ext_resource type="PackedScene" uid="uid://cl2a0hdraxspc" path="res://scenes/chest_and_buff/buff_container/skip-skill.tscn" id="8_mbqmq"]
-[ext_resource type="PackedScene" uid="uid://hl1cyx3v46oq" path="res://scenes/chest_and_buff/buff_container/triple_damage_buff.tscn" id="9_qcjbk"]
+[ext_resource type="PackedScene" uid="uid://b1yakvyqkf3rh" path="res://scenes/chest_and_buff_and_core/buff_container/attack_range_buff.tscn" id="3_en5ls"]
+[ext_resource type="PackedScene" uid="uid://bec8nbrh0hvbk" path="res://scenes/chest_and_buff_and_core/buff_container/attack_speed_buff.tscn" id="4_bq820"]
+[ext_resource type="PackedScene" uid="uid://bdxoua6n0q8ea" path="res://scenes/chest_and_buff_and_core/buff_container/bullet-magazine.tscn" id="5_fr3tl"]
+[ext_resource type="PackedScene" uid="uid://b6c8kehw6wh8k" path="res://scenes/chest_and_buff_and_core/buff_container/double_damage_buff.tscn" id="6_fyam4"]
+[ext_resource type="PackedScene" uid="uid://cq3wtuxeyf1fg" path="res://scenes/chest_and_buff_and_core/buff_container/extra-live.tscn" id="7_guevl"]
+[ext_resource type="PackedScene" uid="uid://cl2a0hdraxspc" path="res://scenes/chest_and_buff_and_core/buff_container/skip-skill.tscn" id="8_mbqmq"]
+[ext_resource type="PackedScene" uid="uid://hl1cyx3v46oq" path="res://scenes/chest_and_buff_and_core/buff_container/triple_damage_buff.tscn" id="9_qcjbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cetuv"]
 radius = 55.0091
