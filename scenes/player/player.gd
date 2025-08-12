@@ -573,7 +573,7 @@ func _on_game_reset():
 func reset_state():
 	var player_pos_in_first_floor = load("res://scenes/maps/first-floor-map.tscn").instantiate()
 	var marker = player_pos_in_first_floor.get_node_or_null("first_floor_spawn_marker")
-	
+
 	global_position = marker.global_position
 	velocity = Vector2.ZERO
 	dash_velocity = Vector2.ZERO
@@ -581,6 +581,7 @@ func reset_state():
 	is_shooting = false
 	is_dead = false
 	has_gun = false 
+	typing = false
 	
 	is_player_have_double_damage_buff = false
 	is_player_have_triple_damage_buff = false

@@ -72,6 +72,7 @@ func open_chest():
 	print("✅ Chest opened!")
 	chest_already_opened = true
 	SaveSystem.opened_chests[chest_id] = true
+	GameManager.opened_chests_count += 1
 	SoundSystem.play_open_chest()
 	$chest_sprite.play("chest_anim")
 	

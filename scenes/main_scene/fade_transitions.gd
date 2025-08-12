@@ -118,6 +118,8 @@ func _on_game_reset():
 		set_transition_message("You Died!!")
 	elif GameManager.last_reset_reason == GameManager.ResetReason.QUIT:
 		set_transition_message("Goodbye!")  # Optional or leave empty
+	elif GameManager.last_reset_reason == GameManager.ResetReason.MISSION_COMPLETE:
+		set_transition_message("Mission Complete!")
 	else:
 		set_transition_message("")  # Clear message if unknown
 

@@ -346,6 +346,7 @@ func die():
 	anim.play("death_left" if anim.flip_h else "death_right")
 
 	SaveSystem.killed_robots[robot_id] = true
+	GameManager.killed_robots_count += 1
 	maybe_drop_chest()
 
 func maybe_drop_chest():

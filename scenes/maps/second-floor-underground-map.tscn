@@ -2511,6 +2511,7 @@ position = Vector2(62, -13)
 shape = SubResource("CapsuleShape2D_iev2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-second-floor-first-door/door-button"]
+z_index = 11
 position = Vector2(65, -13)
 
 [node name="hirozontal-second-floor-fith-door" type="StaticBody2D" parent="." groups=["persistent_object"]]
@@ -2565,6 +2566,7 @@ position = Vector2(84, -13)
 shape = SubResource("CapsuleShape2D_iev2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-second-floor-fith-door/door-button"]
+z_index = 11
 position = Vector2(83, -13)
 rotation = 3.14159
 
@@ -2621,6 +2623,7 @@ position = Vector2(62, -13)
 shape = SubResource("CapsuleShape2D_iev2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-second-floor-last-door/door-button"]
+z_index = 11
 position = Vector2(65, -13)
 
 [node name="vertical-second-floor-second-doorv2" type="StaticBody2D" parent="." groups=["persistent_object"]]

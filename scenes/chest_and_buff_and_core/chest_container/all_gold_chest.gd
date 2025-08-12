@@ -116,6 +116,7 @@ func open_chest():
 
 	if chest_id != "":
 		SaveSystem.opened_chests[chest_id] = true
+		GameManager.opened_chests_count += 1
 	SoundSystem.play_open_chest()
 	chest_sprite.play("gold_chest_anim")
 	await chest_sprite.animation_finished

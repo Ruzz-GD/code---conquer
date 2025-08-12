@@ -13,16 +13,18 @@ signal core_collected(core_type)
 
 var is_loaded_from_save: bool = false
 
-enum ResetReason { DEATH, QUIT }
+enum ResetReason { DEATH, QUIT ,MISSION_COMPLETE}
 
 var last_reset_reason: ResetReason = ResetReason.QUIT  # Default
 
+var _player_username: String = ""
+
 var player_username: String:
 	set(value):
-		player_username = value
+		_player_username = value
 		emit_signal("username_changed", value)
 	get:
-		return player_username
+		return _player_username
 
 # TIMER
 var game_timer := 0.0
@@ -192,12 +194,24 @@ func update_current_save_station_marker():
 func reset_game(reason: ResetReason = ResetReason.QUIT):
 	print("🔄 Game reset triggered with reason:", reason)
 	last_reset_reason = reason
+
+	# Reset collected cores
 	for core in cores_collected.keys():
 		cores_collected[core] = false
 
-	player_username = ""
-	SaveSystem.reset_save()
+	# Reset all game stats here:
 
+	if reason != ResetReason.MISSION_COMPLETE:
+		player_username = ""
+		game_timer = 0.0
+		death_count = 0
+		opened_doors_count = 0
+		opened_chests_count = 0
+		killed_drones_count = 0
+		killed_robots_count = 0
+		
+	killed_robots_count = 0
+	SaveSystem.reset_save()
 	is_game_started = false
 	current_map_path = first_floor_map
 	spawn_marker_name = first_floor_spawn_marker_name
@@ -207,7 +221,7 @@ func reset_game(reason: ResetReason = ResetReason.QUIT):
 
 	call_deferred("emit_signal", "map_updated", current_map_path, spawn_marker_name)
 	call_deferred("emit_signal", "game_reset")
-	
+
 # --- Save File Tracking ---
 func set_save_file(file_name: String):
 	set_meta("current_save_file", file_name)

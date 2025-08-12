@@ -4008,6 +4008,7 @@ position = Vector2(83, -13)
 shape = SubResource("CapsuleShape2D_3yol8")
 
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-first-floor-first-door/start-room-button"]
+z_index = 11
 position = Vector2(83, -13)
 rotation = 3.14159
 
@@ -4065,6 +4066,7 @@ position = Vector2(83, -13)
 shape = SubResource("CapsuleShape2D_3yol8")
 
 [node name="Sprite2D" type="Sprite2D" parent="hirozontal-first-floor-second-door/start-room-button"]
+z_index = 11
 position = Vector2(83, -13)
 rotation = 3.14159
 
@@ -4630,7 +4632,7 @@ position = Vector2(-125.75, 1.5)
 shape = SubResource("RectangleShape2D_a8rj4")
 
 [node name="first_floor_spawn_marker" type="Marker2D" parent="."]
-position = Vector2(-229, -145)
+position = Vector2(758, -346)
 
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)
@@ -4788,13 +4790,13 @@ position = Vector2(1076, 0)
 chest_id = "ff-gold-chest-2"
 
 [node name="Green-core" parent="." instance=ExtResource("38_jdovf")]
-position = Vector2(15, -134)
+position = Vector2(723, -552)
 
 [node name="Blue-core" parent="." instance=ExtResource("39_1ktru")]
-position = Vector2(-101, -131)
+position = Vector2(800, -556)
 
 [node name="Red-core" parent="." instance=ExtResource("40_h5dxs")]
-position = Vector2(-147, -53)
+position = Vector2(879, -555)
 
 [node name="finaly" type="Area2D" parent="."]
 position = Vector2(-229, -368)
@@ -4803,7 +4805,7 @@ collision_mask = 2
 script = ExtResource("42_dmt08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="finaly"]
-position = Vector2(-18.5, 53.5)
+position = Vector2(-18.5, 69.5)
 shape = SubResource("RectangleShape2D_11jrj")
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]

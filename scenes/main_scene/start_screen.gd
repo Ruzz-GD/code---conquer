@@ -6,7 +6,7 @@ extends Control
 @onready var info_router = $"../info-route"
 @onready var setting_modal = $"setting-modal"
 @onready var to_addusername_con = $"to-addusername-container"
-@onready var player_username = $"to-addusername-container/TextEdit"
+@onready var player_added_username = $"to-addusername-container/TextEdit"
 @onready var welcome_message = $welcome_player
 @onready var saved_game_container = $view_saved_game_container
 @onready var history_modal = $view_history
@@ -44,6 +44,26 @@ func _ready():
 
 	GameManager.connect("game_reset", Callable(self, "_on_game_reset"))
 
+func clear_history_files():
+	var folder_path = "user://code_conquer_saves_gameplay"
+	var dir = DirAccess.open(folder_path)
+	if dir == null:
+		push_error("Cannot access folder: %s" % folder_path)
+		return
+
+	dir.list_dir_begin()
+	var filename = dir.get_next()
+	while filename != "":
+		if filename.ends_with("_game_history.txt"):
+			var file_path = "%s/%s" % [folder_path, filename]
+			var err = dir.remove(filename)  # remove by filename in this folder
+			if err == OK:
+				print("Deleted history file: ", file_path)
+			else:
+				push_error("Failed to delete file: %s" % file_path)
+		filename = dir.get_next()
+	dir.list_dir_end()
+
 func _on_game_reset():
 	if not GameManager.is_game_started:
 		difficulty_btn.selected = 0
@@ -62,16 +82,19 @@ func _on_addusername_pressed() -> void:
 	to_addusername_con.show()
 
 func _on_infobtn_pressed() -> void:
-	info_router.visible = true
+	info_router.show()
+	setting_modal.hide()
 
 func _on_settingbtn_pressed() -> void:
-	setting_modal.visible = true
+	setting_modal.show()
+	saved_game_container.hide()
+	history_modal.hide()
 
 func _on_closebtn_pressed() -> void:
 	to_addusername_con.hide()
 
 func _on_submitbtn_addusername_pressed() -> void:
-	var name = player_username.text.strip_edges()
+	var name = player_added_username.text.strip_edges()
 	GameManager.player_username = name
 	to_addusername_con.hide()
 	setting_modal.hide()
@@ -84,6 +107,8 @@ func _on_closesavecon_pressed() -> void:
 
 func _on_open_saved_game_pressed() -> void:
 	saved_game_container.show()
+	history_modal.hide()
+	setting_modal.hide()
 	_populate_saved_game_list()
 
 func _on_newgamebtn_pressed() -> void:
@@ -190,6 +215,9 @@ func _on_audio_pressed() -> void:
 
 func _on_historybtn_pressed() -> void:
 	history_modal.show()
+	history_modal._load_history()
+	saved_game_container.hide()
+	setting_modal.hide()
 
 
 func _on_closehistorymodal_pressed() -> void:
