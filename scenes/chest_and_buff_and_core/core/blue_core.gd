@@ -12,7 +12,6 @@ func _ready():
 		queue_free()
 		return
 	
-	connect("body_entered", Callable(self, "_on_body_entered"))
 	base_y = float_node.position.y  # store local Y position
 	
 func _process(delta):

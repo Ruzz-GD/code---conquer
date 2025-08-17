@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=4 uid="uid://cu67wjahiwtrg"]
+[gd_scene load_steps=126 format=4 uid="uid://cu67wjahiwtrg"]
 
 [ext_resource type="Texture2D" uid="uid://by3lupafqsqrq" path="res://assets/tilesets/tilesFloor.png" id="1_bsfws"]
 [ext_resource type="Texture2D" uid="uid://bccsj1fq1od5v" path="res://assets/tilesets/tilesWalls.png" id="3_fnifa"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn" id="18_5hmaa"]
 [ext_resource type="PackedScene" uid="uid://gu4007qprrps" path="res://scenes/chest_and_buff_and_core/chest_container/all_gold_chest.tscn" id="19_a6vdv"]
 [ext_resource type="PackedScene" uid="uid://c7ok3atjqsdyw" path="res://scenes/chest_and_buff_and_core/chest_container/all_silver_chest.tscn" id="20_idv8a"]
+[ext_resource type="PackedScene" uid="uid://3f3lexqs6coc" path="res://scenes/chest_and_buff_and_core/core/blue-core.tscn" id="21_idv8a"]
+[ext_resource type="PackedScene" uid="uid://cphxn02dpoevx" path="res://scenes/chest_and_buff_and_core/note.tscn" id="22_34bbu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fnifa"]
 texture = ExtResource("1_bsfws")
@@ -2935,6 +2937,16 @@ chest_id = "sf-gold-chest-2"
 [node name="all_gold_chest3" parent="Chest" instance=ExtResource("19_a6vdv")]
 position = Vector2(351, 107)
 chest_id = "sf-gold-chest-3"
+
+[node name="extra" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Blue-core" parent="extra" instance=ExtResource("21_idv8a")]
+position = Vector2(232, 234)
+
+[node name="note6" parent="extra" instance=ExtResource("22_34bbu")]
+position = Vector2(-378, -324)
+note_id = "note6"
 
 [connection signal="body_entered" from="second_floor_stair_door" to="second_floor_stair_door" method="_on_body_entered"]
 [connection signal="child_entered_tree" from="second_floor_stair_door/detector" to="second_floor_stair_door" method="_on_detector_child_entered_tree"]

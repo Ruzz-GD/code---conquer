@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://bo7eesj5hn1sq"]
+[gd_scene load_steps=114 format=3 uid="uid://bo7eesj5hn1sq"]
 
 [ext_resource type="Script" uid="uid://dhpew8klfs2r5" path="res://scenes/main_scene/main_scene.gd" id="1_6iw8k"]
 [ext_resource type="Theme" uid="uid://b2ia87ml1evux" path="res://assets/theme/doors_modal.tres" id="3_3t4qf"]
@@ -18,18 +18,19 @@
 [ext_resource type="Script" uid="uid://ub01xe4nulnr" path="res://scenes/main_scene/chests_debug_ui_script/debug_ui_third_floor_ug_all_chest.gd" id="10_scan6"]
 [ext_resource type="Script" uid="uid://cw4lwirt8ub3n" path="res://scenes/main_scene/escape_door_modal.gd" id="11_fr7fn"]
 [ext_resource type="Script" uid="uid://b5yue1ceel8hl" path="res://scenes/main_scene/ingame_ui_script/player_stat.gd" id="11_nim2u"]
-[ext_resource type="Texture2D" uid="uid://1b5kvmfm0inp" path="res://assets/img/extra-lives.png" id="12_3naof"]
 [ext_resource type="Texture2D" uid="uid://dkjdriadmmqrl" path="res://assets/img/profile.png" id="12_17klg"]
 [ext_resource type="Texture2D" uid="uid://c3tff2ljfkogp" path="res://assets/img/hint.png" id="13_3naof"]
 [ext_resource type="Script" uid="uid://2b5c2louk43v" path="res://scenes/main_scene/ingame_ui_script/bullet_buff_container.gd" id="15_b7qf2"]
 [ext_resource type="Script" uid="uid://01rs0h4amp1w" path="res://scenes/main_scene/info_route.gd" id="15_qgjuk"]
 [ext_resource type="Texture2D" uid="uid://de8lgymlnhc2j" path="res://assets/img/bullet-icon.png" id="16_lt3s2"]
 [ext_resource type="Texture2D" uid="uid://bqr001dm4q8d5" path="res://assets/img/back-arrow.png" id="16_qgjuk"]
+[ext_resource type="Script" uid="uid://c1klf045x1nw0" path="res://scenes/main_scene/note_ui.gd" id="16_rv7a5"]
 [ext_resource type="Texture2D" uid="uid://dyypt2jsp7wio" path="res://assets/img/code-conquer-start-screen.png" id="17_17klg"]
 [ext_resource type="Texture2D" uid="uid://d33jcnoc3p1w6" path="res://assets/buff-icon/double_damage.png" id="19_nceve"]
 [ext_resource type="Texture2D" uid="uid://05ly8a7tvs4k" path="res://assets/buff-icon/triple_damage.png" id="20_wuij3"]
 [ext_resource type="Texture2D" uid="uid://blhhf84wrqfxu" path="res://assets/buff-icon/extra_atk_speed.png" id="21_scan6"]
 [ext_resource type="Texture2D" uid="uid://cptywfipihkmr" path="res://assets/buff-icon/extra_atk_range.png" id="22_cm64g"]
+[ext_resource type="Texture2D" uid="uid://d3rrp1yybj11c" path="res://assets/img/extra-lives-1.png" id="23_c3uee"]
 [ext_resource type="Script" uid="uid://dswosu680xmxm" path="res://scenes/main_scene/core_container.gd" id="25_bo5y2"]
 [ext_resource type="Texture2D" uid="uid://c31fahk6yeulo" path="res://assets/img/green-core.png" id="26_w0eu7"]
 [ext_resource type="Texture2D" uid="uid://buvyeuwlk5vuq" path="res://assets/img/blue-core.png" id="27_bc27i"]
@@ -75,6 +76,18 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5i1m"]
+bg_color = Color(0.25, 0.25, 0.25, 0.917647)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.84, 0.84, 0.84, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17klg"]
 bg_color = Color(0.14, 0.14, 0.14, 0.517647)
@@ -220,9 +233,6 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_datfd"]
-bg_color = Color(0, 0.611765, 0.678431, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgjuk"]
 bg_color = Color(0, 0.611765, 0.678431, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bj71x"]
@@ -972,6 +982,52 @@ texture_normal = ExtResource("16_qgjuk")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="Note-ui" type="Control" parent="DoorsChestDebugModal"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_rv7a5")
+
+[node name="Panel" type="Panel" parent="DoorsChestDebugModal/Note-ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.5
+offset_top = -182.0
+offset_right = 134.5
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5i1m")
+
+[node name="system_message" type="Label" parent="DoorsChestDebugModal/Note-ui/Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 119.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 12
+text = "System message"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="content" type="Label" parent="DoorsChestDebugModal/Note-ui/Panel"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 247.0
+offset_bottom = 341.0
+theme_override_colors/font_color = Color(9.04858e-06, 0.740096, 0.922015, 1)
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
 [node name="UIManager" type="CanvasLayer" parent="."]
 layer = 5
 
@@ -992,9 +1048,9 @@ script = ExtResource("5_umvci")
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 528.0
-offset_top = -316.0
+offset_top = -314.0
 offset_right = 568.0
-offset_bottom = -276.0
+offset_bottom = -274.0
 texture_normal = ExtResource("7_s5p1y")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1146,15 +1202,15 @@ layout_mode = 2
 
 [node name="heart-1" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
 layout_mode = 2
-texture = ExtResource("12_3naof")
+texture = ExtResource("23_c3uee")
 
 [node name="heart-2" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
 layout_mode = 2
-texture = ExtResource("12_3naof")
+texture = ExtResource("23_c3uee")
 
 [node name="heart-3" type="TextureRect" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer/extra-lives-container"]
 layout_mode = 2
-texture = ExtResource("12_3naof")
+texture = ExtResource("23_c3uee")
 
 [node name="hints-container" type="HBoxContainer" parent="UIManager/ingame_ui/player-stat/HBoxContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(142.5, 0)
@@ -1290,9 +1346,9 @@ show_percentage = false
 [node name="core_container" type="PanelContainer" parent="UIManager/ingame_ui"]
 custom_minimum_size = Vector2(150, 70)
 layout_mode = 1
-offset_left = 315.0
+offset_left = 110.0
 offset_top = -315.0
-offset_right = 518.0
+offset_right = 313.0
 offset_bottom = -238.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fr7fn")
 script = ExtResource("25_bo5y2")
@@ -1324,7 +1380,22 @@ size_flags_vertical = 4
 texture = ExtResource("28_fr7fn")
 expand_mode = 1
 
+[node name="TextureButton" type="TextureButton" parent="UIManager/ingame_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 467.0
+offset_top = -315.0
+offset_right = 507.0
+offset_bottom = -275.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="start_screen" type="Control" parent="UIManager"]
+visible = false
 z_index = 900
 layout_mode = 3
 anchors_preset = 0
@@ -1870,6 +1941,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="UIManager/info-route/info-page/MarginContainer/control-info"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "W – Walk Up
 
 A – Walk Left
@@ -1886,15 +1958,11 @@ SA – Diagonal Down-Left
 
 SD – Diagonal Down-Right
 
-Hold W / A / S / D + Spacebar – Dash in that direction
+Hold W / A / S / D / WA / WD / SA / SD + Spacebar – Dash in that direction
 
-Left Click – Target objects or enemies"
+Hold RightClick - Shoot
 
-[node name="lab-info" type="VBoxContainer" parent="UIManager/info-route/info-page/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIManager/info-route/info-page/MarginContainer/lab-info"]
-layout_mode = 2
+Hold RightClick And Drag - Aim"
 
 [node name="control-info-btn" type="Button" parent="UIManager/info-route"]
 layout_mode = 0
@@ -1905,16 +1973,6 @@ offset_bottom = 167.0
 theme_override_font_sizes/font_size = 18
 theme_override_styles/hover = SubResource("StyleBoxFlat_datfd")
 text = "Control Info"
-
-[node name="lab-info-btn" type="Button" parent="UIManager/info-route"]
-layout_mode = 0
-offset_left = 254.0
-offset_top = 122.0
-offset_right = 464.0
-offset_bottom = 167.0
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_qgjuk")
-text = "Lab Info"
 
 [node name="back" type="TextureButton" parent="UIManager/info-route"]
 layout_mode = 0
@@ -2466,7 +2524,6 @@ stream = ExtResource("33_bj71x")
 [connection signal="pressed" from="UIManager/start_screen/view_saved_game_container/close-save-con" to="UIManager/start_screen" method="_on_closesavecon_pressed"]
 [connection signal="pressed" from="UIManager/start_screen/view_history/close-history-modal" to="UIManager/start_screen" method="_on_closehistorymodal_pressed"]
 [connection signal="pressed" from="UIManager/info-route/control-info-btn" to="UIManager/info-route" method="_on_controlinfobtn_pressed"]
-[connection signal="pressed" from="UIManager/info-route/lab-info-btn" to="UIManager/info-route" method="_on_labinfobtn_pressed"]
 [connection signal="pressed" from="UIManager/info-route/back" to="UIManager/info-route" method="_on_back_pressed"]
 [connection signal="pressed" from="UIManager/save-station-ui/save_container/save_btn" to="UIManager/save-station-ui" method="_on_save_btn_pressed"]
 [connection signal="pressed" from="UIManager/save-station-ui/save_container/close-btn" to="UIManager/save-station-ui" method="_on_closebtn_pressed"]

@@ -59,6 +59,7 @@ func _ready():
 	# Start menu music if game not started and not loading
 	if not GameManager.is_game_started and not is_loading:
 		_play_bgm(MENU_BGM)
+
 # ----------------------------
 # 🚪 Loading / Transition Handling
 # ----------------------------
@@ -77,6 +78,7 @@ func _on_transition_changed(is_transitioning: bool):
 func _on_game_start(started: bool):
 	if not started and not is_loading:
 		_play_bgm(MENU_BGM)
+
 # ----------------------------
 # 🎵 Music Helpers
 # ----------------------------
@@ -101,6 +103,7 @@ func _play_bgm(music_path: String):
 		print("🎵 Playing BGM:", music_path)
 	else:
 		push_warning("BGM file not found: " + music_path)
+
 # ----------------------------
 # 🎚 Volume Controls
 # ----------------------------
@@ -121,9 +124,28 @@ func set_mob_volume(value: float):
 
 
 # ----------------------------
-# 💾 Save / Load
+# 💾 Save / Load Helpers
 # ----------------------------
+func ensure_save_folder_exists() -> bool:
+	var folder_path = "user://code_conquer_saves_gameplay"
+	var dir = DirAccess.open(folder_path)
+	if dir == null:
+		var base_dir = DirAccess.open("user://")
+		if base_dir == null:
+			push_error("Cannot open user:// folder")
+			return false
+		var err = base_dir.make_dir_recursive("code_conquer_saves_gameplay")
+		if err != OK:
+			push_error("Failed to create save folder: " + folder_path)
+			return false
+		return true
+	return true
+
 func save_sound_settings():
+	if not ensure_save_folder_exists():
+		print("❌ Cannot save sound settings because folder doesn't exist and can't be created.")
+		return
+
 	var data := {
 		"bg_volume": background_volume,
 		"sfx_volume": player_volume
@@ -134,6 +156,10 @@ func save_sound_settings():
 		file.close()
 
 func load_sound_settings():
+	if not ensure_save_folder_exists():
+		print("⚠️ Save folder missing on load, skipping sound settings load.")
+		return
+
 	if FileAccess.file_exists(SOUND_SETTINGS_PATH):
 		var file = FileAccess.open(SOUND_SETTINGS_PATH, FileAccess.READ)
 		if file:

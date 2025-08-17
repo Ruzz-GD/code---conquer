@@ -15,6 +15,7 @@ extends Control
 var player
 
 func _ready():
+	show()
 	await get_tree().process_frame
 	GameManager.connect("username_changed", Callable(self, "_on_username_changed"))
 

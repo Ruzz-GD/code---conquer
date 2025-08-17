@@ -43,7 +43,6 @@ func _on_button_pressed() -> void:
 func _disable_player_input(state: bool):
 	if player:
 		player.typing = state
-		print("🔧 Player typing_cant_move set to:", state)
 
 
 func _on_back_button_pressed() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://bkarx1vov08fy"]
+[gd_scene load_steps=130 format=4 uid="uid://bkarx1vov08fy"]
 
 [ext_resource type="Texture2D" uid="uid://by3lupafqsqrq" path="res://assets/tilesets/tilesFloor.png" id="1_dcd1y"]
 [ext_resource type="Texture2D" uid="uid://bccsj1fq1od5v" path="res://assets/tilesets/tilesWalls.png" id="2_uxndf"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://vht8jo1i2lm" path="res://scenes/chest_and_buff_and_core/chest_container/all_bronze_chest.tscn" id="19_j04no"]
 [ext_resource type="PackedScene" uid="uid://gu4007qprrps" path="res://scenes/chest_and_buff_and_core/chest_container/all_gold_chest.tscn" id="20_xqp04"]
 [ext_resource type="PackedScene" uid="uid://c7ok3atjqsdyw" path="res://scenes/chest_and_buff_and_core/chest_container/all_silver_chest.tscn" id="21_42xc3"]
+[ext_resource type="PackedScene" uid="uid://dqulcbmdywib3" path="res://scenes/chest_and_buff_and_core/core/red-core.tscn" id="22_42xc3"]
+[ext_resource type="PackedScene" uid="uid://cphxn02dpoevx" path="res://scenes/chest_and_buff_and_core/note.tscn" id="23_ispf6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cubh"]
 texture = ExtResource("1_dcd1y")
@@ -2567,11 +2569,11 @@ position = Vector2(1064, 256)
 chest_id = "tf-gold-chest-1"
 
 [node name="all_silver_chest" parent="chest" instance=ExtResource("21_42xc3")]
-position = Vector2(552, 287)
+position = Vector2(540, 287)
 chest_id = "tf-silver-chest-1"
 
 [node name="all_silver_chest2" parent="chest" instance=ExtResource("21_42xc3")]
-position = Vector2(599, 287)
+position = Vector2(612, 287)
 chest_id = "tf-silver-chest-2"
 
 [node name="all_bronze_chest3" parent="chest" instance=ExtResource("19_j04no")]
@@ -2605,6 +2607,20 @@ chest_id = "tf-gold-chest-4"
 [node name="all_bronze_chest5" parent="chest" instance=ExtResource("19_j04no")]
 position = Vector2(255, 530)
 chest_id = "tf-bronze-chest-5"
+
+[node name="extra" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Red-core" parent="extra" instance=ExtResource("22_42xc3")]
+position = Vector2(572, 78)
+
+[node name="note7" parent="extra" instance=ExtResource("23_ispf6")]
+position = Vector2(1031, 37)
+note_id = "note7"
+
+[node name="note4" parent="extra" instance=ExtResource("23_ispf6")]
+position = Vector2(687, 204)
+note_id = "note4"
 
 [connection signal="body_entered" from="third_floor_stair_door" to="third_floor_stair_door" method="_on_body_entered"]
 [connection signal="child_entered_tree" from="third_floor_stair_door/detector" to="third_floor_stair_door" method="_on_detector_child_entered_tree"]
