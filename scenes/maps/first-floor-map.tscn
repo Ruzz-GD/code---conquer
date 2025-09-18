@@ -4630,9 +4630,6 @@ script = ExtResource("36_1gvyd")
 position = Vector2(-125.75, 1.5)
 shape = SubResource("RectangleShape2D_a8rj4")
 
-[node name="first_floor_spawn_marker" type="Marker2D" parent="."]
-position = Vector2(969, -537)
-
 [node name="first_floor_spawn_marker_stair" type="Marker2D" parent="."]
 position = Vector2(-1157, -745)
 
@@ -4820,6 +4817,9 @@ note_id = "note5"
 
 [node name="Green-core" parent="extra" instance=ExtResource("38_jdovf")]
 position = Vector2(-974, -42)
+
+[node name="first_floor_spawn_marker" type="Marker2D" parent="."]
+position = Vector2(932, -534)
 
 [connection signal="body_entered" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_entered"]
 [connection signal="body_exited" from="vertical-first-floor-last-door/door-detector" to="vertical-first-floor-last-door" method="_on_doordetector_body_exited"]

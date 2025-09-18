@@ -24,6 +24,7 @@ var save_data := {
 	"save_station_map": "",
 	"gameplay_time": 0.0,
 	"cores_collected": {},
+	"saved_at": ""  # ✅ add field here
 }
 
 func reset_save():
@@ -45,7 +46,8 @@ func reset_save():
 		"difficulty": "",
 		"save_station_map": "",
 		"gameplay_time": 0.0,
-		"cores_collected": {} # ✅ Reset core data
+		"cores_collected": {},
+		"saved_at": ""  # ✅ reset too
 	}
 
 func save_game(file_name := "", save_station_map := ""):
@@ -86,7 +88,8 @@ func save_game(file_name := "", save_station_map := ""):
 	save_data["killed_drones_count"] = GameManager.killed_drones_count
 	save_data["killed_robots_count"] = GameManager.killed_robots_count
 	save_data["cores_collected"] = GameManager.cores_collected 
-	
+	save_data["saved_at"] = Time.get_datetime_string_from_system(true, true)  # ✅ store save timestamp
+
 	var player_node = get_tree().get_first_node_in_group("player")
 	if player_node:
 		player_state = player_node.get_save_state()
@@ -94,7 +97,7 @@ func save_game(file_name := "", save_station_map := ""):
 
 	var file = FileAccess.open(final_path, FileAccess.WRITE)
 	if file:
-		file.store_string(JSON.stringify(save_data))
+		file.store_string(JSON.stringify(save_data, "\t"))  # ✅ keep pretty format
 		file.close()
 		print("✅ Game saved to:", final_path)
 
@@ -149,8 +152,6 @@ func load_game(file_name := "save_data.json"):
 
 	var loaded_time = save_data.get("gameplay_time", 0.0)
 	GameManager.game_timer = loaded_time
-
-	GameManager.is_game_started = true
 	GameManager.update_map(GameManager.current_map_path, GameManager.spawn_marker_name)
 
 	# ✅ Update UI for already collected cores

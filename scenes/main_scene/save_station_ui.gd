@@ -41,7 +41,24 @@ func hide_modal():
 func _on_save_file_loaded(file_name: String) -> void:
 	saved_filename = file_name
 	has_saved_once = true
-	saved_file_name.text = file_name.replace(".json", "").capitalize()
+
+	# ✅ Load save to get save date
+	var full_path = "user://code_conquer_saves_gameplay/%s" % file_name
+	if FileAccess.file_exists(full_path):
+		var file = FileAccess.open(full_path, FileAccess.READ)
+		var parsed = JSON.parse_string(file.get_as_text())
+		file.close()
+		if typeof(parsed) == TYPE_DICTIONARY:
+			var saved_at = parsed.get("saved_at", "Unknown date")
+			saved_file_name.text = "%s (📅 %s)" % [
+				file_name.replace(".json", "").capitalize(),
+				saved_at
+			]
+		else:
+			saved_file_name.text = file_name.replace(".json", "").capitalize()
+	else:
+		saved_file_name.text = file_name.replace(".json", "").capitalize()
+
 	saved_file_name.editable = false
 	save_btn.disabled = false
 
@@ -49,7 +66,8 @@ func _on_save_btn_pressed() -> void:
 	var floor_name = floor_name_label.text.strip_edges()
 
 	if has_saved_once:
-		SaveSystem.save_game(saved_filename, floor_name)  # ✅ now passes floor name
+		# ✅ overwrite existing save (with new date inside JSON)
+		SaveSystem.save_game(saved_filename, floor_name)
 		save_message.text = "✅ Progress updated!"
 		reset_timer.start()
 		return
@@ -68,7 +86,7 @@ func _on_save_btn_pressed() -> void:
 		reset_timer.start()
 		return
 
-	SaveSystem.save_game(saved_filename, floor_name)  # ✅ pass floor name
+	SaveSystem.save_game(saved_filename, floor_name)  # ✅ new save with date
 	has_saved_once = true
 	saved_file_name.editable = false
 	save_btn.disabled = true

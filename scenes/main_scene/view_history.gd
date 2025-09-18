@@ -1,18 +1,18 @@
 extends Panel
 
 @onready var history_list = $ScrollContainer/history_list
-@onready var content = $ScrollContainer/history_list/content  # the Label node you want to duplicate
+@onready var template_panel = $ScrollContainer/history_list/Panel
 
 func _ready():
-	content.visible = false
-	_load_history()
+	template_panel.visible = false
+	_populate_history_list()
 
 func _clear_history_list():
 	for child in history_list.get_children():
-		if child != content:
+		if child != template_panel:
 			child.queue_free()
 
-func _load_history():
+func _populate_history_list():
 	_clear_history_list()
 
 	var folder_path = "user://code_conquer_saves_gameplay"
@@ -21,7 +21,7 @@ func _load_history():
 		push_error("Cannot access folder: %s" % folder_path)
 		return
 
-	var line_tuples = []  # Will store (date_str, line)
+	var histories: Array = []
 
 	dir.list_dir_begin()
 	var filename = dir.get_next()
@@ -32,63 +32,63 @@ func _load_history():
 				var file = FileAccess.open(file_path, FileAccess.READ)
 				if file:
 					while not file.eof_reached():
-						var line = file.get_line()
-						if line.strip_edges() != "":
+						var line = file.get_line().strip_edges()
+						if line != "":
 							var date_str = _extract_date(line)
 							if date_str != "":
-								line_tuples.append([date_str, line])
+								histories.append({
+									"raw_line": line,
+									"date": date_str
+								})
 					file.close()
-				else:
-					push_error("Failed to open file: %s" % file_path)
 		filename = dir.get_next()
 	dir.list_dir_end()
 
-	if line_tuples.size() == 0:
-		print("No game history lines found in folder.")
+	if histories.is_empty():
+		print("No game history lines found.")
 		return
 
-	# Sort by date string ascending
-	line_tuples.sort()  # sorts by first element in tuple i.e. date_str ascending
+	# newest first
+	histories.sort_custom(func(a, b): return a["date"] > b["date"])
 
-	# Reverse for latest first
-	line_tuples.reverse()
+	for history in histories:
+		_add_history_row(history["raw_line"], history["date"])
 
-	# Debug print
-	print("After sorting:")
-	for tuple in line_tuples:
-		print(tuple[0], tuple[1])
+func _add_history_row(line: String, date_str: String) -> void:
+	var new_row = template_panel.duplicate()
+	new_row.visible = true
 
-	for tuple in line_tuples:
-		var line = tuple[1]
-		var new_label = content.duplicate()
-		new_label.visible = true
+	# ✅ Direct children of Panel
+	var playername = new_row.get_node_or_null("playername")
+	var gamedifficulty = new_row.get_node_or_null("gamedifficulty")
+	var gametime = new_row.get_node_or_null("gametime")
+	var deathcount = new_row.get_node_or_null("deathcount")
+	var unlockdoors = new_row.get_node_or_null("unlockdoors")
+	var unlockchests = new_row.get_node_or_null("unlockchests")
+	var killeddrones = new_row.get_node_or_null("killeddrones")
+	var killedrobots = new_row.get_node_or_null("killedrobots")
+	var date = new_row.get_node_or_null("date")
 
-		var decorated_line = line
-		decorated_line = decorated_line.replace("Player:", "👤 Player:")
-		decorated_line = decorated_line.replace("Difficulty:", "🎚️ Difficulty:")
-		decorated_line = decorated_line.replace("Time:", "⏱️ Game Time:")
-		decorated_line = decorated_line.replace("Deaths:", "💀 Deaths:")
-		decorated_line = decorated_line.replace("Doors:", "🚪 Unlock Doors:")
-		decorated_line = decorated_line.replace("Chests:", "🎁 Unlock Chests:")
-		decorated_line = decorated_line.replace("Drones:", "🤖 Killed Drones:")
-		decorated_line = decorated_line.replace("Robots:", "🦾 Killed Robots:")
+	# ✅ Fill values with emojis
+	if playername: playername.text = "👤 " + "Player Name - " + _extract_value(line, "Player:")
+	if gamedifficulty: gamedifficulty.text = "🎚️ " + "Game Difficulty - "+ _extract_value(line, "Difficulty:")
+	if gametime: gametime.text = "⏱️ " + "Game Time - " + _extract_value(line, "Time:")
+	if deathcount: deathcount.text = "💀 " + "Death Count - " + _extract_value(line, "Deaths:")
+	if unlockdoors: unlockdoors.text = "🚪 " + "Unlock Doors - " + _extract_value(line, "Doors:")
+	if unlockchests: unlockchests.text = "🎁 " + "Unlock Chests - "+ _extract_value(line, "Chests:")
+	if killeddrones: killeddrones.text = "🤖 " + "Killed Drones - " +_extract_value(line, "Drones:")
+	if killedrobots: killedrobots.text = "🦾 " + "Killed Robots - "+_extract_value(line, "Robots:")
+	if date: date.text = "📅 " + "Date - " + date_str
 
-		new_label.text = decorated_line
-		history_list.add_child(new_label)
-		# no need to move_child if you add in newest-to-oldest order
+	history_list.add_child(new_row)
 
-func _compare_by_date(a: String, b: String) -> int:
-	var date_str_a = _extract_date(a)
-	var date_str_b = _extract_date(b)
-	# Debug print to confirm:
-	print("Comparing:", date_str_a, "<->", date_str_b)
-
-	if date_str_a > date_str_b:
-		return 1
-	elif date_str_a < date_str_b:
-		return -1
-	else:
-		return 0
+func _extract_value(line: String, key: String) -> String:
+	if line.find(key) == -1:
+		return ""
+	var part = line.split(key, false, 1)
+	if part.size() < 2:
+		return ""
+	return part[1].split("|")[0].strip_edges()
 
 func _extract_date(line: String) -> String:
 	var start = line.find("[")

@@ -131,10 +131,10 @@ func _on_game_loaded():
 	# Emit signal for listeners after transition starts
 	emit_signal("game_loaded")
 
-	# Start timer WITHOUT resetting time, since loading from save
-	start_timer()
+	# Safely start game without resetting timer
+	is_game_started = true   # use the setter, so signals fire
 
-	# Reset flag so future starts reset time normally
+	# Now that the timer has started, clear the flag
 	is_loaded_from_save = false
 
 # Starts the timer
